@@ -1,5 +1,7 @@
 package tp.p1.plants;
 
+import tp.p1.game.Game;
+
 public class SunFlower {
 	private int cost = 20;
 	private int healthPoints = 1;
@@ -7,11 +9,13 @@ public class SunFlower {
 	private int damage = 0;
 	private int x;
 	private int y;
+	private Game game;
 	
 	
-	public SunFlower(int x,int y) {
+	public SunFlower(int x,int y, Game game) {
 	this.x=x;
 	this.y=y;
+	this.game=game;
 	}
 
 
