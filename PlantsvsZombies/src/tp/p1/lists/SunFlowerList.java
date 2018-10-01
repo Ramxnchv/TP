@@ -35,4 +35,7 @@ public class SunFlowerList {
 		}
 		return i;
 	}
+	public int length() {
+		return list.length;
+	}
 }

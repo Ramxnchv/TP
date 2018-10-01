@@ -16,6 +16,7 @@ public class PeaShooterList {
 		}
 		return list.length<TAMAÑO_TABLERO;
 	}
+	
 	public boolean Delete(int pos) {
 		for(int i=pos;i<list.length;i++) {
 			list[i]=list[i+1];
@@ -34,5 +35,8 @@ public class PeaShooterList {
 			}
 		}
 		return i;
+	}
+	public int length() {
+		return list.length;
 	}
 }

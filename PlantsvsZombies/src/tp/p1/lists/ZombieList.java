@@ -35,4 +35,7 @@ public class ZombieList {
 		}
 		return i;
 	}
+	public int length() {
+		return list.length;
+	}
 }
