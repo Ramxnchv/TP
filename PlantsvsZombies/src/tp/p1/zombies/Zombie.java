@@ -16,6 +16,11 @@ public class Zombie {
 		this.game=game;
 	}
 
+	public void avanzar() {
+		this.x--;
+	}
+	
+	//getters y setters
 	public int getHealthPoints() {
 		return healthPoints;
 	}

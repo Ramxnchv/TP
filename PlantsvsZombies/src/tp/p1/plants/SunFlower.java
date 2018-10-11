@@ -18,7 +18,10 @@ public class SunFlower {
 	this.game=game;
 	}
 
-
+	public int recolectar(int suncoins) {
+		return suncoins+=10;
+	}
+	
 	public int getX() {
 		return x;
 	}

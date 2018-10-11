@@ -5,17 +5,24 @@ import tp.p1.game.Game;
 import tp.p1.game.LEVEL;
 
 public class ZombieManager {
-	Game game;
-	ZombieList zombieList;
-	int zombiesRestantes;
-	LEVEL nivel;
+	private Game game;
+	private int zombiesRestantes;
+	private LEVEL nivel;
 	
-	public ZombieManager(Game game,ZombieList zombielist) {
-		this.zombieList=zombielist;
+	public ZombieManager(Game game) {
 		this.game=game;
 	}
 	
 	public boolean isZombieAdded(int rand) {
 		return rand < game.getLevel().getFrecuencia();
 	}
+
+	public int getZombiesRestantes() {
+		return zombiesRestantes;
+	}
+
+	public void setZombiesRestantes(int zombiesRestantes) {
+		this.zombiesRestantes = zombiesRestantes;
+	}
+	
 }

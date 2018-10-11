@@ -1,16 +1,20 @@
 package tp.p1;
 
 import tp.p1.game.*;
+import java.util.Random;
 import java.util.Scanner;
 
 public class PlantsVsZombies {
 
 	public static void main(String[] args) {
 		
-		if((args.length>1)||(args.length<3)) {
+		if((args.length>0)||(args.length<3)) {
 			LEVEL level;
 			int seed;
+			Random rand;
 			Scanner scanner=new Scanner(System.in);
+			
+			args[0].toUpperCase();
 			
 			if(args[0].equals("EASY")) {
 				level=LEVEL.EASY;
@@ -21,9 +25,19 @@ public class PlantsVsZombies {
 			else if(args[0].equals("INSANE")) {
 				level=LEVEL.INSANE;
 			}
+			else {
+				System.out.println("El nivel introducido es incorrecto, por defecto se asignará EASY");
+				level=LEVEL.EASY;
+			}
 			
-			seed=Integer.parseInt(args[1]);
+			if(args.length==1) {
+				seed=new Random().nextInt(20);
+			}
+			else {
+				seed=Integer.parseInt(args[1]);
+			}
 			
+			rand = new Random(seed);
 			Game game = new Game(level,seed);
 			Controller controller = new Controller(game,scanner);
 			controller.run();

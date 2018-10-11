@@ -1,6 +1,8 @@
 package tp.p1.plants;
 
 import tp.p1.game.Game;
+import tp.p1.lists.ZombieList;
+import tp.p1.zombies.Zombie;
 
 public class PeaShooter {
 	private int cost = 50;
@@ -15,6 +17,15 @@ public class PeaShooter {
 		this.x=x;
 		this.y=y;
 		this.game=game;
+	}
+	
+	public void disparar() {
+		Zombie[] zb = game.getZombieList().getList();
+		for(int i=0;i<game.getZombieList().getContador();i++) {
+			if(this.x==zb[i].getX()) {
+				zb[i].setHealthPoints(zb[i].getHealthPoints());
+			}
+		}			
 	}
 	
 	

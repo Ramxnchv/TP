@@ -4,6 +4,7 @@ import tp.p1.zombies.Zombie;
 
 public class ZombieList {
 	private Zombie[] list;
+	int contador=0;
 	private static final int NUM_MAX_ZOMBIES=10;
 	
 	public ZombieList() {
@@ -11,31 +12,46 @@ public class ZombieList {
 	}
 	
 	public boolean Add(Zombie zombie) {
-		if(list.length<NUM_MAX_ZOMBIES) {
-			list[list.length]=zombie;
+		if(contador<NUM_MAX_ZOMBIES) {
+			list[contador]=zombie;
+			contador++;
 		}
-		return list.length<NUM_MAX_ZOMBIES;
+		return contador<NUM_MAX_ZOMBIES;
 	}
-	public boolean Delete(int pos) {
-		for(int i=pos;i<list.length;i++) {
+	public void Delete(int pos) {
+		for(int i=pos;i<contador;i++) {
 			list[i]=list[i+1];
 		}
-		return true;
+		contador--;
 	}
 	public int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
-		while(i<list.length&&!encontrado) {
+		while(i<contador&&!encontrado) {
 			if((list[i].getX()==x)&&(list[i].getY()==y)) {
 				encontrado=true;
 			}
 			else {
-			i++;	
+				i++;	
 			}
 		}
 		return i;
 	}
-	public int length() {
-		return list.length;
+
+	public Zombie[] getList() {
+		return list;
 	}
+
+	public void setList(Zombie[] list) {
+		this.list = list;
+	}
+
+	public static int getNumMaxZombies() {
+		return NUM_MAX_ZOMBIES;
+	}
+
+	public int getContador() {
+		return contador;
+	}
+	
 }

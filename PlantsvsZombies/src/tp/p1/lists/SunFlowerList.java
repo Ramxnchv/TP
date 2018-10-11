@@ -4,6 +4,7 @@ import tp.p1.plants.SunFlower;
 
 public class SunFlowerList {
 	private SunFlower[] list;
+	int contador=0;
 	private static final int TAMAÑO_TABLERO=32;
 	
 	public SunFlowerList() {
@@ -11,21 +12,21 @@ public class SunFlowerList {
 	}
 	
 	public boolean Add(SunFlower sunflower) {
-		if(list.length<TAMAÑO_TABLERO) {
-			list[list.length]=sunflower;
+		if(contador<TAMAÑO_TABLERO) {
+			list[contador]=sunflower;
+			contador++;
 		}
-		return list.length<TAMAÑO_TABLERO;
+		return contador<TAMAÑO_TABLERO;
 	}
-	public boolean Delete(int pos) {
-		for(int i=pos;i<list.length;i++) {
+	public void Delete(int pos) {
+		for(int i=pos;i<contador;i++) {
 			list[i]=list[i+1];
 		}
-		return true;
 	}
 	public int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
-		while(i<list.length&&!encontrado) {
+		while(i<contador&&!encontrado) {
 			if((list[i].getX()==x)&&(list[i].getY()==y)) {
 				encontrado=true;
 			}
@@ -35,7 +36,17 @@ public class SunFlowerList {
 		}
 		return i;
 	}
-	public int length() {
-		return list.length;
+
+	public SunFlower[] getList() {
+		return list;
 	}
+
+	public static int getTamañoTablero() {
+		return TAMAÑO_TABLERO;
+	}
+
+	public int getContador() {
+		return contador;
+	}
+	
 }
