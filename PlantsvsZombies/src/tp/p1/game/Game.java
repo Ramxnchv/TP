@@ -32,11 +32,8 @@ public class Game {
 		String salida1="Number of cycles: "+numCiclos;
 		String salida2="\nSun coins: "+suncoins.getSunCoins();
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
-				
-		gamePrinter.actualizarTablero();
-		String tablero= gamePrinter.dibujarTablero();
 		
-		return salida1+salida2+salida3+tablero;
+		return salida1+salida2+salida3+gamePrinter.toString();
 	}
 	
 	public LEVEL getLevel() {
