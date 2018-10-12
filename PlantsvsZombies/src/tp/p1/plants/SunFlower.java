@@ -4,9 +4,9 @@ import tp.p1.game.Game;
 
 public class SunFlower {
 	private static final int cost = 20;
+	private static final int damage = 0;
 	private int healthPoints = 1;
 	private int frequency = 10;
-	private int damage = 0;
 	private int x;
 	private int y;
 	private Game game;
@@ -40,6 +40,10 @@ public class SunFlower {
 	public static int getCost() {
 		return cost;
 	}
+	
+	public static int getDamage() {
+		return damage;
+	}
 
 	public int getHealthPoints() {
 		return healthPoints;
@@ -52,9 +56,5 @@ public class SunFlower {
 
 	public int getFrequency() {
 		return frequency;
-	}
-
-	public int getDamage() {
-		return damage;
 	}
 }

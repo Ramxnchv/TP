@@ -1,16 +1,20 @@
 package tp.p1.lists;
 
 import tp.p1.plants.PeaShooter;
+import tp.p1.zombies.Zombie;
 
 public class PeaShooterList {
 	private PeaShooter[] list;
 	private int contador=0;
 	private static final int BOARD_SIZE=32;
 	
+	
+	//constructor
 	public PeaShooterList() {
 		list=new PeaShooter[BOARD_SIZE];
 	}
 	
+	//metodos principales
 	public boolean Add(PeaShooter peashooter) {
 		if(contador<BOARD_SIZE) {
 			list[contador]=peashooter;
@@ -38,20 +42,19 @@ public class PeaShooterList {
 		}
 		return i;
 	}
-	public int length() {
-		return list.length;
-	}
 
+	//getters y setters
+	
+	public PeaShooter getPeaShooter(int pos) {
+		return list[pos];
+	}
+	
 	public static int getBoardSize() {
 		return BOARD_SIZE;
 	}
 
 	public PeaShooter[] getList() {
 		return list;
-	}
-
-	public void setList(PeaShooter[] list) {
-		this.list = list;
 	}
 
 	public int getContador() {

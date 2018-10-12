@@ -1,5 +1,6 @@
 package tp.p1.game;
 
+import tp.p1.plants.PeaShooter;
 import tp.p1.plants.SunFlower;
 import tp.p1.lists.SunFlowerList;
 
@@ -18,8 +19,6 @@ public class SunCoinManager {
 		}
 		return sunCoins+=50;
 	}
-	
-	
 	
 	public int getSunCoins() {
 		return sunCoins;

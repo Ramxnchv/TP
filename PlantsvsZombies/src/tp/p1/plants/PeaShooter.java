@@ -5,10 +5,10 @@ import tp.p1.lists.ZombieList;
 import tp.p1.zombies.Zombie;
 
 public class PeaShooter {
-	private int cost = 50;
+	private final static int cost = 50;
 	private int healthPoints = 3;
 	private int frequency = 1;
-	private int damage = 1;
+	private final static int damage = 1;
 	private int x;
 	private int y;
 	private Game game;
@@ -45,7 +45,7 @@ public class PeaShooter {
 		this.y = y;
 	}
 
-	public int getCost() {
+	public static int getCost() {
 		return cost;
 	}
 
@@ -62,7 +62,7 @@ public class PeaShooter {
 		return frequency;
 	}
 
-	public int getDamage() {
+	public static int getDamage() {
 		return damage;
 	}
 }

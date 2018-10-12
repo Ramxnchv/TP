@@ -4,6 +4,7 @@ import tp.p1.lists.*;
 import tp.p1.zombies.ZombieManager;
 
 public class Game {
+	//atributos
 	private final int BOARD_SIZE=32;
 	private Game game;
 	private ZombieList zombieList;
@@ -16,13 +17,14 @@ public class Game {
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
 	
-	
+	//constuctor
 	public Game(LEVEL level,int seed) {
 		this.level=level;
 		this.seed=seed;
 		inicializar();
 	}
 	
+	//metodos principales
 	public void update() {
 		
 	}
@@ -48,10 +50,15 @@ public class Game {
 	
 	
 	public boolean checkEmpty(int x,int y) {
-		if(zombieList.searchPosition(x, y))
+		if(true) {
+			
+		}
 		return true;
 	}
 	
+	
+	
+	//getters y setters
 	public LEVEL getLevel() {
 		return level;
 	}

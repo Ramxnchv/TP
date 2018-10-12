@@ -1,6 +1,7 @@
 package tp.p1.lists;
 
 import tp.p1.plants.SunFlower;
+import tp.p1.zombies.Zombie;
 
 public class SunFlowerList {
 	private SunFlower[] list;
@@ -41,6 +42,10 @@ public class SunFlowerList {
 
 	public SunFlower[] getList() {
 		return list;
+	}
+	
+	public SunFlower getSunFlower(int pos) {
+		return list[pos];
 	}
 
 
