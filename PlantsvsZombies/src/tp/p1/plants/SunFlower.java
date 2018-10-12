@@ -3,7 +3,7 @@ package tp.p1.plants;
 import tp.p1.game.Game;
 
 public class SunFlower {
-	private int cost = 20;
+	private static final int cost = 20;
 	private int healthPoints = 1;
 	private int frequency = 10;
 	private int damage = 0;
@@ -37,7 +37,7 @@ public class SunFlower {
 		this.y = y;
 	}
 
-	public int getCost() {
+	public static int getCost() {
 		return cost;
 	}
 

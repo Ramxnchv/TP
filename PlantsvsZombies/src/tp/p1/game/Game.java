@@ -4,6 +4,8 @@ import tp.p1.lists.*;
 import tp.p1.zombies.ZombieManager;
 
 public class Game {
+	private final int BOARD_SIZE=32;
+	private Game game;
 	private ZombieList zombieList;
 	private PeaShooterList peashooterList;
 	private SunFlowerList sunflowerList;
@@ -18,14 +20,22 @@ public class Game {
 	public Game(LEVEL level,int seed) {
 		this.level=level;
 		this.seed=seed;
+		inicializar();
 	}
 	
 	public void update() {
 		
 	}
 	
-	public void reset() {
-		
+	public void inicializar() {
+		zombieList =new ZombieList();
+		peashooterList=new PeaShooterList();
+		sunflowerList=new SunFlowerList();
+		numCiclos=0;
+		this.suncoins=new SunCoinManager(this.game);
+		suncoins.setSunCoins(50);
+		this.zombieManager=new ZombieManager(this.game);
+		zombieManager.setZombiesRestantes(zombieManager.getZombiesRestantes());
 	}
 	
 	public String toString() {
@@ -34,6 +44,12 @@ public class Game {
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
 		
 		return salida1+salida2+salida3+gamePrinter.toString();
+	}
+	
+	
+	public boolean checkEmpty(int x,int y) {
+		if(zombieList.searchPosition(x, y))
+		return true;
 	}
 	
 	public LEVEL getLevel() {

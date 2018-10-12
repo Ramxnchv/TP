@@ -37,6 +37,7 @@ public class ZombieList {
 		}
 		return i;
 	}
+	
 
 	public Zombie[] getList() {
 		return list;

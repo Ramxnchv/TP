@@ -17,6 +17,9 @@ public class Zombie {
 	}
 
 	public void avanzar() {
+		if(game.getZombieList().searchPosition(this.x, this.y)) {
+			
+		}
 		this.x--;
 	}
 	

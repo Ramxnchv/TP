@@ -26,7 +26,7 @@ public class PlantsVsZombies {
 				level=LEVEL.INSANE;
 			}
 			else {
-				System.out.println("El nivel introducido es incorrecto, por defecto se asignará EASY");
+				System.out.println("El nivel introducido es incorrecto, por defecto se asigna EASY");
 				level=LEVEL.EASY;
 			}
 			

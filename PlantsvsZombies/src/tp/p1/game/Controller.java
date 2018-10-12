@@ -11,36 +11,36 @@ public class Controller {
 	}
 	public void run() {
 		System.out.println("Random seed used: "+game.getSeed());
-		System.out.println(game);
 		
 		while((game.getZombieManager().getZombiesRestantes()>0)&&(true)) { //cambiar 2ª condicion zombie ganador
+			game.update();
+			System.out.println(game);
+			
+			
 			System.out.println("Command > ");
-			String comando=in.nextLine();
-			comando.toLowerCase();
+			String[] comando=in.nextLine().toLowerCase().split(" ");
 			
 			//parsear/separar comando y realizar update
-			if(comando.startsWith("a")||(comando.startsWith("add"))) {
+			if(comando[0].equals("a")||comando[0].equals("add")) {
 				
 			}
-			else if(comando.startsWith("r")||(comando.startsWith("reset"))) {
-				game.reset();
+			else if(comando[0].equals("r")||comando[0].equals("reset")) {
+				game.inicializar();
 			}
-			else if(comando.startsWith("l")||(comando.startsWith("list"))) {
+			else if(comando[0].equals("l")||comando[0].equals("list")) {
 				
 			}
-			else if(comando.startsWith("h")||(comando.startsWith("help"))) {
+			else if(comando[0].equals("h")||comando[0].equals("help")) {
 				
 			}
-			else if(comando.startsWith("")||(comando.startsWith("none"))) {
+			else if(comando[0].equals("")||comando[0].equals("none")) {
 				
 			}
 			else {
-				
+				System.out.println("Comando incorrecto");
+				comando=in.nextLine().toLowerCase().split(" ");
 			}
 			
-			
-			game.update();
-			game.setNumCiclos(game.getNumCiclos()+1);
 		}
 		//si el zombie gana
 		System.out.println("Zombies win");

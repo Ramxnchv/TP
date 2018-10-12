@@ -5,18 +5,18 @@ import tp.p1.plants.PeaShooter;
 public class PeaShooterList {
 	private PeaShooter[] list;
 	private int contador=0;
-	private static final int TAMAÑO_TABLERO=32;
+	private static final int BOARD_SIZE=32;
 	
 	public PeaShooterList() {
-		list=new PeaShooter[TAMAÑO_TABLERO];
+		list=new PeaShooter[BOARD_SIZE];
 	}
 	
 	public boolean Add(PeaShooter peashooter) {
-		if(contador<TAMAÑO_TABLERO) {
+		if(contador<BOARD_SIZE) {
 			list[contador]=peashooter;
 			contador++;
 		}
-		return contador<TAMAÑO_TABLERO;
+		return contador<BOARD_SIZE;
 	}
 	
 	public void Delete(int pos) {
@@ -42,8 +42,8 @@ public class PeaShooterList {
 		return list.length;
 	}
 
-	public static int getTamañoTablero() {
-		return TAMAÑO_TABLERO;
+	public static int getBoardSize() {
+		return BOARD_SIZE;
 	}
 
 	public PeaShooter[] getList() {

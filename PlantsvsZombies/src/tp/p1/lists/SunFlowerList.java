@@ -5,18 +5,18 @@ import tp.p1.plants.SunFlower;
 public class SunFlowerList {
 	private SunFlower[] list;
 	int contador=0;
-	private static final int TAMAÑO_TABLERO=32;
+	private static final int BOARD_SIZE=32;
 	
 	public SunFlowerList() {
-		list=new SunFlower[TAMAÑO_TABLERO];
+		list=new SunFlower[BOARD_SIZE];
 	}
 	
 	public boolean Add(SunFlower sunflower) {
-		if(contador<TAMAÑO_TABLERO) {
+		if(contador<BOARD_SIZE) {
 			list[contador]=sunflower;
 			contador++;
 		}
-		return contador<TAMAÑO_TABLERO;
+		return contador<BOARD_SIZE;
 	}
 	public void Delete(int pos) {
 		for(int i=pos;i<contador;i++) {
@@ -36,13 +36,16 @@ public class SunFlowerList {
 		}
 		return i;
 	}
+	
+	//metodo comprobar casilla libre
 
 	public SunFlower[] getList() {
 		return list;
 	}
 
-	public static int getTamañoTablero() {
-		return TAMAÑO_TABLERO;
+
+	public static int getBoardSize() {
+		return BOARD_SIZE;
 	}
 
 	public int getContador() {
