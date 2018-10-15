@@ -1,7 +1,7 @@
 package tp.p1.lists;
 
 import tp.p1.plants.PeaShooter;
-import tp.p1.zombies.Zombie;
+ 
 
 public class PeaShooterList {
 	private PeaShooter[] list;
@@ -29,6 +29,21 @@ public class PeaShooterList {
 		}
 		contador--;
 	}
+	
+	public boolean checkPeashooter(int x, int y)
+	{
+		boolean found = false;
+		for(int i = 0; i < contador; i++)
+		{
+			if((list[i].getX() == x) && (list[i].getY() == y))
+			{
+				found = true;
+			}
+		}
+		
+		return found;
+	}
+	
 	public int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
@@ -41,6 +56,11 @@ public class PeaShooterList {
 			}
 		}
 		return i;
+	}
+	
+	public String printPosition(int i)
+	{
+		return list[i].toString();
 	}
 
 	//getters y setters

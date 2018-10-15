@@ -24,6 +24,22 @@ public class ZombieList {
 		}
 		contador--;
 	}
+	
+	
+	public boolean checkZombie(int x, int y)
+	{
+		boolean found = false;
+		for(int i = 0; i < contador; i++)
+		{
+			if((list[i].getX() == x) && (list[i].getY() == y))
+			{
+				found = true;
+			}
+		}
+		
+		return found;
+	}
+	
 	public int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
@@ -36,6 +52,11 @@ public class ZombieList {
 			}
 		}
 		return i;
+	}
+	
+	public String printPosition(int i)
+	{
+		return list[i].toString();
 	}
 	
 
