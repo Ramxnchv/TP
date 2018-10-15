@@ -22,6 +22,13 @@ public class SunFlower {
 		return suncoins+=10;
 	}
 	
+	public String toString()
+	{
+		String str = "S [" + healthPoints + "]";
+		
+		return str;
+	}
+	
 	public int getX() {
 		return x;
 	}

@@ -28,6 +28,13 @@ public class PeaShooter {
 		}			
 	}
 	
+	public String toString()
+	{	
+		String str =  "P [" + healthPoints + "]";
+		
+		return str;
+	}
+	
 	
 	public int getX() {
 		return x;
