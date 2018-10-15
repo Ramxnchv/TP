@@ -1,35 +1,30 @@
 package tp.p1.zombies;
 
-import tp.p1.game.Game;
-
 public class Zombie {
 	private int healthPoints = 5;
 	private int speed=1;
 	private int damage=1;
 	private int x;
 	private int y;
-	private Game game;
 	
-	public Zombie(int x,int y,Game game) {
+	public Zombie(int x,int y) {
 		this.x=x;
 		this.y=y;
-		this.game=game;
 	}
 
-	public void avanzar() {
-		if(game.getZombieList().searchPosition(this.x, this.y)) {
-			
-		}
-		this.x--;
-	}
-	
-	//getters y setters
 	public int getHealthPoints() {
 		return healthPoints;
 	}
 
 	public void setHealthPoints(int healthPoints) {
 		this.healthPoints = healthPoints;
+	}
+	
+	public String toString()
+	{
+		String 	str = "Z ["  + healthPoints + "]";
+		
+		return str;
 	}
 
 	public int getX() {
@@ -55,4 +50,6 @@ public class Zombie {
 	public int getDamage() {
 		return damage;
 	}
+	
+	
 }
