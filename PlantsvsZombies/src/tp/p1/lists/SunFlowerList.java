@@ -54,6 +54,12 @@ public class SunFlowerList {
 		return i;
 	}
 	
+	/*public void increaseCycleSunflowers()
+	{
+		for(int i = 0; i < contador; i++)
+			list[i].setInternalCycle(list[i].getInternalCycle()+1);
+	}*/
+	
 	public String printPosition(int i)
 	{
 		return list[i].toString();
