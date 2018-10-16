@@ -27,7 +27,7 @@ public class PeaShooter {
 		}			
 	}
 	
-<<<<<<< Updated upstream
+
 	public String toString()
 	{	
 		String str =  "P [" + healthPoints + "]";
@@ -36,8 +36,6 @@ public class PeaShooter {
 	}
 	
 	
-=======
->>>>>>> Stashed changes
 	public int getX() {
 		return x;
 	}

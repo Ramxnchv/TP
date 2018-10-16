@@ -16,7 +16,7 @@ public class ZombieManager {
 	
 	public boolean isZombieAdded() {
 		Random rand= new Random();
-		return rand.nextDouble() < game.getLevel().getFrecuencia()*game.getSeed();
+		return rand.nextDouble() < game.getLevel().getFrecuencia();
 	}
 	
 	public boolean zombiGanador() {

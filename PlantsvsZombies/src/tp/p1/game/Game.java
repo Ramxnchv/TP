@@ -26,7 +26,24 @@ public class Game {
 	
 	//metodos principales
 	public void update() {
-		
+		//recolectar girasol
+		for(int i=0;i<sunflowerList.getContador();i++) {
+			suncoins.setSunCoins(sunflowerList.getSunFlower(i).recolectar(suncoins.getSunCoins()));
+		}
+		//disparar lanzaguisantes
+		for(int i=0;i<peashooterList.getContador();i++) {
+			peashooterList.getPeaShooter(i).disparar();
+		}
+		//avanzar zombies
+		for(int i=0;i<zombieList.getContador();i++){
+			zombieList.getZombie(i).avanzar();
+		}
+		//atacar zombies
+		for(int i=0;i<zombieList.getContador();i++) {
+			zombieList.getZombie(i).atacar();
+		}
+		//limpiar sin vida
+		this.eliminarSinVida();
 	}
 	
 	public void inicializar() {

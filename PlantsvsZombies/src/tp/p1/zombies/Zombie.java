@@ -1,4 +1,5 @@
 package tp.p1.zombies;
+import tp.p1.game.Game;
 
 public class Zombie {
 	private int healthPoints = 5;
@@ -6,19 +7,15 @@ public class Zombie {
 	private int damage=1;
 	private int x;
 	private int y;
-<<<<<<< Updated upstream
-=======
 	boolean avanzar;
 	private Game game;
->>>>>>> Stashed changes
+
 	
 	public Zombie(int x,int y) {
 		this.x=x;
 		this.y=y;
 	}
 
-<<<<<<< Updated upstream
-=======
 	public void avanzar() {
 		if(game.checkEmpty(x-1, y)) {
 			this.x--;
@@ -37,7 +34,7 @@ public class Zombie {
 	}
 	
 	//getters y setters
->>>>>>> Stashed changes
+
 	public int getHealthPoints() {
 		return healthPoints;
 	}
