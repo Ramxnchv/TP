@@ -5,8 +5,6 @@ import tp.p1.zombies.ZombieManager;
 
 public class Game {
 	//atributos
-	private final int BOARD_SIZE=32;
-	private Game game;
 	private ZombieList zombieList;
 	private PeaShooterList peashooterList;
 	private SunFlowerList sunflowerList;
@@ -51,9 +49,9 @@ public class Game {
 		peashooterList=new PeaShooterList();
 		sunflowerList=new SunFlowerList();
 		numCiclos=0;
-		this.suncoins=new SunCoinManager(this.game);
+		this.suncoins=new SunCoinManager(this);
 		suncoins.setSunCoins(50);
-		this.zombieManager=new ZombieManager(this.game);
+		this.zombieManager=new ZombieManager(this);
 		zombieManager.setZombiesRestantes(zombieManager.getZombiesRestantes());
 	}
 	

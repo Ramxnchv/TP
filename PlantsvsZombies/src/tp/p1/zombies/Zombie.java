@@ -18,17 +18,21 @@ public class Zombie {
 
 	public void avanzar() {
 		if(game.checkEmpty(x-1, y)) {
-			this.x--;
+			this.x=this.x-speed;
 		}
 	}
 	
 	public void atacar() {
 		for(int i=0;i<game.getZombieList().getContador();i++) {
 			for(int j=0;j<game.getSunflowerList().getContador();j++) {
-				
+				if(game.getZombieList().getZombie(i).getX()-1==game.getSunflowerList().getSunFlower(j).getX()) {
+					game.getSunflowerList().getSunFlower(j).setHealthPoints(game.getSunflowerList().getSunFlower(j).getHealthPoints()-game.getZombieList().getZombie(i).getDamage());
+				}
 			}
-			for() {
-				
+			for(int k=0;k<game.getPeashooterList().getContador();k++) {
+				if(game.getZombieList().getZombie(i).getX()-1==game.getPeashooterList().getPeaShooter(k).getX()) {
+					game.getPeashooterList().getPeaShooter(k).setHealthPoints(game.getPeashooterList().getPeaShooter(k).getHealthPoints()-game.getZombieList().getZombie(i).getDamage());	
+				}
 			}
 		}
 	}
