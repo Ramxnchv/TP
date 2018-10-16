@@ -42,6 +42,19 @@ public class Game {
 		}
 		//limpiar sin vida
 		this.eliminarSinVida();
+		
+		//aumentar ciclo interno zombie y girasol
+		for(int i = 0; i < zombieList.getContador(); i++)
+			zombieList.getZombie(i).setInternalCycle(zombieList.getZombie(i).getInternalCycle()+1);
+		
+		for(int i = 0; i < sunflowerList.getContador(); i++)
+			sunflowerList.getSunFlower(i).setInternalCycle(sunflowerList.getSunFlower(i).getInternalCycle()+1);
+		
+		
+		/*Solucion alternativa
+		sunflowerList.increaseCycleSunflowers();
+		zombieList.increaseCycleZombies();
+		*/
 	}
 	
 	public void inicializar() {

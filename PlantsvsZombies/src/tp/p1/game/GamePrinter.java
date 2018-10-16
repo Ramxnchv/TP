@@ -25,7 +25,7 @@ public class GamePrinter {
 			for(int j = 0; j < dimY; j++) {
 
 				board[i][j] =  space;
-				
+				board[i][j] = game.getObject(x,y);
 				// TODO Fill the board with simulation objects
 				
 			}
