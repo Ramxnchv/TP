@@ -54,6 +54,12 @@ public class ZombieList {
 		return i;
 	}
 	
+	public void increaseCycleZombies()
+	{
+		for (int i = 0; i < contador; i++)
+			list[i].setInternalCycle(list[i].getInternalCycle()+1);
+	}
+	
 	public String printPosition(int i)
 	{
 		return list[i].toString();
