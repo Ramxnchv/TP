@@ -9,6 +9,7 @@ public class SunFlower {
 	private int frequency = 10;
 	private int x;
 	private int y;
+	boolean recolectar;
 	private Game game;
 	
 	

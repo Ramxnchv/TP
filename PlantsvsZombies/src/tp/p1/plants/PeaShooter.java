@@ -20,14 +20,14 @@ public class PeaShooter {
 	}
 	
 	public void disparar() {
-		Zombie[] zb = game.getZombieList().getList();
 		for(int i=0;i<game.getZombieList().getContador();i++) {
-			if(this.x==zb[i].getX()) {
-				zb[i].setHealthPoints(zb[i].getHealthPoints());
+			if(this.x==game.getZombieList().getZombie(i).getX()) {
+				game.getZombieList().getZombie(i).setHealthPoints(game.getZombieList().getZombie(i).getHealthPoints());
 			}
 		}			
 	}
 	
+<<<<<<< Updated upstream
 	public String toString()
 	{	
 		String str =  "P [" + healthPoints + "]";
@@ -36,6 +36,8 @@ public class PeaShooter {
 	}
 	
 	
+=======
+>>>>>>> Stashed changes
 	public int getX() {
 		return x;
 	}

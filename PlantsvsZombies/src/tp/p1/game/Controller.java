@@ -22,7 +22,8 @@ public class Controller {
 			System.out.println(game);
 			
 			System.out.println("Command > ");
-			String[] comando=in.nextLine().toLowerCase().split(" ");
+			String[] comando=new String[4];
+			comando=in.nextLine().toLowerCase().split(" ");
 			
 			
 			if(comando[0].equals("a")||comando[0].equals("add")) {

@@ -56,6 +56,19 @@ public class Game {
 		return true;
 	}
 	
+	public void eliminarSinVida() {
+		for(int i=0;i<zombieList.getContador();i++) {
+			if(zombieList.getZombie(i).getHealthPoints()==0) {
+				zombieList.Delete(i);
+			}
+			if(sunflowerList.getSunFlower(i).getHealthPoints()==0) {
+				sunflowerList.Delete(i);
+			}
+			if(peashooterList.getPeaShooter(i).getHealthPoints()==0) {
+				peashooterList.Delete(i);
+			}
+		}
+	}
 	
 	
 	//getters y setters
