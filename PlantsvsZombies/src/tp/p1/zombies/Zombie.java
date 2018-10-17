@@ -11,9 +11,11 @@ public class Zombie {
 	private Game game;
 
 	
-	public Zombie(int x,int y) {
+	public Zombie(int x,int y,Game game) {
 		this.x=x;
 		this.y=y;
+		this.game=game;
+		this.internalCycle=0;
 	}
 
 	public void avanzar() {

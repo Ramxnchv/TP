@@ -28,12 +28,12 @@ public class Controller {
 			
 			if(comando[0].equals("a")||comando[0].equals("add")) {
 				//comprobar espacio vacio
-				if(game.checkEmpty(Integer.parseInt(comando[3]), Integer.parseInt(comando[4]))) {
+				if(game.checkEmpty(Integer.parseInt(comando[2]), Integer.parseInt(comando[3]))) {
 					//separar por tipo planta
 					if(comando[1].equals("p")||comando[1].equals("peashooter")) {
 						//comprobar dinero
 						if(game.getSuncoins().getSunCoins()>PeaShooter.getCost()) {
-							PeaShooter ps=new PeaShooter(Integer.parseInt(comando[3]),Integer.parseInt(comando[4]),game);
+							PeaShooter ps=new PeaShooter(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getPeashooterList().Add(ps);
 							game.update();
 							game.setNumCiclos(game.getNumCiclos()+1);
@@ -45,7 +45,7 @@ public class Controller {
 					}
 					else if(comando[1].equals("s")||comando[1].equals("sunflower")) {
 						if(game.getSuncoins().getSunCoins()>SunFlower.getCost()) {
-							SunFlower sf=new SunFlower(Integer.parseInt(comando[3]),Integer.parseInt(comando[4]),game);
+							SunFlower sf=new SunFlower(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getSunflowerList().Add(sf);
 							game.update();
 							game.setNumCiclos(game.getNumCiclos()+1);

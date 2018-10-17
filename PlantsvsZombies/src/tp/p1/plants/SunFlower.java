@@ -6,10 +6,10 @@ public class SunFlower {
 	private static final int cost = 20;
 	private static final int damage = 0;
 	private int healthPoints = 1;
-	private int frequency = 10;
+	private int internalCycle;
+	private int cantidadRecolectada = 10;
 	private int x;
 	private int y;
-	boolean recolectar;
 	private Game game;
 	
 	
@@ -17,10 +17,11 @@ public class SunFlower {
 	this.x=x;
 	this.y=y;
 	this.game=game;
+	this.internalCycle=0;
 	}
 
 	public int recolectar(int suncoins) {
-		return suncoins+=10;
+		return suncoins+=cantidadRecolectada;
 	}
 	
 	public String toString()
@@ -56,13 +57,17 @@ public class SunFlower {
 	public int getHealthPoints() {
 		return healthPoints;
 	}
+	
+	public int getInternalCycle() {
+		return internalCycle;
+	}
+
+	public void setInternalCycle(int internalCycle) {
+		this.internalCycle = internalCycle;
+	}
 
 	public void setHealthPoints(int healthPoints) {
 		this.healthPoints = healthPoints;
 	}
-
-
-	public int getFrequency() {
-		return frequency;
-	}
+	
 }

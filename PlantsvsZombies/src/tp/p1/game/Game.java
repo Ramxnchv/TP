@@ -19,7 +19,7 @@ public class Game {
 	public Game(LEVEL level,int seed) {
 		this.level=level;
 		this.seed=seed;
-		inicializar();
+		this.inicializar();
 	}
 	
 	//metodos principales
@@ -62,6 +62,7 @@ public class Game {
 		peashooterList=new PeaShooterList();
 		sunflowerList=new SunFlowerList();
 		numCiclos=0;
+		this.gamePrinter=new GamePrinter(this,4,8);
 		this.suncoins=new SunCoinManager(this);
 		suncoins.setSunCoins(50);
 		this.zombieManager=new ZombieManager(this);
