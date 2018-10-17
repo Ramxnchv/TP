@@ -45,6 +45,7 @@ public class Controller {
 								int filaZombie= new Random().nextInt(3);
 								Zombie zomb=new Zombie(filaZombie,7,game);
 								game.getZombieList().Add(zomb);
+								game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
 							}
 							//aniadir ciclo
 							game.setNumCiclos(game.getNumCiclos()+1);
@@ -70,6 +71,7 @@ public class Controller {
 								int filaZombie= new Random().nextInt(3);
 								Zombie zomb=new Zombie(filaZombie,7,game);
 								game.getZombieList().Add(zomb);
+								game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
 							}
 							//aniadir ciclo
 							game.setNumCiclos(game.getNumCiclos()+1);
