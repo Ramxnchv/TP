@@ -17,10 +17,9 @@ public class Controller {
 	public void run() {
 		
 		System.out.println("Random seed used: "+game.getSeed());
+		System.out.println(game);
 		
 		while((game.getZombieManager().getZombiesRestantes()>0)&&(!game.getZombieManager().zombiGanador())) {
-			
-			System.out.println(game);
 			
 			System.out.println("Command > ");
 			String[] comando=new String[4];
