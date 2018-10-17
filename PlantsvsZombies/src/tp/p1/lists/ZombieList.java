@@ -28,16 +28,17 @@ public class ZombieList {
 	
 	public boolean checkZombie(int x, int y)
 	{
-		boolean found = false;
-		for(int i = 0; i < contador; i++)
-		{
-			if((list[i].getX() == x) && (list[i].getY() == y))
-			{
-				found = true;
+		int i=0;
+		boolean encontrado=false;
+		while(i<contador&&!encontrado) {
+			if((list[i].getX()==x)&&(list[i].getY()==y)) {
+				encontrado=true;
+			}
+			else {
+				i++;	
 			}
 		}
-		
-		return found;
+		return encontrado;
 	}
 	
 	public int searchPosition(int x,int y) {

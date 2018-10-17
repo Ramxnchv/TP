@@ -30,7 +30,7 @@ public class PlantsVsZombies {
 			}
 			
 			if(args.length==1) {
-				seed=new Random().nextInt(10);
+				seed=new Random().nextInt(3);
 			}
 			else {
 				seed=Integer.parseInt(args[1]);

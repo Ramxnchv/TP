@@ -1,9 +1,11 @@
 package tp.p1.game;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import tp.p1.plants.PeaShooter;
 import tp.p1.plants.SunFlower;
+import tp.p1.zombies.Zombie;
 
 public class Controller {
 	private Game game;
@@ -32,10 +34,15 @@ public class Controller {
 					//separar por tipo planta
 					if(comando[1].equals("p")||comando[1].equals("peashooter")) {
 						//comprobar dinero
-						if(game.getSuncoins().getSunCoins()>PeaShooter.getCost()) {
+						if(game.getSuncoins().getSunCoins()>=PeaShooter.getCost()) {
 							PeaShooter ps=new PeaShooter(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getPeashooterList().Add(ps);
 							game.update();
+							if(game.getZombieManager().isZombieAdded()) {
+								int filaZombie= new Random().nextInt(3);
+								Zombie zomb=new Zombie(filaZombie,7,game);
+								game.getZombieList().Add(zomb);
+							}
 							game.setNumCiclos(game.getNumCiclos()+1);
 							System.out.println(game);
 						}
@@ -48,6 +55,11 @@ public class Controller {
 							SunFlower sf=new SunFlower(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getSunflowerList().Add(sf);
 							game.update();
+							if(game.getZombieManager().isZombieAdded()) {
+								int filaZombie= new Random().nextInt(3);
+								Zombie zomb=new Zombie(filaZombie,7,game);
+								game.getZombieList().Add(zomb);
+							}
 							game.setNumCiclos(game.getNumCiclos()+1);
 							System.out.println(game);
 						}
@@ -77,6 +89,11 @@ public class Controller {
 			}
 			else if(comando[0].equals("")||comando[0].equals("none")) {
 				game.update();
+				if(game.getZombieManager().isZombieAdded()) {
+					int filaZombie= new Random().nextInt(3);
+					Zombie zomb=new Zombie(filaZombie,7,game);
+					game.getZombieList().Add(zomb);
+				}
 				game.setNumCiclos(game.getNumCiclos()+1);
 				System.out.println(game);
 			}
