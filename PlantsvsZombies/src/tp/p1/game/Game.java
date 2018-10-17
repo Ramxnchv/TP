@@ -78,10 +78,12 @@ public class Game {
 	
 	
 	public boolean checkEmpty(int x,int y) {
-		if(true) {
-			
+		boolean empty = false;
+		
+		if(!peashooterList.checkPeashooter(x, y) && !sunflowerList.checkSunflower(x, y) && !zombieList.checkZombie(x, y)) {
+			empty = true;
 		}
-		return true;
+		return empty;
 	}
 	
 	public void eliminarSinVida() {
