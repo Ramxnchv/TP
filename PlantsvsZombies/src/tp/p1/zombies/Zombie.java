@@ -5,6 +5,7 @@ public class Zombie {
 	private int healthPoints = 5;
 	private int speed=1;
 	private int damage=1;
+	private int internalCycle;
 	private int x;
 	private int y;
 	boolean avanzar;
@@ -45,6 +46,14 @@ public class Zombie {
 
 	public void setHealthPoints(int healthPoints) {
 		this.healthPoints = healthPoints;
+	}
+	
+	public int getInternalCycle() {
+		return internalCycle;
+	}
+
+	public void setInternalCycle(int internalCycle) {
+		this.internalCycle = internalCycle;
 	}
 	
 	public String toString()
