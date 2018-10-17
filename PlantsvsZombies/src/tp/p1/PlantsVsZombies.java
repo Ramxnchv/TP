@@ -11,7 +11,6 @@ public class PlantsVsZombies {
 		if((args.length>0)||(args.length<3)) {
 			LEVEL level;
 			int seed;
-			Random rand;
 			Scanner scanner=new Scanner(System.in);
 			
 			args[0].toUpperCase();
@@ -31,13 +30,12 @@ public class PlantsVsZombies {
 			}
 			
 			if(args.length==1) {
-				seed=new Random().nextInt(20);
+				seed=new Random().nextInt(10);
 			}
 			else {
 				seed=Integer.parseInt(args[1]);
 			}
 			
-			rand = new Random(seed);
 			Game game = new Game(level,seed);
 			Controller controller = new Controller(game,scanner);
 			controller.run();

@@ -65,7 +65,6 @@ public class Game {
 		this.suncoins=new SunCoinManager(this);
 		suncoins.setSunCoins(50);
 		this.zombieManager=new ZombieManager(this);
-		zombieManager.setZombiesRestantes(zombieManager.getZombiesRestantes());
 	}
 	
 	public String toString() {

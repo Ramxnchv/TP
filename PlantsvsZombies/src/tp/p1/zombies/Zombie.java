@@ -8,7 +8,6 @@ public class Zombie {
 	private int internalCycle;
 	private int x;
 	private int y;
-	boolean avanzar;
 	private Game game;
 
 	
