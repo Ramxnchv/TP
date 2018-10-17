@@ -133,6 +133,10 @@ public class Game {
 		return zombieList;
 	}
 	
+	public void setGamePrinter(GamePrinter gamePrinter) {
+		this.gamePrinter = gamePrinter;
+	}
+
 	public PeaShooterList getPeashooterList() {
 		return peashooterList;
 	}

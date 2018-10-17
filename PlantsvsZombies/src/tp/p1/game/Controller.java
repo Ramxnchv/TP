@@ -20,7 +20,6 @@ public class Controller {
 		
 		while((game.getZombieManager().getZombiesRestantes()>0)&&(!game.getZombieManager().zombiGanador())) {
 			
-			game.update();
 			System.out.println(game);
 			
 			System.out.println("Command > ");
@@ -35,15 +34,22 @@ public class Controller {
 					if(comando[1].equals("p")||comando[1].equals("peashooter")) {
 						//comprobar dinero
 						if(game.getSuncoins().getSunCoins()>=PeaShooter.getCost()) {
+							game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()-PeaShooter.getCost());
+							//aniadir peashooter en lista
 							PeaShooter ps=new PeaShooter(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getPeashooterList().Add(ps);
+							//update
 							game.update();
+							//aniadir zombie
 							if(game.getZombieManager().isZombieAdded()) {
 								int filaZombie= new Random().nextInt(3);
 								Zombie zomb=new Zombie(filaZombie,7,game);
 								game.getZombieList().Add(zomb);
 							}
+							//aniadir ciclo
 							game.setNumCiclos(game.getNumCiclos()+1);
+							//repintar tablero
+							game.setGamePrinter(new GamePrinter(game,4,8));
 							System.out.println(game);
 						}
 						else {
@@ -51,16 +57,24 @@ public class Controller {
 						}
 					}
 					else if(comando[1].equals("s")||comando[1].equals("sunflower")) {
-						if(game.getSuncoins().getSunCoins()>SunFlower.getCost()) {
+						//comprobar dinero
+						if(game.getSuncoins().getSunCoins()>=SunFlower.getCost()) {
+							game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()-SunFlower.getCost());
+							//aniadir sunflower a lista
 							SunFlower sf=new SunFlower(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getSunflowerList().Add(sf);
+							//update
 							game.update();
+							//aniadir zombie
 							if(game.getZombieManager().isZombieAdded()) {
 								int filaZombie= new Random().nextInt(3);
 								Zombie zomb=new Zombie(filaZombie,7,game);
 								game.getZombieList().Add(zomb);
 							}
+							//aniadir ciclo
 							game.setNumCiclos(game.getNumCiclos()+1);
+							//repintar tablero
+							game.setGamePrinter(new GamePrinter(game,4,8));
 							System.out.println(game);
 						}
 						else {
@@ -95,6 +109,7 @@ public class Controller {
 					game.getZombieList().Add(zomb);
 				}
 				game.setNumCiclos(game.getNumCiclos()+1);
+				game.setGamePrinter(new GamePrinter(game,4,8));
 				System.out.println(game);
 			}
 			else {

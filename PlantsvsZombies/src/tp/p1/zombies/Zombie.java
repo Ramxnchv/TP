@@ -19,8 +19,8 @@ public class Zombie {
 	}
 
 	public void avanzar() {
-		if(game.checkEmpty(x-1, y)) {
-			this.x=this.x-speed;
+		if(game.checkEmpty(x, y-1)) {
+			this.y=this.y-speed;
 		}
 	}
 	

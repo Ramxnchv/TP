@@ -30,7 +30,7 @@ public class PeaShooter {
 
 	public String toString()
 	{	
-		String str =  "P [" + healthPoints + "]";
+		String str =  "P [" + this.healthPoints + "]";
 		
 		return str;
 	}
