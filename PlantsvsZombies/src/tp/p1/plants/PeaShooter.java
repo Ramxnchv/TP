@@ -22,7 +22,7 @@ public class PeaShooter {
 	public void disparar() {
 		for(int i=0;i<game.getZombieList().getContador();i++) {
 			if(this.x==game.getZombieList().getZombie(i).getX()) {
-				game.getZombieList().getZombie(i).setHealthPoints(game.getZombieList().getZombie(i).getHealthPoints());
+				game.getZombieList().getZombie(i).setHealthPoints(game.getZombieList().getZombie(i).getHealthPoints()-this.damage);
 			}
 		}			
 	}
