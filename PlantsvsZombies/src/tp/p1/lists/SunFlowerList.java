@@ -66,7 +66,7 @@ public class SunFlowerList {
 		return list[i].toString();
 	}
 	
-	//metodo comprobar casilla libre
+
 
 	public SunFlower[] getList() {
 		return list;

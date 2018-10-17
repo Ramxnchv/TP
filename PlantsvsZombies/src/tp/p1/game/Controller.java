@@ -118,7 +118,7 @@ public class Controller {
 			}
 			
 		}
-		
+		System.out.println("Game Over");
 		if(game.getZombieManager().zombiGanador()) {
 		System.out.println("\nZombies win");}
 		else {

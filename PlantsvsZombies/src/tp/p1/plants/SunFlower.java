@@ -31,6 +31,7 @@ public class SunFlower {
 		return str;
 	}
 	
+	//getters y setters
 	public int getX() {
 		return x;
 	}
