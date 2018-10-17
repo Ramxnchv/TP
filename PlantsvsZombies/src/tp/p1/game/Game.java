@@ -98,6 +98,30 @@ public class Game {
 		}
 	}
 	
+		
+	public String getObject(int x, int y)
+	{
+		String str;
+		int i;
+		if(peashooterList.checkPeashooter(x, y))
+		{
+			i = peashooterList.searchPosition(x, y);
+			str = peashooterList.printPosition(i);
+		} else if (sunflowerList.checkSunflower(x, y))
+		{
+			i = sunflowerList.searchPosition(x, y);
+			str = sunflowerList.printPosition(i);
+		} else if (zombieList.checkZombie(x, y))
+		{
+			i = zombieList.searchPosition(x, y);
+			str = zombieList.printPosition(i);
+		} else {
+			str = " ";
+		}
+		return str;
+	}
+	
+	
 	
 	//getters y setters
 	public LEVEL getLevel() {
