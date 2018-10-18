@@ -19,13 +19,27 @@ public class SunFlowerList {
 		}
 		return contador<BOARD_SIZE;
 	}
-	public void Delete(int pos) {
-		for(int i=pos;i<contador;i++) {
-			list[i]=list[i+1];
+	public void Delete() {
+		for(int i=0;i<contador;i++) {
+			if(contador > 0 && list[i].getHealthPoints() <= 0)
+			{
+				list[i]=list[i+1];
+				contador--;
+			}
+		}
+		
+	}
+	
+	public void update() {
+		for(int i=0;i<contador;i++) {
+			list[i].updateSunFlower();
 		}
 	}
 	
-	
+	public void decreaseHealth(int i, int x, int y, int damage)
+	{
+		list[i].decreaseHealth(damage);
+	}
 	public boolean checkSunflower(int x, int y)
 	{
 		int i=0;
@@ -55,34 +69,27 @@ public class SunFlowerList {
 		return i;
 	}
 	
-	/*public void increaseCycleSunflowers()
-	{
-		for(int i = 0; i < contador; i++)
-			list[i].setInternalCycle(list[i].getInternalCycle()+1);
-	}*/
-	
 	public String printPosition(int i)
 	{
 		return list[i].toString();
 	}
 	
-
-
 	public SunFlower[] getList() {
 		return list;
 	}
 	
-	public SunFlower getSunFlower(int pos) {
-		return list[pos];
-	}
-
-
 	public static int getBoardSize() {
 		return BOARD_SIZE;
 	}
 
 	public int getContador() {
 		return contador;
+	}
+	
+	public void printAllSunflowers()
+	{
+		for(int i = 0; i < contador; i++)
+			System.out.println("Esta en x: " + list[i].getX() + "esta en y: " + list[i].getY());
 	}
 	
 }

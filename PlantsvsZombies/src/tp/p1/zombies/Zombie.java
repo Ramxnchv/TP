@@ -18,27 +18,27 @@ public class Zombie {
 		this.internalCycle=0;
 	}
 
-	public void avanzar() {
-		if(game.checkEmpty(x, y-1)) {
+	public void update() {
+		//si esta vacia la casilla
+		if(game.checkEmpty(x, y-1)&&internalCycle%2==0) {
+			//avanzar
 			this.y=this.y-speed;
 		}
-	}
-	
-	public void atacar() {
-		for(int i=0;i<game.getZombieList().getContador();i++) {
-			for(int j=0;j<game.getSunflowerList().getContador();j++) {
-				if(game.getZombieList().getZombie(i).getY()-1==game.getSunflowerList().getSunFlower(j).getY()) {
-					game.getSunflowerList().getSunFlower(j).setHealthPoints(game.getSunflowerList().getSunFlower(j).getHealthPoints()-game.getZombieList().getZombie(i).getDamage());
-				}
-			}
-			for(int k=0;k<game.getPeashooterList().getContador();k++) {
-				if(game.getZombieList().getZombie(i).getY()-1==game.getPeashooterList().getPeaShooter(k).getY()) {
-					game.getPeashooterList().getPeaShooter(k).setHealthPoints(game.getPeashooterList().getPeaShooter(k).getHealthPoints()-game.getZombieList().getZombie(i).getDamage());	
-				}
+		else if (game.checkEmpty(x, y-1) && internalCycle%2!=0 ){
+			this.y = y;
+		} else {
+			if(!game.getZombieList().checkZombie(x, y-1)) {
+				//atacar
+				game.attackPlant(x,y-1,damage);
 			}
 		}
+		this.internalCycle += 1;
 	}
 	
+	public void decreaseHealth(int damage)
+	{
+		healthPoints -= damage;
+	}
 	//getters y setters
 
 	public int getHealthPoints() {

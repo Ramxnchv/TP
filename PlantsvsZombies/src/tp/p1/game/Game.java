@@ -14,6 +14,7 @@ public class Game {
 	private SunCoinManager suncoins;
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
+	private int zombiesLeftAlive;
 	
 	//constuctor
 	public Game(LEVEL level,int seed) {
@@ -25,36 +26,14 @@ public class Game {
 	//metodos principales
 	public void update() {
 		//recolectar girasol
-		for(int i=0;i<sunflowerList.getContador();i++) {
-			suncoins.setSunCoins(sunflowerList.getSunFlower(i).recolectar(suncoins.getSunCoins()));
-		}
+		sunflowerList.update();
 		//disparar lanzaguisantes
-		for(int i=0;i<peashooterList.getContador();i++) {
-			peashooterList.getPeaShooter(i).disparar();
-		}
-		//avanzar zombies
-		for(int i=0;i<zombieList.getContador();i++){
-			zombieList.getZombie(i).avanzar();
-		}
-		//atacar zombies
-		for(int i=0;i<zombieList.getContador();i++) {
-			zombieList.getZombie(i).atacar();
-		}
+		peashooterList.update();
+		//avanzar y atacar zombies
+		zombieList.update();
+
 		//limpiar sin vida
 		this.eliminarSinVida();
-		
-		//aumentar ciclo interno zombie y girasol
-		for(int i = 0; i < zombieList.getContador(); i++)
-			zombieList.getZombie(i).setInternalCycle(zombieList.getZombie(i).getInternalCycle()+1);
-		
-		for(int i = 0; i < sunflowerList.getContador(); i++)
-			sunflowerList.getSunFlower(i).setInternalCycle(sunflowerList.getSunFlower(i).getInternalCycle()+1);
-		
-		
-		/*Solucion alternativa
-		sunflowerList.increaseCycleSunflowers();
-		zombieList.increaseCycleZombies();
-		*/
 	}
 	
 	public void inicializar() {
@@ -87,17 +66,65 @@ public class Game {
 	}
 	
 	public void eliminarSinVida() {
-		for(int i=0;i<zombieList.getContador();i++) {
-			if(zombieList.getZombie(i).getHealthPoints()<=0) {
-				zombieList.Delete(i);
+		System.out.println("Los zombies vivos antes de eliminar sin vida son: " + zombieManager.getZombiesRestantesVivos());
+		if(zombieList.Delete())
+			zombieManager.setZombiesRestantesVivos(zombieManager.getZombiesRestantesVivos()-1);
+		System.out.println("Los zombies vivos despues de eliminar son: " + zombieManager.getZombiesRestantesVivos());
+		sunflowerList.Delete();
+		peashooterList.Delete();
+	}
+	public void attackZombie(int x, int y, int damage) {
+		
+		int i = 0, position;
+		
+		//recorremos las columnas en busca ed un zombie
+		while (i < 8 && !zombieList.checkZombie(x, y))
+		{
+			y++;
+			if(zombieList.checkZombie(x,y))
+			{
+				position = zombieList.searchPosition(x,y);
+				zombieList.decreaseHealth(position, damage);
 			}
-			if(sunflowerList.getSunFlower(i).getHealthPoints()<=0) {
-				sunflowerList.Delete(i);
+			i++;
+		}
+	}
+	
+	public boolean checkWinnerZombie()
+	{
+		boolean found = false;;
+		if(zombieList.checkWinnerZombie())
+			found = true;
+		return found;
+	}
+	
+	public void attackPlant(int x, int y, int damage) {
+		int i = 0;
+		if(sunflowerList.checkSunflower(x, y))
+		{
+			i = sunflowerList.searchPosition(x, y);
+			sunflowerList.decreaseHealth(i, x, y, damage);
+		}
+		else 
+		{
+			i = peashooterList.searchPosition(x, y);
+			peashooterList.decreaseHealth(i, x, y, damage);
+		}
+		
+		/*public void atacar() {
+		for(int i=0;i<game.getZombieList().getContador();i++) {
+			for(int j=0;j<game.getSunflowerList().getContador();j++) {
+				if(game.getZombieList().getZombie(i).getY()-1==game.getSunflowerList().getSunFlower(j).getY()) {
+					game.getSunflowerList().getSunFlower(j).setHealthPoints(game.getSunflowerList().getSunFlower(j).getHealthPoints()-game.getZombieList().getZombie(i).getDamage());
+				}
 			}
-			if(peashooterList.getPeaShooter(i).getHealthPoints()<=0) {
-				peashooterList.Delete(i);
+			for(int k=0;k<game.getPeashooterList().getContador();k++) {
+				if(game.getZombieList().getZombie(i).getY()-1==game.getPeashooterList().getPeaShooter(k).getY()) {
+					game.getPeashooterList().getPeaShooter(k).setHealthPoints(game.getPeashooterList().getPeaShooter(k).getHealthPoints()-game.getZombieList().getZombie(i).getDamage());	
+				}
 			}
 		}
+	}*/
 	}
 	
 		
@@ -172,5 +199,16 @@ public class Game {
 	public ZombieManager getZombieManager() {
 		return zombieManager;
 	}
+
+	public int getZombiesLeftAlive() {
+		return zombiesLeftAlive;
+	}
+
+	public void setZombiesLeftAlive(int zombiesLeftAlive) {
+		this.zombiesLeftAlive = zombiesLeftAlive;
+	}
+	
+	
 		
+	
 }

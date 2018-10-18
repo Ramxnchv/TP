@@ -1,3 +1,4 @@
+
 package tp.p1.game;
 
 import java.util.Random;
@@ -19,8 +20,7 @@ public class Controller {
 		System.out.println("Random seed used: "+game.getSeed());
 		System.out.println(game);
 		
-		while((game.getZombieManager().getZombiesRestantes()>0)&&(!game.getZombieManager().zombiGanador())) {
-			
+		while((game.getZombieManager().getZombiesRestantesVivos() > 0)&&(!game.getZombieManager().zombiGanador())) {
 			System.out.println("Command > ");
 			String[] comando=new String[4];
 			comando=in.nextLine().toLowerCase().split(" ");
@@ -37,6 +37,7 @@ public class Controller {
 							//aniadir peashooter en lista
 							PeaShooter ps=new PeaShooter(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getPeashooterList().Add(ps);
+							System.out.println(game.getPeashooterList().getContador());
 							//update
 							game.update();
 							//aniadir zombie
@@ -108,6 +109,7 @@ public class Controller {
 					int filaZombie= new Random().nextInt(3);
 					Zombie zomb=new Zombie(filaZombie,7,game);
 					game.getZombieList().Add(zomb);
+					game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
 				}
 				game.setNumCiclos(game.getNumCiclos()+1);
 				game.setGamePrinter(new GamePrinter(game,4,8));
@@ -119,6 +121,7 @@ public class Controller {
 			}
 			
 		}
+		System.out.println("Los zombies restantes son: " + game.getZombieManager().getZombiesRestantes() + " los zombies vivos son: " + game.getZombieManager().getZombiesRestantesVivos());
 		System.out.println("Game Over");
 		if(game.getZombieManager().zombiGanador()) {
 		System.out.println("\nZombies win");}

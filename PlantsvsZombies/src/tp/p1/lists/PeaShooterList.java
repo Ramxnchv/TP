@@ -23,11 +23,24 @@ public class PeaShooterList {
 		return contador<BOARD_SIZE;
 	}
 	
-	public void Delete(int pos) {
-		for(int i=pos;i<contador;i++) {
-			list[i]=list[i+1];
+	public void Delete() {
+		for(int i=0;i<contador;i++) {
+			if(contador > 0 && list[i].getHealthPoints() <= 0) {
+				list[i]=list[i+1];
+				contador--;
+			}
 		}
-		contador--;
+	}
+	
+	public void update() {
+		for(int i=0;i<contador;i++) {
+			list[i].update();
+		}
+	}
+	
+	public void decreaseHealth(int i, int x, int y, int damage)
+	{
+		list[i].decreaseHealth(damage);
 	}
 	
 	public boolean checkPeashooter(int x, int y)
@@ -66,10 +79,6 @@ public class PeaShooterList {
 
 	//getters y setters
 	
-	public PeaShooter getPeaShooter(int pos) {
-		return list[pos];
-	}
-	
 	public static int getBoardSize() {
 		return BOARD_SIZE;
 	}
@@ -81,5 +90,8 @@ public class PeaShooterList {
 	public int getContador() {
 		return contador;
 	}
+	
+
+	
 	
 }

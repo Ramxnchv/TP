@@ -19,14 +19,15 @@ public class PeaShooter {
 		this.game=game;
 	}
 	
-	public void disparar() {
-		for(int i=0;i<game.getZombieList().getContador();i++) {
-			if(this.x==game.getZombieList().getZombie(i).getX()) {
-				game.getZombieList().getZombie(i).setHealthPoints(game.getZombieList().getZombie(i).getHealthPoints()-this.damage);
-			}
-		}			
+	
+	public void update() {
+		game.attackZombie(x, y, damage);
 	}
 	
+	public void decreaseHealth(int damage)
+	{
+		healthPoints -= damage;
+	}
 
 	public String toString()
 	{	

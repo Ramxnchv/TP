@@ -18,13 +18,29 @@ public class ZombieList {
 		}
 		return contador<NUM_MAX_ZOMBIES;
 	}
-	public void Delete(int pos) {
-		for(int i=pos;i<contador;i++) {
-			list[i]=list[i+1];
+	public boolean Delete() {
+		boolean deleted = false;;
+		for(int i=0;i<contador;i++) {
+			if(contador > 0  && list[i].getHealthPoints() <= 0) {
+				list[i]=list[i+1];
+				contador--;
+				deleted = true;
+			}
 		}
-		contador--;
+		
+		return deleted;
 	}
 	
+	public void update() {
+		for(int i=0;i<contador;i++) {
+			list[i].update();
+		}
+	}
+	
+	public void decreaseHealth(int position, int damage)
+	{
+		list[position].decreaseHealth(damage);
+	}
 	
 	public boolean checkZombie(int x, int y)
 	{
@@ -41,6 +57,22 @@ public class ZombieList {
 		return encontrado;
 	}
 	
+	public boolean checkWinnerZombie()
+	{
+		int i = 0;
+		boolean found = false;
+		while (i < contador && !found)
+		{
+			if(list[i].getY() == 0)
+			{
+				found = true;
+			}
+			i++;
+		}
+		
+		return found;
+	}
+	
 	public int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
@@ -55,21 +87,11 @@ public class ZombieList {
 		return i;
 	}
 	
-	public void increaseCycleZombies()
-	{
-		for (int i = 0; i < contador; i++)
-			list[i].setInternalCycle(list[i].getInternalCycle()+1);
-	}
-	
 	public String printPosition(int i)
 	{
 		return list[i].toString();
 	}
 	
-
-	public Zombie getZombie(int pos) {
-		return list[pos];
-	}
 	
 	public Zombie[] getList() {
 		return list;

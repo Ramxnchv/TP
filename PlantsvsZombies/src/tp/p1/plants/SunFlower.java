@@ -19,16 +19,22 @@ public class SunFlower {
 	this.game=game;
 	this.internalCycle=0;
 	}
-
-	public int recolectar(int suncoins) {
-		return suncoins+=cantidadRecolectada;
-	}
 	
 	public String toString()
 	{
 		String str = "S [" + healthPoints + "]";
 		
 		return str;
+	}
+	
+	public void updateSunFlower() {
+		game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()+cantidadRecolectada);
+		this.internalCycle+=1;
+	}
+	
+	public void decreaseHealth(int damage)
+	{
+		healthPoints -= damage;
 	}
 	
 	//getters y setters

@@ -8,10 +8,12 @@ import tp.p1.game.LEVEL;
 public class ZombieManager {
 	private Game game;
 	private int zombiesRestantes;
+	private int zombiesRestantesVivos;
 	
 	public ZombieManager(Game game) {
 		this.game=game;
 		this.zombiesRestantes=game.getLevel().getNumeroZombies();
+		this.zombiesRestantesVivos=game.getLevel().getNumeroZombies();
 	}
 	
 	public boolean isZombieAdded() {
@@ -23,12 +25,10 @@ public class ZombieManager {
 		boolean zombiganador=false;
 		int i=0;
 		while(i<game.getZombieList().getContador() && !zombiganador) {
-			if(game.getZombieList().getZombie(i).getY()==0) {
+			if(game.checkWinnerZombie()) {
 				zombiganador=true;
 			}
-			else {
 			i++;
-			}
 		}
 		return zombiganador;
 	}
@@ -40,5 +40,14 @@ public class ZombieManager {
 	public void setZombiesRestantes(int zombiesRestantes) {
 		this.zombiesRestantes = zombiesRestantes;
 	}
+
+	public int getZombiesRestantesVivos() {
+		return zombiesRestantesVivos;
+	}
+
+	public void setZombiesRestantesVivos(int zombiesRestantesVivos) {
+		this.zombiesRestantesVivos = zombiesRestantesVivos;
+	}
+
 	
 }
