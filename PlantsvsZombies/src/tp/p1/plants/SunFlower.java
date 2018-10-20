@@ -65,6 +65,10 @@ public class SunFlower {
 		return healthPoints;
 	}
 	
+	public void setHealthPoints(int healthPoints) {
+		this.healthPoints = healthPoints;
+	}
+	
 	public int getInternalCycle() {
 		return internalCycle;
 	}
@@ -73,8 +77,6 @@ public class SunFlower {
 		this.internalCycle = internalCycle;
 	}
 
-	public void setHealthPoints(int healthPoints) {
-		this.healthPoints = healthPoints;
-	}
+	
 	
 }

@@ -27,7 +27,4 @@ public class SunCoinManager {
 	public void setSunCoins(int sunCoins) {
 		this.sunCoins = sunCoins;
 	}
-	
-	
-	
 }

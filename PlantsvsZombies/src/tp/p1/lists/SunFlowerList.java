@@ -27,7 +27,6 @@ public class SunFlowerList {
 				contador--;
 			}
 		}
-		
 	}
 	
 	public void update() {
@@ -36,10 +35,11 @@ public class SunFlowerList {
 		}
 	}
 	
-	public void decreaseHealth(int i, int x, int y, int damage)
+	public void decreaseHealth(int pos,int damage)
 	{
-		list[i].decreaseHealth(damage);
+		list[pos].decreaseHealth(damage);
 	}
+	
 	public boolean checkSunflower(int x, int y)
 	{
 		int i=0;
@@ -73,23 +73,9 @@ public class SunFlowerList {
 	{
 		return list[i].toString();
 	}
-	
-	public SunFlower[] getList() {
-		return list;
-	}
-	
-	public static int getBoardSize() {
-		return BOARD_SIZE;
-	}
 
 	public int getContador() {
 		return contador;
-	}
-	
-	public void printAllSunflowers()
-	{
-		for(int i = 0; i < contador; i++)
-			System.out.println("Esta en x: " + list[i].getX() + "esta en y: " + list[i].getY());
 	}
 	
 }

@@ -16,7 +16,8 @@ public class Game {
 	private SunCoinManager suncoins;
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
-	private int zombiesLeftAlive;
+	private final int FILAS=4;
+	private final int COLUMNAS=8;
 	
 	//constuctor
 	public Game(LEVEL level,Random rand) {
@@ -43,7 +44,7 @@ public class Game {
 		peashooterList=new PeaShooterList();
 		sunflowerList=new SunFlowerList();
 		numCiclos=0;
-		this.gamePrinter=new GamePrinter(this,4,8);
+		this.gamePrinter=new GamePrinter(this,FILAS,COLUMNAS);
 		this.suncoins=new SunCoinManager(this);
 		suncoins.setSunCoins(50);
 		this.zombieManager=new ZombieManager(this);
@@ -68,19 +69,22 @@ public class Game {
 	}
 	
 	public void eliminarSinVida() {
-		System.out.println("Los zombies vivos antes de eliminar sin vida son: " + zombieManager.getZombiesRestantesVivos());
 		if(zombieList.Delete())
 			zombieManager.setZombiesRestantesVivos(zombieManager.getZombiesRestantesVivos()-1);
-		System.out.println("Los zombies vivos despues de eliminar son: " + zombieManager.getZombiesRestantesVivos());
 		sunflowerList.Delete();
 		peashooterList.Delete();
 	}
+	
+	public boolean comprobarDentroTablero(String x, String y) {
+		return Integer.parseInt(x)>=0 && Integer.parseInt(x)<FILAS && Integer.parseInt(y)>=0 && Integer.parseInt(y)<COLUMNAS;
+	}
+	
 	public void attackZombie(int x, int y, int damage) {
 		
 		int i = 0;
 		
-		//recorremos las columnas en busca ed un zombie
-		while (i < 8 && !zombieList.checkZombie(x, y))
+		//recorremos las columnas en busca de un zombie
+		while (i < COLUMNAS && !zombieList.checkZombie(x, y))
 		{
 			y++;
 			if(zombieList.checkZombie(x,y))
@@ -100,16 +104,13 @@ public class Game {
 	}
 	
 	public void attackPlant(int x, int y, int damage) {
-		int i = 0;
 		if(sunflowerList.checkSunflower(x, y))
 		{
-			i = sunflowerList.searchPosition(x, y);
-			sunflowerList.decreaseHealth(i, x, y, damage);
+			sunflowerList.decreaseHealth(sunflowerList.searchPosition(x, y), damage);
 		}
 		else 
 		{
-			i = peashooterList.searchPosition(x, y);
-			peashooterList.decreaseHealth(i, x, y, damage);
+			peashooterList.decreaseHealth(peashooterList.searchPosition(x, y), damage);
 		}
 	}
 	
@@ -117,20 +118,20 @@ public class Game {
 	public String getObject(int x, int y)
 	{
 		String str;
-		int i;
+		
 		if(peashooterList.checkPeashooter(x, y))
 		{
-			i = peashooterList.searchPosition(x, y);
-			str = peashooterList.printPosition(i);
-		} else if (sunflowerList.checkSunflower(x, y))
+			str = peashooterList.printPosition(peashooterList.searchPosition(x, y));
+		} 
+		else if (sunflowerList.checkSunflower(x, y))
 		{
-			i = sunflowerList.searchPosition(x, y);
-			str = sunflowerList.printPosition(i);
-		} else if (zombieList.checkZombie(x, y))
+			str = sunflowerList.printPosition(sunflowerList.searchPosition(x, y));
+		} 
+		else if (zombieList.checkZombie(x, y))
 		{
-			i = zombieList.searchPosition(x, y);
-			str = zombieList.printPosition(i);
-		} else {
+			str = zombieList.printPosition(zombieList.searchPosition(x, y));
+		} 
+		else {
 			str = " ";
 		}
 		return str;
@@ -174,10 +175,6 @@ public class Game {
 		return suncoins;
 	}
 
-	public void setSuncoins(SunCoinManager suncoins) {
-		this.suncoins = suncoins;
-	}
-
 	public GamePrinter getGamePrinter() {
 		return gamePrinter;
 	}
@@ -186,15 +183,12 @@ public class Game {
 		return zombieManager;
 	}
 
-	public int getZombiesLeftAlive() {
-		return zombiesLeftAlive;
+	public int getFILAS() {
+		return FILAS;
 	}
 
-	public void setZombiesLeftAlive(int zombiesLeftAlive) {
-		this.zombiesLeftAlive = zombiesLeftAlive;
-	}
-	
-	
-		
+	public int getCOLUMNAS() {
+		return COLUMNAS;
+	}	
 	
 }

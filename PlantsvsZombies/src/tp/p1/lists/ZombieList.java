@@ -37,9 +37,9 @@ public class ZombieList {
 		}
 	}
 	
-	public void decreaseHealth(int position, int damage)
+	public void decreaseHealth(int pos, int damage)
 	{
-		list[position].decreaseHealth(damage);
+		list[pos].decreaseHealth(damage);
 	}
 	
 	public boolean checkZombie(int x, int y)
@@ -91,22 +91,8 @@ public class ZombieList {
 	{
 		return list[i].toString();
 	}
-	
-	
-	public Zombie[] getList() {
-		return list;
-	}
-
-	public void setList(Zombie[] list) {
-		this.list = list;
-	}
-
-	public static int getNumMaxZombies() {
-		return NUM_MAX_ZOMBIES;
-	}
 
 	public int getContador() {
 		return contador;
-	}
-	
+	}	
 }

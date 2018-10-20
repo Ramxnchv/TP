@@ -38,9 +38,9 @@ public class PeaShooterList {
 		}
 	}
 	
-	public void decreaseHealth(int i, int x, int y, int damage)
+	public void decreaseHealth(int pos, int damage)
 	{
-		list[i].decreaseHealth(damage);
+		list[pos].decreaseHealth(damage);
 	}
 	
 	public boolean checkPeashooter(int x, int y)
@@ -78,10 +78,6 @@ public class PeaShooterList {
 	}
 
 	//getters y setters
-	
-	public static int getBoardSize() {
-		return BOARD_SIZE;
-	}
 
 	public int getContador() {
 		return contador;

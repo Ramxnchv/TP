@@ -17,7 +17,11 @@ public class ZombieManager {
 	}
 	
 	public boolean isZombieAdded() {
-		return game.getRand().nextDouble() < game.getLevel().getFrecuencia();
+		boolean add=false;
+		if(zombiesRestantes>0) {
+			add=game.getRand().nextDouble() < game.getLevel().getFrecuencia();
+		}
+		return add;
 	}
 	
 	public boolean zombiGanador() {

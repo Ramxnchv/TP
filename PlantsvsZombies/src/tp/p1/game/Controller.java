@@ -26,8 +26,8 @@ public class Controller {
 			
 			
 			if(comando[0].equals("a")||comando[0].equals("add")) {
-				//comprobar espacio vacio
-				if(game.checkEmpty(Integer.parseInt(comando[2]), Integer.parseInt(comando[3]))) {
+				//comprobar espacio vacio y coordenada dentro tablero
+				if(game.checkEmpty(Integer.parseInt(comando[2]), Integer.parseInt(comando[3]))&&game.comprobarDentroTablero(comando[2], comando[3])) {
 					//separar por tipo planta
 					if(comando[1].equals("p")||comando[1].equals("peashooter")) {
 						//comprobar dinero
@@ -49,7 +49,7 @@ public class Controller {
 							//aniadir ciclo
 							game.setNumCiclos(game.getNumCiclos()+1);
 							//repintar tablero
-							game.setGamePrinter(new GamePrinter(game,4,8));
+							game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
 							System.out.println(game);
 						}
 						else {
@@ -118,13 +118,14 @@ public class Controller {
 				System.out.println("Comando incorrecto");
 				comando=in.nextLine().toLowerCase().split(" ");
 			}
-			
 		}
-		System.out.println("Los zombies restantes son: " + game.getZombieManager().getZombiesRestantes() + " los zombies vivos son: " + game.getZombieManager().getZombiesRestantesVivos());
+		
 		System.out.println("Game Over");
 		if(game.getZombieManager().zombiGanador()) {
-		System.out.println("\nZombies win");}
+		System.out.println("\nZombies win");
+		}
 		else {
-		System.out.println("\nPlayer wins");}
+		System.out.println("\nPlayer wins");
+		}
 	}
 }
