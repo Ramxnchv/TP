@@ -1,5 +1,7 @@
 package tp.p1.game;
 
+import java.util.Random;
+
 import tp.p1.lists.*;
 import tp.p1.zombies.ZombieManager;
 
@@ -9,7 +11,7 @@ public class Game {
 	private PeaShooterList peashooterList;
 	private SunFlowerList sunflowerList;
 	private LEVEL level;
-	private int seed;
+	private Random rand;
 	private int numCiclos;
 	private SunCoinManager suncoins;
 	private GamePrinter gamePrinter;
@@ -17,9 +19,9 @@ public class Game {
 	private int zombiesLeftAlive;
 	
 	//constuctor
-	public Game(LEVEL level,int seed) {
+	public Game(LEVEL level,Random rand) {
 		this.level=level;
-		this.seed=seed;
+		this.rand=rand;
 		this.inicializar();
 	}
 	
@@ -75,7 +77,7 @@ public class Game {
 	}
 	public void attackZombie(int x, int y, int damage) {
 		
-		int i = 0, position;
+		int i = 0;
 		
 		//recorremos las columnas en busca ed un zombie
 		while (i < 8 && !zombieList.checkZombie(x, y))
@@ -83,8 +85,7 @@ public class Game {
 			y++;
 			if(zombieList.checkZombie(x,y))
 			{
-				position = zombieList.searchPosition(x,y);
-				zombieList.decreaseHealth(position, damage);
+				zombieList.decreaseHealth(zombieList.searchPosition(x,y), damage);
 			}
 			i++;
 		}
@@ -110,21 +111,6 @@ public class Game {
 			i = peashooterList.searchPosition(x, y);
 			peashooterList.decreaseHealth(i, x, y, damage);
 		}
-		
-		/*public void atacar() {
-		for(int i=0;i<game.getZombieList().getContador();i++) {
-			for(int j=0;j<game.getSunflowerList().getContador();j++) {
-				if(game.getZombieList().getZombie(i).getY()-1==game.getSunflowerList().getSunFlower(j).getY()) {
-					game.getSunflowerList().getSunFlower(j).setHealthPoints(game.getSunflowerList().getSunFlower(j).getHealthPoints()-game.getZombieList().getZombie(i).getDamage());
-				}
-			}
-			for(int k=0;k<game.getPeashooterList().getContador();k++) {
-				if(game.getZombieList().getZombie(i).getY()-1==game.getPeashooterList().getPeaShooter(k).getY()) {
-					game.getPeashooterList().getPeaShooter(k).setHealthPoints(game.getPeashooterList().getPeaShooter(k).getHealthPoints()-game.getZombieList().getZombie(i).getDamage());	
-				}
-			}
-		}
-	}*/
 	}
 	
 		
@@ -172,8 +158,8 @@ public class Game {
 		return sunflowerList;
 	}
 
-	public int getSeed() {
-		return seed;
+	public Random getRand() {
+		return rand;
 	}
 
 	public int getNumCiclos() {

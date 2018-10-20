@@ -17,7 +17,6 @@ public class Controller {
 	}
 	public void run() {
 		
-		System.out.println("Random seed used: "+game.getSeed());
 		System.out.println(game);
 		
 		while((game.getZombieManager().getZombiesRestantesVivos() > 0)&&(!game.getZombieManager().zombiGanador())) {
@@ -42,7 +41,7 @@ public class Controller {
 							game.update();
 							//aniadir zombie
 							if(game.getZombieManager().isZombieAdded()) {
-								int filaZombie= new Random().nextInt(3);
+								int filaZombie= game.getRand().nextInt(3);
 								Zombie zomb=new Zombie(filaZombie,7,game);
 								game.getZombieList().Add(zomb);
 								game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
@@ -68,7 +67,7 @@ public class Controller {
 							game.update();
 							//aniadir zombie
 							if(game.getZombieManager().isZombieAdded()) {
-								int filaZombie= new Random().nextInt(3);
+								int filaZombie= game.getRand().nextInt(3);
 								Zombie zomb=new Zombie(filaZombie,7,game);
 								game.getZombieList().Add(zomb);
 								game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);

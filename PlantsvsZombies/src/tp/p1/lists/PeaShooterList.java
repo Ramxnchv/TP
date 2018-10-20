@@ -83,10 +83,6 @@ public class PeaShooterList {
 		return BOARD_SIZE;
 	}
 
-	public PeaShooter[] getList() {
-		return list;
-	}
-
 	public int getContador() {
 		return contador;
 	}

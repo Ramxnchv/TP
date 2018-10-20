@@ -10,7 +10,8 @@ public class PlantsVsZombies {
 		
 		if((args.length>0)||(args.length<3)) {
 			LEVEL level;
-			int seed;
+			long seed;
+			Random rand;
 			Scanner scanner=new Scanner(System.in);
 			
 			args[0].toUpperCase();
@@ -30,14 +31,16 @@ public class PlantsVsZombies {
 			}
 			
 			if(args.length==1) {
-				seed=new Random().nextInt(3);
+				seed=new Random().nextInt(5);
 			}
 			else {
-				seed=Integer.parseInt(args[1]);
+				seed=Long.parseLong(args[1]);
 			}
 			
-			Game game = new Game(level,seed);
+			rand= new Random(seed);
+			Game game = new Game(level,rand);
 			Controller controller = new Controller(game,scanner);
+			System.out.println("Random seed used: "+(int)seed);
 			controller.run();
 		}	
 	}
