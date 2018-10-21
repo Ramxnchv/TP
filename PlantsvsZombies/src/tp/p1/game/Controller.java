@@ -18,9 +18,14 @@ public class Controller {
 	public void run() {
 		
 		boolean exit=false;
-		System.out.println(game);
 		
 		while((game.getZombieManager().getZombiesRestantesVivos() > 0)&&(!game.getZombieManager().zombiGanador())&&!exit) {
+			//actualizar
+			game.update();
+			//draw
+			game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
+			System.out.println(game);
+			//user command
 			System.out.println("Command > ");
 			String[] comando=new String[4];
 			comando=in.nextLine().toLowerCase().split(" ");
@@ -38,8 +43,6 @@ public class Controller {
 							PeaShooter ps=new PeaShooter(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getPeashooterList().Add(ps);
 							System.out.println(game.getPeashooterList().getContador());
-							//update
-							game.update();
 							//aniadir zombie
 							if(game.getZombieManager().isZombieAdded()) {
 								int filaZombie= game.getRand().nextInt(3);
@@ -49,9 +52,6 @@ public class Controller {
 							}
 							//aniadir ciclo
 							game.setNumCiclos(game.getNumCiclos()+1);
-							//repintar tablero
-							game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
-							System.out.println(game);
 						}
 						else {
 							System.out.println("You dont have enought Suncoins");
@@ -64,8 +64,6 @@ public class Controller {
 							//aniadir sunflower a lista
 							SunFlower sf=new SunFlower(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getSunflowerList().Add(sf);
-							//update
-							game.update();
 							//aniadir zombie
 							if(game.getZombieManager().isZombieAdded()) {
 								int filaZombie= game.getRand().nextInt(3);
@@ -75,9 +73,6 @@ public class Controller {
 							}
 							//aniadir ciclo
 							game.setNumCiclos(game.getNumCiclos()+1);
-							//repintar tablero
-							game.setGamePrinter(new GamePrinter(game,4,8));
-							System.out.println(game);
 						}
 						else {
 							System.out.println("You dont have enought Suncoins");
@@ -112,8 +107,6 @@ public class Controller {
 					game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
 				}
 				game.setNumCiclos(game.getNumCiclos()+1);
-				game.setGamePrinter(new GamePrinter(game,4,8));
-				System.out.println(game);
 			}
 			else if((comando[0].equals("e")||comando[0].equals("exit"))) {
 				exit=true;
