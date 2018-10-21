@@ -28,7 +28,9 @@ public class SunFlower {
 	}
 	
 	public void updateSunFlower() {
-		game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()+cantidadRecolectada);
+		
+		if((internalCycle != 0) && (internalCycle%2==0))
+			game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()+cantidadRecolectada);
 		this.internalCycle+=1;
 	}
 	
