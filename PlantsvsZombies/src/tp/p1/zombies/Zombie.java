@@ -20,21 +20,22 @@ public class Zombie {
 
 	public void update() {
 		
-		this.internalCycle += 1;
+		
 		//si esta vacia la casilla
-		if(game.checkEmpty(x, y-1)&&internalCycle%2==0) {
-			//avanzar
-			this.y=this.y-speed;
-		}
-		else if (game.checkEmpty(x, y-1) && internalCycle%2!=0 ){
+		if(game.checkEmpty(x, y-1)&&internalCycle%2!=0 || internalCycle==0) {
 			//mantenerse
-			this.y = y;
+			this.y=this.y;
+		}
+		else if (game.checkEmpty(x, y-1) && internalCycle%2==0 ){
+			//avanzar
+			this.y = this.y-speed;
 		} else {
 			if(!game.getZombieList().checkZombie(x, y-1)) {
 				//atacar
 				game.attackPlant(x,y-1,damage);
 			}
 		}
+		this.internalCycle += 1;
 
 	}
 	
