@@ -17,19 +17,27 @@ public class Controller {
 	}
 	public void run() {
 		
+		//variable para controlar el exit
 		boolean exit=false;
 		
+		//variable para controlar update si no hay suncoins
+		boolean suncoins=true;
+		
 		while((game.getZombieManager().getZombiesRestantesVivos() > 0)&&(!game.getZombieManager().zombiGanador())&&!exit) {
+			
+			if(suncoins) {
 			//actualizar
 			game.update();
+			
 			//draw
 			game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
 			System.out.println(game);
+			}
+			
 			//user command
 			System.out.println("Command > ");
 			String[] comando=new String[4];
 			comando=in.nextLine().toLowerCase().split(" ");
-			
 			
 			if(comando[0].equals("a")||comando[0].equals("add")) {
 				//comprobar espacio vacio y coordenada dentro tablero
@@ -38,44 +46,47 @@ public class Controller {
 					if(comando[1].equals("p")||comando[1].equals("peashooter")) {
 						//comprobar dinero
 						if(game.getSuncoins().getSunCoins()>=PeaShooter.getCost()) {
+							suncoins=true;
 							game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()-PeaShooter.getCost());
 							//aniadir peashooter en lista
 							PeaShooter ps=new PeaShooter(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getPeashooterList().Add(ps);
-							System.out.println(game.getPeashooterList().getContador());
-							//aniadir zombie
-							if(game.getZombieManager().isZombieAdded()) {
-								int filaZombie= game.getRand().nextInt(3);
-								Zombie zomb=new Zombie(filaZombie,7,game);
+							//computer action
+							int filaZombie= game.getRand().nextInt(game.getFILAS()-1);
+							if(game.getZombieManager().isZombieAdded()&&game.checkEmpty(filaZombie,game.getCOLUMNAS()-1)) {
+								Zombie zomb=new Zombie(filaZombie,game.getCOLUMNAS()-1,game);
 								game.getZombieList().Add(zomb);
 								game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
 							}
 							//aniadir ciclo
-							game.setNumCiclos(game.getNumCiclos()+1);
+							game.addCycle();
 						}
 						else {
 							System.out.println("You dont have enought Suncoins");
+							suncoins=false;
 						}
 					}
 					else if(comando[1].equals("s")||comando[1].equals("sunflower")) {
 						//comprobar dinero
 						if(game.getSuncoins().getSunCoins()>=SunFlower.getCost()) {
+							suncoins=true;
 							game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()-SunFlower.getCost());
 							//aniadir sunflower a lista
 							SunFlower sf=new SunFlower(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
 							game.getSunflowerList().Add(sf);
-							//aniadir zombie
-							if(game.getZombieManager().isZombieAdded()) {
-								int filaZombie= game.getRand().nextInt(3);
-								Zombie zomb=new Zombie(filaZombie,7,game);
+							//computer action
+							int filaZombie= game.getRand().nextInt(game.getFILAS()-1);
+							if(game.getZombieManager().isZombieAdded()&&game.checkEmpty(filaZombie,game.getCOLUMNAS()-1)) {
+								Zombie zomb=new Zombie(filaZombie,game.getCOLUMNAS()-1,game);
 								game.getZombieList().Add(zomb);
 								game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
 							}
 							//aniadir ciclo
-							game.setNumCiclos(game.getNumCiclos()+1);
+							game.addCycle();
 						}
 						else {
 							System.out.println("You dont have enought Suncoins");
+							suncoins=false;
 						}
 					}
 					else {
@@ -99,13 +110,14 @@ public class Controller {
 				System.out.println("[none]: Skips cycle.");
 			}
 			else if(comando[0].equals("")||comando[0].equals("none")) {
-				if(game.getZombieManager().isZombieAdded()) {
-					int filaZombie= new Random().nextInt(3);
-					Zombie zomb=new Zombie(filaZombie,7,game);
+				suncoins=true;
+				int filaZombie= new Random().nextInt(game.getFILAS()-1);
+				if(game.getZombieManager().isZombieAdded()&&game.checkEmpty(filaZombie,game.getCOLUMNAS()-1)) {
+					Zombie zomb=new Zombie(filaZombie,game.getCOLUMNAS()-1,game);
 					game.getZombieList().Add(zomb);
 					game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
 				}
-				game.setNumCiclos(game.getNumCiclos()+1);
+				game.addCycle();
 			}
 			else if((comando[0].equals("e")||comando[0].equals("exit"))) {
 				exit=true;

@@ -21,7 +21,7 @@ public class PeaShooter {
 	
 	
 	public void update() {
-		game.attackZombie(x, y, damage);
+		game.attackZombie(x,damage);
 	}
 	
 	public void decreaseHealth(int damage)

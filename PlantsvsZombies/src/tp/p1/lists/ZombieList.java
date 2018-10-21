@@ -19,7 +19,7 @@ public class ZombieList {
 		return contador<NUM_MAX_ZOMBIES;
 	}
 	public boolean Delete() {
-		boolean deleted = false;;
+		boolean deleted = false;
 		for(int i=0;i<contador;i++) {
 			if(contador > 0  && list[i].getHealthPoints() <= 0) {
 				list[i]=list[i+1];

@@ -19,9 +19,9 @@ public class Zombie {
 	}
 
 	public void update() {
-		
-		
+		//aumentamos su ciclo
 		internalCycle +=1;
+		
 		//si esta vacia la casilla
 		if(game.checkEmpty(x, y-1)&&internalCycle%2==0) {
 			//avanzar

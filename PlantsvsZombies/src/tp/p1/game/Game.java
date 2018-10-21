@@ -79,25 +79,25 @@ public class Game {
 		return Integer.parseInt(x)>=0 && Integer.parseInt(x)<FILAS && Integer.parseInt(y)>=0 && Integer.parseInt(y)<COLUMNAS;
 	}
 	
-	public void attackZombie(int x, int y, int damage) {
+	public void attackZombie(int x, int damage) {
 		
 		int i = 0;
 		
 		//recorremos las columnas en busca de un zombie
-		while (i < COLUMNAS && !zombieList.checkZombie(x, y))
+		while (i < COLUMNAS && !zombieList.checkZombie(x, i))
 		{
-			y++;
-			if(zombieList.checkZombie(x,y))
-			{
-				zombieList.decreaseHealth(zombieList.searchPosition(x,y), damage);
-			}
 			i++;
+		}
+		//si sale porque encuentra un zombie -> dispara
+		if(zombieList.checkZombie(x,i))
+		{
+			zombieList.decreaseHealth(zombieList.searchPosition(x,i), damage);
 		}
 	}
 	
 	public boolean checkWinnerZombie()
 	{
-		boolean found = false;;
+		boolean found = false;
 		if(zombieList.checkWinnerZombie())
 			found = true;
 		return found;
@@ -112,6 +112,10 @@ public class Game {
 		{
 			peashooterList.decreaseHealth(peashooterList.searchPosition(x, y), damage);
 		}
+	}
+	
+	public void addCycle() {
+		this.numCiclos++;
 	}
 	
 		
