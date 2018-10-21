@@ -17,9 +17,10 @@ public class Controller {
 	}
 	public void run() {
 		
+		boolean exit=false;
 		System.out.println(game);
 		
-		while((game.getZombieManager().getZombiesRestantesVivos() > 0)&&(!game.getZombieManager().zombiGanador())) {
+		while((game.getZombieManager().getZombiesRestantesVivos() > 0)&&(!game.getZombieManager().zombiGanador())&&!exit) {
 			System.out.println("Command > ");
 			String[] comando=new String[4];
 			comando=in.nextLine().toLowerCase().split(" ");
@@ -114,14 +115,18 @@ public class Controller {
 				game.setGamePrinter(new GamePrinter(game,4,8));
 				System.out.println(game);
 			}
+			else if((comando[0].equals("e")||comando[0].equals("exit"))) {
+				exit=true;
+			}
 			else {
 				System.out.println("Comando incorrecto");
 				comando=in.nextLine().toLowerCase().split(" ");
 			}
 		}
-		
-		System.out.println("Game Over");
-		if(game.getZombieManager().zombiGanador()) {
+		if(exit) {
+		System.out.println("Game Over");	
+		}
+		else if(game.getZombieManager().zombiGanador()) {
 		System.out.println("\nZombies win");
 		}
 		else {
