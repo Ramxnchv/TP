@@ -20,12 +20,12 @@ public class Controller {
 		//variable para controlar el exit
 		boolean exit=false;
 		
-		//variable para controlar update si no hay suncoins
-		boolean suncoins=true;
+		//variables para controlar update si no hay suncoins o si la accion no requiere update y draw
+		boolean suncoins=true,list=false,help=false;
 		
 		while((game.getZombieManager().getZombiesRestantesVivos() > 0)&&(!game.getZombieManager().zombiGanador())&&!exit) {
 			
-			if(suncoins) {
+			if(suncoins&&!help&&!list) {
 			//actualizar
 			game.update();
 			
@@ -38,6 +38,8 @@ public class Controller {
 			System.out.println("Command > ");
 			String[] comando=new String[4];
 			comando=in.nextLine().toLowerCase().split(" ");
+			help=false;
+			list=false;
 			
 			if(comando[0].equals("a")||comando[0].equals("add")) {
 				//comprobar espacio vacio y coordenada dentro tablero
@@ -98,16 +100,18 @@ public class Controller {
 				game.inicializar();
 			}
 			else if(comando[0].equals("l")||comando[0].equals("list")) {
+				list=true;
 				System.out.println("[S]unflower: Cost: "+SunFlower.getCost()+"suncoins  Harm: "+SunFlower.getDamage());
-				System.out.println("[P]eashooter: Cost: "+PeaShooter.getCost()+"suncoins  Harm: "+PeaShooter.getDamage());
+				System.out.println("[P]eashooter: Cost: "+PeaShooter.getCost()+"suncoins  Harm: "+PeaShooter.getDamage()+"\n");
 			}
 			else if(comando[0].equals("h")||comando[0].equals("help")) {
+				help=true;
 				System.out.println("Add <plant> <x> <y>: Adds a plant in position x, y.");
 				System.out.println("List: Prints the list of available plants.");
 				System.out.println("Reset: Starts a new game.");
 				System.out.println("Help: Prints this help message.");
 				System.out.println("Exit: Terminates the program.");
-				System.out.println("[none]: Skips cycle.");
+				System.out.println("[none]: Skips cycle.\n");
 			}
 			else if(comando[0].equals("")||comando[0].equals("none")) {
 				suncoins=true;
