@@ -99,7 +99,6 @@ public class Controller {
 				System.out.println("[none]: Skips cycle.");
 			}
 			else if(comando[0].equals("")||comando[0].equals("none")) {
-				game.update();
 				if(game.getZombieManager().isZombieAdded()) {
 					int filaZombie= new Random().nextInt(3);
 					Zombie zomb=new Zombie(filaZombie,7,game);
