@@ -1,6 +1,7 @@
 package tp.p1.lists;
 
 import tp.p1.zombies.Zombie;
+import tp.p1.game.Game;
 
 public class ZombieList {
 	private Zombie[] list;
@@ -11,9 +12,10 @@ public class ZombieList {
 		list=new Zombie[NUM_MAX_ZOMBIES];
 	}
 	
-	public boolean Add(Zombie zombie) {
+	public boolean Add(int x, int y, Game game) {
+		Zombie zomb=new Zombie(x, y, game);
 		if(contador<NUM_MAX_ZOMBIES) {
-			list[contador]=zombie;
+			list[contador]=zomb;
 			contador++;
 		}
 		return contador<NUM_MAX_ZOMBIES;

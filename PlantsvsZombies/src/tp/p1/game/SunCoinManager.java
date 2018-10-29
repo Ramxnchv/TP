@@ -14,10 +14,15 @@ public class SunCoinManager {
 
 	
 	public int calcularSuncoinsCiclo() {
-		for(int i=0;i<game.getSunflowerList().getContador();i++) {
+		for(int i=0;i<game.getNumSunflowerLista();i++) {
 			
 		}
 		return sunCoins+=50;
+	}
+	
+	public void decreaseSuncoins(int cost)
+	{
+		sunCoins -= cost;
 	}
 	
 	public int getSunCoins() {

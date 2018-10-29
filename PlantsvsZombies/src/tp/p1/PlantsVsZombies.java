@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class PlantsVsZombies {
 
 	public static void main(String[] args) {
-		
 		if((args.length>0)||(args.length<3)) {
 			LEVEL level;
 			long seed;

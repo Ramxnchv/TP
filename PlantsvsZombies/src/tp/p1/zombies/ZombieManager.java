@@ -27,7 +27,7 @@ public class ZombieManager {
 	public boolean zombiGanador() {
 		boolean zombiganador=false;
 		int i=0;
-		while(i<game.getZombieList().getContador() && !zombiganador) {
+		while(i<game.getNumZombiesLista() && !zombiganador) {
 			if(game.checkWinnerZombie()) {
 				zombiganador=true;
 			}
@@ -35,6 +35,12 @@ public class ZombieManager {
 		}
 		return zombiganador;
 	}
+	
+	public void decreaseZombiesLeft()
+	{
+		zombiesRestantes -= 1;
+	}
+
 
 	public int getZombiesRestantes() {
 		return zombiesRestantes;

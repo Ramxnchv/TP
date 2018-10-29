@@ -3,8 +3,7 @@ package tp.p1.game;
 import java.util.Random;
 
 import tp.p1.lists.*;
-import tp.p1.plants.PeaShooter;
-import tp.p1.plants.SunFlower;
+import tp.p1.plants.*;
 import tp.p1.zombies.ZombieManager;
 
 public class Game {
@@ -70,6 +69,14 @@ public class Game {
 		return empty;
 	}
 	
+	public boolean addPeaShooterAction() {
+		
+	}
+	public boolean addSunFlowerAction() {
+		
+	}
+	
+	
 	public void eliminarSinVida() {
 		if(zombieList.Delete())
 			zombieManager.setZombiesRestantesVivos(zombieManager.getZombiesRestantesVivos()-1);
@@ -95,18 +102,6 @@ public class Game {
 		{
 			zombieList.decreaseHealth(zombieList.searchPosition(x,i), damage);
 		}
-	}
-	
-	public boolean isNotFinished() {
-		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
-	}
-	
-	public boolean enoughtMoneyPeaShooter() {
-		return suncoins.getSunCoins()>=PeaShooter.getCost();
-	}
-	
-	public boolean enoughtMoneySunFlower() {
-		return suncoins.getSunCoins()>=SunFlower.getCost();
 	}
 	
 	public boolean checkWinnerZombie()
@@ -155,28 +150,86 @@ public class Game {
 		return str;
 	}
 	
+	public boolean isNotFinished() { 
+		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador(); 
+	} 
+	 
+	public boolean enoughMoneyPeaShooter() { 
+		return suncoins.getSunCoins()>=PeaShooter.getCost(); 
+	} 
+	 
+	public boolean enoughMoneySunFlower() { 
+		return suncoins.getSunCoins()>=SunFlower.getCost(); 
+	} 
+	
+	public void addZombieAction() {
+		int filaZombie= rand.nextInt(FILAS-1);
+		if(zombieManager.isZombieAdded()&&checkEmpty(filaZombie,COLUMNAS-1)) {
+			addZombie(filaZombie, COLUMNAS-1);
+			decreaseZombiesLeft();
+		}
+	}
+	
+	public void addPeashooter(int x, int y)
+	{
+		
+		peashooterList.Add(x,y, this);
+	}
+	
+	public void addSunflower(int x, int y)
+	{
+		sunflowerList.Add(x, y,this);
+	}
+	
+	public void addZombie(int x, int y) {
+		zombieList.Add(x, y, this);
+	}
+	
+	public void decreaseZombiesLeft()
+	{
+		zombieManager.decreaseZombiesLeft();
+	}
+	
+	public void decreaseSuncoins(int cost)
+	{
+		
+		suncoins.decreaseSuncoins(cost);
+	}
+	
+	public boolean checkZombie(int x, int y){
+		
+		return zombieList.checkZombie(x,  y);
+	}
+	
+	public int getNumZombiesLista()
+	{
+		return zombieList.getContador();
+	}
+	
+	public int getNumSunflowerLista()
+	{
+		
+		return sunflowerList.getContador();
+	}
 	
 	
 	//getters y setters
 	public LEVEL getLevel() {
 		return level;
 	}
-	public ZombieList getZombieList() {
-		return zombieList;
-	}
 	
 	public void setGamePrinter(GamePrinter gamePrinter) {
 		this.gamePrinter = gamePrinter;
 	}
-
-	public PeaShooterList getPeashooterList() {
-		return peashooterList;
-	}
 	
-	public SunFlowerList getSunflowerList() {
-		return sunflowerList;
+	public int getFILAS() {
+		return FILAS;
 	}
 
+	public int getCOLUMNAS() {
+		return COLUMNAS;
+	}	
+	
 	public Random getRand() {
 		return rand;
 	}
@@ -193,20 +246,7 @@ public class Game {
 		return suncoins;
 	}
 
-	public GamePrinter getGamePrinter() {
-		return gamePrinter;
-	}
-
 	public ZombieManager getZombieManager() {
 		return zombieManager;
 	}
-
-	public int getFILAS() {
-		return FILAS;
-	}
-
-	public int getCOLUMNAS() {
-		return COLUMNAS;
-	}	
-	
 }

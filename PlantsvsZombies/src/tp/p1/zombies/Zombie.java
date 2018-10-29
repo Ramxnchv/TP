@@ -30,7 +30,7 @@ public class Zombie {
 		else if (game.checkEmpty(x, y-1) && internalCycle%2!=0 ){
 			this.y = this.y;
 		} else {
-			if(!game.getZombieList().checkZombie(x, y-1)) {
+			if(!game.checkZombie(x, y-1)) {
 				//atacar
 				game.attackPlant(x,y-1,damage);
 			}

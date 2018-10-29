@@ -37,7 +37,7 @@ public class Controller {
 			//user command
 			System.out.println("Command > ");
 			String[] comando=new String[4];
-			comando=in.nextLine().toLowerCase().split(" ");
+			comando=in.nextLine().toLowerCase().trim().split(" ");
 			help=false;
 			list=false;
 			
@@ -47,19 +47,13 @@ public class Controller {
 					//separar por tipo planta
 					if(comando[1].equals("p")||comando[1].equals("peashooter")) {
 						//comprobar dinero
-						if(game.getSuncoins().getSunCoins()>=PeaShooter.getCost()) {
+						if(game.enoughMoneyPeaShooter()) {
 							suncoins=true;
-							game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()-PeaShooter.getCost());
+							game.decreaseSuncoins(PeaShooter.getCost());
 							//aniadir peashooter en lista
-							PeaShooter ps=new PeaShooter(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
-							game.getPeashooterList().Add(ps);
+							game.addPeashooter(Integer.parseInt(comando[2]), Integer.parseInt(comando[3]));
 							//computer action
-							int filaZombie= game.getRand().nextInt(game.getFILAS()-1);
-							if(game.getZombieManager().isZombieAdded()&&game.checkEmpty(filaZombie,game.getCOLUMNAS()-1)) {
-								Zombie zomb=new Zombie(filaZombie,game.getCOLUMNAS()-1,game);
-								game.getZombieList().Add(zomb);
-								game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
-							}
+							game.addZombieAction();
 							//aniadir ciclo
 							game.addCycle();
 						}
@@ -70,19 +64,13 @@ public class Controller {
 					}
 					else if(comando[1].equals("s")||comando[1].equals("sunflower")) {
 						//comprobar dinero
-						if(game.getSuncoins().getSunCoins()>=SunFlower.getCost()) {
+						if(game.enoughMoneySunFlower()) {
 							suncoins=true;
-							game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()-SunFlower.getCost());
+							game.decreaseSuncoins(SunFlower.getCost());
 							//aniadir sunflower a lista
-							SunFlower sf=new SunFlower(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]),game);
-							game.getSunflowerList().Add(sf);
+							game.addSunflower(Integer.parseInt(comando[2]),Integer.parseInt(comando[3]));
 							//computer action
-							int filaZombie= game.getRand().nextInt(game.getFILAS()-1);
-							if(game.getZombieManager().isZombieAdded()&&game.checkEmpty(filaZombie,game.getCOLUMNAS()-1)) {
-								Zombie zomb=new Zombie(filaZombie,game.getCOLUMNAS()-1,game);
-								game.getZombieList().Add(zomb);
-								game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
-							}
+							game.addZombieAction();
 							//aniadir ciclo
 							game.addCycle();
 						}
@@ -115,12 +103,9 @@ public class Controller {
 			}
 			else if(comando[0].equals("")||comando[0].equals("none")) {
 				suncoins=true;
-				int filaZombie= new Random().nextInt(game.getFILAS()-1);
-				if(game.getZombieManager().isZombieAdded()&&game.checkEmpty(filaZombie,game.getCOLUMNAS()-1)) {
-					Zombie zomb=new Zombie(filaZombie,game.getCOLUMNAS()-1,game);
-					game.getZombieList().Add(zomb);
-					game.getZombieManager().setZombiesRestantes(game.getZombieManager().getZombiesRestantes()-1);
-				}
+				//computer action
+				game.addZombieAction();
+				//aniadir ciclo
 				game.addCycle();
 			}
 			else if((comando[0].equals("e")||comando[0].equals("exit"))) {
@@ -128,7 +113,7 @@ public class Controller {
 			}
 			else {
 				System.out.println("Comando incorrecto");
-				comando=in.nextLine().toLowerCase().split(" ");
+				comando=in.nextLine().toLowerCase().trim().split(" ");
 			}
 		}
 		if(exit) {

@@ -1,6 +1,7 @@
 package tp.p1.lists;
 
 import tp.p1.plants.SunFlower;
+import tp.p1.game.Game;
 
 
 public class SunFlowerList {
@@ -12,9 +13,10 @@ public class SunFlowerList {
 		list=new SunFlower[BOARD_SIZE];
 	}
 	
-	public boolean Add(SunFlower sunflower) {
+	public boolean Add(int x, int y, Game game) {
+		SunFlower sf = new SunFlower(x, y, game);
 		if(contador<BOARD_SIZE) {
-			list[contador]=sunflower;
+			list[contador]=sf;
 			contador++;
 		}
 		return contador<BOARD_SIZE;

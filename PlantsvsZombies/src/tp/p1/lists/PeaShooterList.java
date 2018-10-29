@@ -1,6 +1,7 @@
 package tp.p1.lists;
 
 import tp.p1.plants.PeaShooter;
+import tp.p1.game.Game;
  
 
 public class PeaShooterList {
@@ -15,9 +16,10 @@ public class PeaShooterList {
 	}
 	
 	//metodos principales
-	public boolean Add(PeaShooter peashooter) {
+	public boolean Add(int x, int y, Game game) {
+		PeaShooter ps = new PeaShooter(x, y, game);
 		if(contador<BOARD_SIZE) {
-			list[contador]=peashooter;
+			list[contador]=ps;
 			contador++;
 		}
 		return contador<BOARD_SIZE;
