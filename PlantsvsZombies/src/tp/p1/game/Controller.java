@@ -23,7 +23,7 @@ public class Controller {
 		//variables para controlar update si no hay suncoins o si la accion no requiere update y draw
 		boolean suncoins=true,list=false,help=false;
 		
-		while((game.getZombieManager().getZombiesRestantesVivos() > 0)&&(!game.getZombieManager().zombiGanador())&&!exit) {
+		while(game.isNotFinished()&&!exit) {
 			
 			if(suncoins&&!help&&!list) {
 			//actualizar

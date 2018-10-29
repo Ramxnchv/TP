@@ -3,6 +3,8 @@ package tp.p1.game;
 import java.util.Random;
 
 import tp.p1.lists.*;
+import tp.p1.plants.PeaShooter;
+import tp.p1.plants.SunFlower;
 import tp.p1.zombies.ZombieManager;
 
 public class Game {
@@ -93,6 +95,18 @@ public class Game {
 		{
 			zombieList.decreaseHealth(zombieList.searchPosition(x,i), damage);
 		}
+	}
+	
+	public boolean isNotFinished() {
+		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
+	}
+	
+	public boolean enoughtMoneyPeaShooter() {
+		return suncoins.getSunCoins()>=PeaShooter.getCost();
+	}
+	
+	public boolean enoughtMoneySunFlower() {
+		return suncoins.getSunCoins()>=SunFlower.getCost();
 	}
 	
 	public boolean checkWinnerZombie()
