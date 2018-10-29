@@ -69,14 +69,6 @@ public class Game {
 		return empty;
 	}
 	
-	public boolean addPeaShooterAction() {
-		
-	}
-	public boolean addSunFlowerAction() {
-		
-	}
-	
-	
 	public void eliminarSinVida() {
 		if(zombieList.Delete())
 			zombieManager.setZombiesRestantesVivos(zombieManager.getZombiesRestantesVivos()-1);
