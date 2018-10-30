@@ -75,10 +75,9 @@ public class PeaShooterList {
 		return i;
 	}
 
-	public String printPosition(int x, y)
+	public String printPosition(int x,int y)
 	{
-    int pos = searchPosition(x,y);
-		return list[pos].toString();
+		return list[searchPosition(x,y)].toString();
 	}
 
 	//getters y setters

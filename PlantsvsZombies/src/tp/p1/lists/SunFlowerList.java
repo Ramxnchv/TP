@@ -74,8 +74,7 @@ public class SunFlowerList {
 
 	public String printPosition(int x, int y)
 	{
-		int pos = searchPosition(x,y);
-		return list[pos].toString();
+		return list[searchPosition(x,y)].toString();
 	}
 
 	public int getContador() {
