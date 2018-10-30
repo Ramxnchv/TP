@@ -8,11 +8,11 @@ public class SunFlowerList {
 	private SunFlower[] list;
 	int contador=0;
 	private static final int BOARD_SIZE=32;
-	
+
 	public SunFlowerList() {
 		list=new SunFlower[BOARD_SIZE];
 	}
-	
+
 	public boolean Add(int x, int y, Game game) {
 		SunFlower sf = new SunFlower(x, y, game);
 		if(contador<BOARD_SIZE) {
@@ -30,18 +30,19 @@ public class SunFlowerList {
 			}
 		}
 	}
-	
+
 	public void update() {
 		for(int i=0;i<contador;i++) {
 			list[i].updateSunFlower();
 		}
 	}
-	
-	public void decreaseHealth(int pos,int damage)
+
+	public void decreaseHealth(int x,int y, int damage)
 	{
+		int pos = searchPosition(x, y);
 		list[pos].decreaseHealth(damage);
 	}
-	
+
 	public boolean checkSunflower(int x, int y)
 	{
 		int i=0;
@@ -51,13 +52,13 @@ public class SunFlowerList {
 				encontrado=true;
 			}
 			else {
-			i++;	
+			i++;
 			}
 		}
 		return encontrado;
 	}
-	
-	public int searchPosition(int x,int y) {
+
+	private int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
 		while(i<contador&&!encontrado) {
@@ -65,19 +66,20 @@ public class SunFlowerList {
 				encontrado=true;
 			}
 			else {
-			i++;	
+			i++;
 			}
 		}
 		return i;
 	}
-	
-	public String printPosition(int i)
+
+	public String printPosition(int x, int y)
 	{
-		return list[i].toString();
+		int pos = searchPosition(x,y);
+		return list[pos].toString();
 	}
 
 	public int getContador() {
 		return contador;
 	}
-	
+
 }

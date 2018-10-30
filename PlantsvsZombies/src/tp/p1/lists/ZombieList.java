@@ -7,11 +7,11 @@ public class ZombieList {
 	private Zombie[] list;
 	int contador=0;
 	private static final int NUM_MAX_ZOMBIES=10;
-	
+
 	public ZombieList() {
 		list=new Zombie[NUM_MAX_ZOMBIES];
 	}
-	
+
 	public boolean Add(int x, int y, Game game) {
 		Zombie zomb=new Zombie(x, y, game);
 		if(contador<NUM_MAX_ZOMBIES) {
@@ -29,21 +29,22 @@ public class ZombieList {
 				deleted = true;
 			}
 		}
-		
+
 		return deleted;
 	}
-	
+
 	public void update() {
 		for(int i=0;i<contador;i++) {
 			list[i].update();
 		}
 	}
-	
-	public void decreaseHealth(int pos, int damage)
+
+	public void decreaseHealth(int x, int y, int damage)
 	{
+		int pos = searchPosition(x,y);
 		list[pos].decreaseHealth(damage);
 	}
-	
+
 	public boolean checkZombie(int x, int y)
 	{
 		int i=0;
@@ -53,12 +54,12 @@ public class ZombieList {
 				encontrado=true;
 			}
 			else {
-				i++;	
+				i++;
 			}
 		}
 		return encontrado;
 	}
-	
+
 	public boolean checkWinnerZombie()
 	{
 		int i = 0;
@@ -71,11 +72,11 @@ public class ZombieList {
 			}
 			i++;
 		}
-		
+
 		return found;
 	}
-	
-	public int searchPosition(int x,int y) {
+
+	private int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
 		while(i<contador&&!encontrado) {
@@ -83,18 +84,19 @@ public class ZombieList {
 				encontrado=true;
 			}
 			else {
-				i++;	
+				i++;
 			}
 		}
 		return i;
 	}
-	
-	public String printPosition(int i)
+
+	public String printPosition(int x, int y)
 	{
-		return list[i].toString();
+		int pos = searchPosition(x, y);
+		return list[pos].toString();
 	}
 
 	public int getContador() {
 		return contador;
-	}	
+	}
 }
