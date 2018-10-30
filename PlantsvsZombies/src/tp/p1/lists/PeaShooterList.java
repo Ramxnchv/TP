@@ -40,8 +40,9 @@ public class PeaShooterList {
 		}
 	}
 	
-	public void decreaseHealth(int pos, int damage)
+	public void decreaseHealth(int x, int y)
 	{
+		int pos =  searchPosition(x,y);
 		list[pos].decreaseHealth(damage);
 	}
 	
@@ -60,7 +61,7 @@ public class PeaShooterList {
 		return encontrado;
 	}
 	
-	public int searchPosition(int x,int y) {
+	private int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
 		while(i<contador&&!encontrado) {
