@@ -30,8 +30,7 @@ public class Controller {
 			game.update();
 			
 			//draw
-			game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
-			System.out.println(game);
+			printGame();
 			}
 			
 			//user command
@@ -125,5 +124,10 @@ public class Controller {
 		else {
 		System.out.println("\nPlayer wins");
 		}
+	}
+	
+	private void printGame() {
+		game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
+		System.out.println(game);
 	}
 }
