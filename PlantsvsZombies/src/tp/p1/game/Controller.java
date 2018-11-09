@@ -4,21 +4,53 @@ package tp.p1.game;
 import java.util.Random;
 import java.util.Scanner;
 
+import tp.p1.command.*;
 import tp.p1.plants.PeaShooter;
 import tp.p1.plants.SunFlower;
 import tp.p1.zombies.Zombie;
 
 public class Controller {
+	
 	private Game game;
 	private Scanner in;
+	
 	public Controller(Game game,Scanner in) {
 		this.game=game;
 		this.in=in;
 	}
+	
 	public void run() {
-		
-		//variable para controlar el exit
 		boolean exit=false;
+		String unknownCommandMsg="Comando incorrecto";
+		
+		while (!game.isNotFinished() && !exit) {
+			printGame();
+			boolean noPrint = false;
+			System.out.print(prompt);
+			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
+			Command command = CommandParser.parseCommand(words, this);
+			if (command != null) {
+			command.execute(game, this);
+			}
+			else {
+			System.err.println (unknownCommandMsg);
+			setNoPrintGameState();
+			}
+		}
+	}
+		
+		private void setNoPrintGameState() {
+		
+		}
+		
+		private void printGame() {
+			game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
+			System.out.println(game);
+		}
+
+		/*
+		//variable para controlar el exit
+		
 		
 		//variables para controlar update si no hay suncoins o si la accion no requiere update y draw
 		boolean suncoins=true,list=false,help=false;
@@ -126,8 +158,7 @@ public class Controller {
 		}
 	}
 	
-	private void printGame() {
-		game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
-		System.out.println(game);
-	}
+	*/
+		
 }
+

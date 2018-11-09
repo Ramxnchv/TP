@@ -5,6 +5,6 @@ import tp.p1.game.Game;
 
 public class ResetCommand extends NoParamsCommand {
 	public void execute(Game game, Controller controller) {
-		
+		game.inicializar();
 	}
 }

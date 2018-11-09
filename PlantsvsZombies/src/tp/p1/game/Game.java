@@ -52,11 +52,11 @@ public class Game {
 	}
 
 	public String toString() {
+		StringBuilder sb= new StringBuilder();
 		String salida1="Number of cycles: "+numCiclos;
 		String salida2="\nSun coins: "+suncoins.getSunCoins();
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
-
-		return salida1+salida2+salida3+gamePrinter.toString();
+		return sb.append(salida1).append(salida2).append(salida3).append(gamePrinter.toString()).toString();
 	}
 
 

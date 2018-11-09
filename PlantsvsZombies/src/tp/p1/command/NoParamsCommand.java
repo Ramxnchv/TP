@@ -6,6 +6,7 @@ public class NoParamsCommand extends Command{
 	public NoParamsCommand() {
 		
 	}
+	
 	public Command parse(String[] commandWords, Controller controller) {
 		
 	}
