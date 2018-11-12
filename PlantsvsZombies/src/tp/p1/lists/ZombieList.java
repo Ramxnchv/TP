@@ -1,25 +1,26 @@
 package tp.p1.lists;
 
-import tp.p1.zombies.ZombieComun;
 import tp.p1.game.Game;
+import tp.p1.objects.Zombie;
 
 public class ZombieList {
-	private ZombieComun[] list;
+	private Zombie[] list;
 	int contador=0;
 	private static final int NUM_MAX_ZOMBIES=10;
 
 	public ZombieList() {
-		list=new ZombieComun[NUM_MAX_ZOMBIES];
+		list=new Zombie[NUM_MAX_ZOMBIES];
 	}
 
-	public boolean Add(int x, int y, Game game) {
-		ZombieComun zomb=new ZombieComun(x, y, game);
+	public boolean Add(int x, int y,Zombie zomb, Game game) {
+		//hacer new del zombie aqui
 		if(contador<NUM_MAX_ZOMBIES) {
 			list[contador]=zomb;
 			contador++;
 		}
 		return contador<NUM_MAX_ZOMBIES;
 	}
+	
 	public boolean Delete() {
 		boolean deleted = false;
 		for(int i=0;i<contador;i++) {
@@ -75,7 +76,13 @@ public class ZombieList {
 
 		return found;
 	}
-
+	
+	public String printPosition(int x, int y)
+	{
+		return list[searchPosition(x, y)].toString();
+	}
+	
+	//metodo privado para buscar en la lista
 	private int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
@@ -89,13 +96,9 @@ public class ZombieList {
 		}
 		return i;
 	}
-
-	public String printPosition(int x, int y)
-	{
-		return list[searchPosition(x, y)].toString();
-	}
-
+	
 	public int getContador() {
 		return contador;
 	}
+	
 }

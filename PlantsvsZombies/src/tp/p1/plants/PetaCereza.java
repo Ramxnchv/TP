@@ -32,5 +32,4 @@ public class PetaCereza extends Plant {
 	public static int getDamage() {
 		return damage;
 	}
-	
 }

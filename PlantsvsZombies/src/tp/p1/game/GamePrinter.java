@@ -3,7 +3,7 @@ package tp.p1.game;
 import tp.p1.lists.*;
 import tp.p1.plants.*;
 import tp.p1.util.MyStringUtils;
-import tp.p1.zombies.Zombie;
+import tp.p1.zombies.ZombieComun;
 
 public class GamePrinter {
 	int dimX; 

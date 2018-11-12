@@ -3,14 +3,14 @@ package tp.p1.game;
 import java.util.Random;
 
 import tp.p1.lists.*;
+import tp.p1.objects.Plant;
 import tp.p1.plants.*;
 import tp.p1.zombies.ZombieManager;
 
 public class Game {
 	//atributos
 	private ZombieList zombieList;
-	private PeaShooterList peashooterList;
-	private SunFlowerList sunflowerList;
+	private PlantList plantList;
 	private LEVEL level;
 	private Random rand;
 	private int numCiclos;
@@ -29,10 +29,9 @@ public class Game {
 
 	//metodos principales
 	public void update() {
-		//recolectar girasol
-		sunflowerList.update();
-		//disparar lanzaguisantes
-		peashooterList.update();
+		//actualizar plantas
+		plantList.update();
+		
 		//avanzar y atacar zombies
 		zombieList.update();
 
@@ -42,8 +41,7 @@ public class Game {
 
 	public void inicializar() {
 		zombieList =new ZombieList();
-		peashooterList=new PeaShooterList();
-		sunflowerList=new SunFlowerList();
+		plantList=new PlantList();
 		numCiclos=0;
 		this.gamePrinter=new GamePrinter(this,FILAS,COLUMNAS);
 		this.suncoins=new SunCoinManager(this);
@@ -72,8 +70,7 @@ public class Game {
 	public void eliminarSinVida() {
 		if(zombieList.Delete())
 			zombieManager.setZombiesRestantesVivos(zombieManager.getZombiesRestantesVivos()-1);
-		sunflowerList.Delete();
-		peashooterList.Delete();
+		plantList.Delete();
 	}
 
 	public boolean comprobarDentroTablero(String x, String y) {
@@ -97,7 +94,8 @@ public class Game {
 	}
 	
 	public void attackZombiePetaCereza(int x,int y) {
-		
+		//atacar zombies en la coordenadas que rodean a (x,y)
+		//eliminar petacereza (poner su vida a 0)
 	}
 
 	public boolean checkWinnerZombie()
@@ -166,15 +164,10 @@ public class Game {
 		}
 	}
 
-	public void addPeashooter(int x, int y)
+	public void addPlantToGame(int x, int y,Plant plant)
 	{
 
-		peashooterList.Add(x,y, this);
-	}
-
-	public void addSunflower(int x, int y)
-	{
-		sunflowerList.Add(x, y,this);
+		plantList.Add(x,y,plant,this);
 	}
 
 	public void addZombie(int x, int y) {
@@ -202,10 +195,10 @@ public class Game {
 		return zombieList.getContador();
 	}
 
-	public int getNumSunflowerLista()
+	public int getNumPlantasLista()
 	{
 
-		return sunflowerList.getContador();
+		return plantList.getContador();
 	}
 
 

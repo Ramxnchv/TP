@@ -1,17 +1,20 @@
 package tp.p1.zombies;
 
+import tp.p1.game.Game;
 import tp.p1.objects.Zombie;
 
 public class Deportista extends Zombie{
 	
-	public Deportista() {
-		
+	public Deportista(int x, int y, Game game) {
+		//x,y,healthPoints,frequency,damage,speed,game
+		super(x,y,2,1,1,1,game);
 	}
 	
-	public void update() {
+	
+	public String toString()
+	{
+		String 	str = "X ["  + this.healthPoints + "]";
 		
-	}
-	public String toString() {
-		return "";
+		return str;
 	}
 }

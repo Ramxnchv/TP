@@ -5,11 +5,15 @@ import tp.p1.objects.Zombie;
 
 public class Caracubo extends Zombie {
 	
-	public Caracubo(int x, int y, Random rand) {
-		super(int x,int y,int healthPoints,int frequency,int damage, int internalCycle, int speed,Game game)
+	public Caracubo(int x, int y, Game game) {
+		//x,y,healthPoints,frequency,damage,speed,game
+		super(x,y,8,4,1,1,game);
 	}
 	
-	public void update() {
+	public String toString()
+	{
+		String 	str = "W ["  + this.healthPoints + "]";
 		
+		return str;
 	}
 }
