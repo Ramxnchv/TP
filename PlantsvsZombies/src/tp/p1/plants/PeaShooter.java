@@ -21,7 +21,7 @@ public class PeaShooter extends Plant {
 
 	public String toString()
 	{	
-		String str =  "P [" + super.toString() + "]";
+		String str =  "P [" + this.healthPoints + "]";
 		
 		return str;
 	}

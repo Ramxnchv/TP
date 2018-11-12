@@ -1,5 +1,6 @@
 package tp.p1.game;
 
+import tp.p1.objects.Plant;
 import tp.p1.plants.*;
 
 public class PlantFactory {

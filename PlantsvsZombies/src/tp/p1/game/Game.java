@@ -95,6 +95,10 @@ public class Game {
 			zombieList.decreaseHealth(x, i, damage);
 		}
 	}
+	
+	public void attackZombiePetaCereza(int x,int y) {
+		
+	}
 
 	public boolean checkWinnerZombie()
 	{
