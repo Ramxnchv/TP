@@ -1,19 +1,19 @@
 package tp.p1.lists;
 
-import tp.p1.zombies.Zombie;
+import tp.p1.zombies.ZombieComun;
 import tp.p1.game.Game;
 
 public class ZombieList {
-	private Zombie[] list;
+	private ZombieComun[] list;
 	int contador=0;
 	private static final int NUM_MAX_ZOMBIES=10;
 
 	public ZombieList() {
-		list=new Zombie[NUM_MAX_ZOMBIES];
+		list=new ZombieComun[NUM_MAX_ZOMBIES];
 	}
 
 	public boolean Add(int x, int y, Game game) {
-		Zombie zomb=new Zombie(x, y, game);
+		ZombieComun zomb=new ZombieComun(x, y, game);
 		if(contador<NUM_MAX_ZOMBIES) {
 			list[contador]=zomb;
 			contador++;

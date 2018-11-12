@@ -80,7 +80,7 @@ public class Game {
 		return Integer.parseInt(x)>=0 && Integer.parseInt(x)<FILAS && Integer.parseInt(y)>=0 && Integer.parseInt(y)<COLUMNAS;
 	}
 
-	public void attackZombie(int x, int damage) {
+	public void attackZombiePS(int x, int damage) {
 
 		int i = 0;
 

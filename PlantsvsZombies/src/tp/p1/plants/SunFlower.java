@@ -1,43 +1,35 @@
 package tp.p1.plants;
 
 import tp.p1.game.Game;
+import tp.p1.objects.Plant;
 
-public class SunFlower {
+public class SunFlower extends Plant {
 	private static final int cost = 20;
 	private static final int damage = 0;
 	private int healthPoints = 1;
 	private int internalCycle;
 	private int cantidadRecolectada = 10;
-	private int x;
-	private int y;
-	private Game game;
 	
 	
 	public SunFlower(int x,int y, Game game) {
-	this.x=x;
-	this.y=y;
-	this.game=game;
-	this.internalCycle=0;
+		super(x,y,game);
+		this.internalCycle=0;
 	}
 	
 	public String toString()
 	{
-		String str = "S [" + healthPoints + "]";
+		String str = "S [" + super.toString() + "]";
 		
 		return str;
 	}
 	
-	public void updateSunFlower() {
+	public void update() {
 		
 		if((internalCycle != 0) && (internalCycle%2==0))
 			game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()+cantidadRecolectada);
 		this.internalCycle+=1;
 	}
 	
-	public void decreaseHealth(int damage)
-	{
-		healthPoints -= damage;
-	}
 	
 	//getters y setters
 	public int getX() {

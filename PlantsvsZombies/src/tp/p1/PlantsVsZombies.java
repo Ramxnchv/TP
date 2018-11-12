@@ -1,6 +1,8 @@
 package tp.p1;
 
 import tp.p1.game.*;
+import tp.p1.objects.GameObject;
+
 import java.util.Random;
 import java.util.Scanner;
 

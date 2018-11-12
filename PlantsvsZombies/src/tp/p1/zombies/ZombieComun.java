@@ -1,7 +1,8 @@
 package tp.p1.zombies;
 import tp.p1.game.Game;
+import tp.p1.objects.Zombie;
 
-public class Zombie {
+public class ZombieComun extends Zombie {
 	private int healthPoints = 5;
 	private int speed=1;
 	private int damage=1;
@@ -11,7 +12,7 @@ public class Zombie {
 	private Game game;
 
 	
-	public Zombie(int x,int y,Game game) {
+	public ZombieComun(int x,int y,Game game) {
 		this.x=x;
 		this.y=y;
 		this.game=game;
