@@ -108,16 +108,6 @@ public class Game {
 		return found;
 	}
 
-	public void attackPlant(int x, int y, int damage) {
-		if(sunflowerList.checkSunflower(x, y))
-		{
-			sunflowerList.decreaseHealth(x, y, damage);
-		}
-		else
-		{
-			peashooterList.decreaseHealth(x, y, damage);
-		}
-	}
 
 	public void addCycle() {
 		this.numCiclos++;
@@ -128,13 +118,9 @@ public class Game {
 	{
 		String str;
 
-		if(peashooterList.checkPeashooter(x, y))
+		if(plantList.checkPlantToPrint(x, y))
 		{
-			str = peashooterList.printPosition(x, y);
-		}
-		else if (sunflowerList.checkSunflower(x, y))
-		{
-			str = sunflowerList.printPosition(x, y);
+			str = plantList.printPosition(x, y);
 		}
 		else if (zombieList.checkZombie(x, y))
 		{
@@ -150,14 +136,6 @@ public class Game {
 		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
 	}
 
-	public boolean enoughMoneyPeaShooter() {
-		return suncoins.getSunCoins()>=PeaShooter.getCost();
-	}
-
-	public boolean enoughMoneySunFlower() {
-		return suncoins.getSunCoins()>=SunFlower.getCost();
-	}
-
 	public void addZombieAction() {
 		int filaZombie= rand.nextInt(FILAS-1);
 		if(zombieManager.isZombieAdded()&&checkEmpty(filaZombie,COLUMNAS-1)) {
@@ -166,9 +144,33 @@ public class Game {
 		}
 	}
 
-	public void addPlantToGame(int x, int y,Plant plant)
+	public void addPlantToGame(String plantName, int x, int y)
 	{
-		plantList.Add(x,y,plant,this);
+		
+		if(comprobarDentroTablero(x, y) && checkEmpty(x,y)) {
+			if(enoughMoney(plantName)) {
+				Plant plant = PlantFactory.getPlant(plantName, x, y, this);
+				plantList.Add(x,y,plant,this);
+			}
+		}
+	}
+	
+	public boolean enoughMoney(String plantName) {
+		boolean enough;
+		if (plantName.equals("peashooter") && (suncoins.getSunCoins() >= PeaShooter.getCost())) {
+			enough = true;
+		} else if (plantName.equals("petacereza") && (suncoins.getSunCoins() >= PetaCereza.getCost())){
+			enough = true;
+		} else if (plantName.equals("sunflower") && (suncoins.getSunCoins() >= SunFlower.getCost())) {
+			enough = true;
+		} else if (plantName.equals("nuez") && (suncoins.getSunCoins() >= Nuez.getCost())) {
+			enough = true;
+		} else {
+			enough = false;
+		}
+		
+		return enough;
+				
 	}
 
 	public void addZombie(int x, int y) {
@@ -240,7 +242,7 @@ public class Game {
 		return zombieManager;
 	}
 
-	//añadido nuevo p2
+	//aÃ±adido nuevo p2
 	public static void commandHelp() {
 		CommandParser.commandHelp();
 	}
@@ -250,33 +252,6 @@ public class Game {
 	}
 
 
-	public void add(String plant, int x, int y)
-	{
-
-		if(this.comprobarDentroTablero(x, y) && this.checkEmpty(x, y)) {
-			if(plant.equals("peashooter") && this.enoughMoneyPeaShooter()) {
-				this.decreaseSuncoins(PeaShooter.getCost());
-				//aniadir peashooter en lista
-				this.addPeashooter(x, y);
-				//computer action
-				this.addZombieAction();
-				//aniadir ciclo
-				this.addCycle();
-			} else {
-				System.out.println("You don't have enough suncoins to buy a peashooter");
-			}
-		}  else if(plant.equals("sunflower") && this.enoughMoneySunFlower()) {
-			this.decreaseSuncoins(SunFlower.getCost());
-			//aniadir sunflower a lista
-			this.addSunflower(x, y);
-			//computer action
-			this.addZombieAction();
-			//aniadir ciclo
-			this.addCycle();
-		} else {
-			System.out.println("You don't have enough suncoins to buy a sunflower");
-		}
-	}
 
 	public boolean setExitTrue(boolean exit)
 	{
@@ -291,3 +266,4 @@ public class Game {
 		this.addCycle();
 	}
 }
+
