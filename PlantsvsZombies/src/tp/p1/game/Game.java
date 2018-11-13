@@ -59,7 +59,7 @@ public class Game {
 	}
 
 
-	public boolean checkEmpty(int x,int y) {
+	private boolean checkEmpty(int x,int y) {
 		boolean empty = false;
 
 		if(!peashooterList.checkPeashooter(x, y) && !sunflowerList.checkSunflower(x, y) && !zombieList.checkZombie(x, y)) {
@@ -74,7 +74,7 @@ public class Game {
 		plantList.Delete();
 	}
 
-	public boolean comprobarDentroTablero(int x, int y) {
+	private boolean comprobarDentroTablero(int x, int y) {
 		//solo permite poner plantas hasta la penultima columna
 		return x >=0 && x<FILAS && y >=0 && y <COLUMNAS-1;
 	}
