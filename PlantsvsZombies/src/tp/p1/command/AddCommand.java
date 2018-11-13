@@ -42,8 +42,9 @@ public class AddCommand extends Command {
 	}
 
 	public void execute(Game game, Controller controller) {
-		game.add(this.getPlant(), this.getX(), this.getY());
+		game.addPlantToGame(this.getPlant(), this.getX(), this.getY());
 	}
+
 
 	public String getPlant() {
 		return plant;
