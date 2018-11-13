@@ -4,7 +4,20 @@ import tp.p1.game.Controller;
 import tp.p1.game.Game;
 
 public class ExitCommand extends NoParamsCommand {
-	public void execute(Game game, Controller controller) {
-		
+	public ExitCommand() {
+		super("Exit", "E", "Exit: finish the program");
 	}
+
+	public void execute(Game game, Controller controller) {
+		game.setExitTrue(controller.getExit());
+	}
+
+	public static Command creatExitCommand() {
+
+		ExitCommand eC = new ExitCommand();
+
+		return eC;
+	}
+
+
 }

@@ -31,7 +31,7 @@ public class Game {
 	public void update() {
 		//actualizar plantas
 		plantList.update();
-		
+
 		//avanzar y atacar zombies
 		zombieList.update();
 
@@ -73,8 +73,8 @@ public class Game {
 		plantList.Delete();
 	}
 
-	public boolean comprobarDentroTablero(String x, String y) {
-		return Integer.parseInt(x)>=0 && Integer.parseInt(x)<FILAS && Integer.parseInt(y)>=0 && Integer.parseInt(y)<COLUMNAS;
+	public boolean comprobarDentroTablero(int x, int y) {
+		return x >=0 && x<FILAS && y >=0 && y <COLUMNAS;
 	}
 
 	public void attackZombiePS(int x, int damage) {
@@ -92,7 +92,7 @@ public class Game {
 			zombieList.decreaseHealth(x, i, damage);
 		}
 	}
-	
+
 	public void attackZombiePetaCereza(int x,int y) {
 		//atacar zombies en la coordenadas que rodean a (x,y)
 		//eliminar petacereza (poner su vida a 0)
@@ -238,4 +238,59 @@ public class Game {
 	public ZombieManager getZombieManager() {
 		return zombieManager;
 	}
+
+	//añadido nuevo p2
+public static void commandHelp() {
+	CommandParser.commandHelp();
+}
+
+public String printList() {
+	return PlantFactory.listOfAvaiablePlants();
+}
+
+
+public void add(String plant, int x, int y)
+{
+
+	if(this.comprobarDentroTablero(x, y) && this.checkEmpty(x, y)) {
+		if(plant == "peashooter" && this.enoughMoneyPeaShooter()) {
+			this.decreaseSuncoins(PeaShooter.getCost());
+			//aniadir peashooter en lista
+			this.addPeashooter(x, y);
+			//computer action
+			this.addZombieAction();
+			//aniadir ciclo
+			this.addCycle();
+		} else {
+			System.out.println("You don't have enough suncoins to buy a peashooter");
+		}
+	}  else if(plant == "sunflower" && this.enoughMoneySunFlower()) {
+		this.decreaseSuncoins(SunFlower.getCost());
+		//aniadir sunflower a lista
+		this.addSunflower(x, y);
+		//computer action
+		this.addZombieAction();
+		//aniadir ciclo
+		this.addCycle();
+	} else {
+		System.out.println("You don't have enough suncoins to buy a sunflower");
+	}
+}
+
+public boolean setExitTrue(boolean exit)
+{
+	return exit = true;
+
+}
+
+public void executeNoneCommand()
+{
+	//computer action
+	this.addZombieAction();
+	//aniadir ciclo
+	this.addCycle();
+}
+
+
+}
 }
