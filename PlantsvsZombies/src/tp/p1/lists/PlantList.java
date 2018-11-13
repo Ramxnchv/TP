@@ -85,4 +85,21 @@ public class PlantList {
 		return contador;
 	}
 	
+	
+	public boolean checkPlantToPrint(int x, int y) {
+		
+	int i=0;
+	boolean encontrado=false;
+	while(i<contador&&!encontrado) {
+		if((list[i].getX()==x)&&(list[i].getY()==y)) {
+			encontrado=true;
+		} else {
+			i++;
+		}
+		}
+		
+		
+	return encontrado;
+	}
+	
 }
