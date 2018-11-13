@@ -18,11 +18,10 @@ public class PeaShooter extends Plant {
 	}
 	
 	public void update() {
-		game.attackZombiePS(x,damage);
+		game.attackZombie("Peashooter",x,y);
 	}
 	
 	
-
 	public String toString()
 	{	
 		String str =  "P [" + this.healthPoints + "]";

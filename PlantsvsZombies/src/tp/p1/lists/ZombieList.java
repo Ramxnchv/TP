@@ -2,6 +2,7 @@ package tp.p1.lists;
 
 import tp.p1.game.Game;
 import tp.p1.objects.Zombie;
+import tp.p1.zombies.*;
 
 public class ZombieList {
 	private Zombie[] list;
@@ -12,10 +13,10 @@ public class ZombieList {
 		list=new Zombie[NUM_MAX_ZOMBIES];
 	}
 
-	public boolean Add(int x, int y,Zombie zomb, Game game) {
-		//hacer new del zombie aqui
+	public boolean Add(int x, int y,String zomb, Game game) {
+		Zombie zb = getZombie(x,y,zomb,game);
 		if(contador<NUM_MAX_ZOMBIES) {
-			list[contador]=zomb;
+			list[contador]=zb;
 			contador++;
 		}
 		return contador<NUM_MAX_ZOMBIES;
@@ -34,6 +35,20 @@ public class ZombieList {
 		return deleted;
 	}
 
+	private Zombie getZombie(int x,int y,String zomb,Game game) {
+		Zombie zb;
+		if(zomb.equals("ZombieComun")) {
+			zb=new ZombieComun(x,y,game);
+		}
+		else if(zomb.equals("Caracubo")){
+			zb= new Caracubo(x,y,game);
+		}
+		else {
+			zb= new Deportista(x,y,game);
+		}
+		return zb;
+	}
+	
 	public void update() {
 		for(int i=0;i<contador;i++) {
 			list[i].update();

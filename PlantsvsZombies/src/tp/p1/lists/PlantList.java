@@ -1,6 +1,7 @@
 package tp.p1.lists;
 
 import tp.p1.game.Game;
+import tp.p1.game.PlantFactory;
 import tp.p1.objects.Plant;
 import tp.p1.plants.PeaShooter;
 
@@ -13,8 +14,8 @@ public class PlantList {
 		list=new Plant[BOARD_SIZE];
 	}
 	
-	public boolean Add(int x, int y, Plant plant,Game game) {
-		//hacer new de la planta aqui
+	public boolean Add(int x, int y, String plantName,Game game) {
+		Plant plant = PlantFactory.getPlant(plantName, x, y, game);
 		if(contador<BOARD_SIZE) {
 			list[contador]=plant;
 			contador++;

@@ -20,7 +20,8 @@ public class PetaCereza extends Plant {
 	
 	public void update() {
 		if(internalCycle==frequency) {
-			game.attackZombiePetaCereza(x,y);
+			game.attackZombie("PetaCereza",x,y);
+			healthPoints=0;
 		}
 		else {
 			this.internalCycle++;
