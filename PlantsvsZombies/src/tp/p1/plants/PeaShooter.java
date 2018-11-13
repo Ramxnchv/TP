@@ -12,6 +12,10 @@ public class PeaShooter extends Plant {
 		super(x,y,3,1,50,game);
 	}
 	
+	public PeaShooter() {
+		//para avaiablePlants
+		super(0,0,3,1,50,null);
+	}
 	
 	public void update() {
 		game.attackZombiePS(x,damage);

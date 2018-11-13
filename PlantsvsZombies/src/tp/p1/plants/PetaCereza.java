@@ -13,6 +13,11 @@ public class PetaCereza extends Plant {
 		this.internalCycle=0;
 	}
 	
+	public PetaCereza() {
+		//para avaiablePlants
+		super(0,0,2,2,50,null);
+	}
+	
 	public void update() {
 		if(internalCycle==frequency) {
 			game.attackZombiePetaCereza(x,y);

@@ -4,15 +4,29 @@ import tp.p1.objects.Plant;
 import tp.p1.plants.*;
 
 public class PlantFactory {
+	
 	private static Plant[] avaiablePlants = {
 		new PeaShooter(),
 		new SunFlower(),
-		new Petacereza(),
+		new PetaCereza(),
 		new Nuez()
-	}
+	};
 
-	public static Plant getPlant (String plantName) {
-
+	public static Plant getPlant (String plantName,int x,int y,Game game) {
+		Plant p;
+		if(plantName.equals("peashooter")||plantName.equals("p")) {
+			p=new PeaShooter(x,y,game);
+		}
+		else if(plantName.equals("sunflower")||plantName.equals("s")) {
+			p=new SunFlower(x,y,game);
+		}
+		else if(plantName.equals("petacereza")||plantName.equals("c")) {
+			p=new PetaCereza(x,y,game);
+		}
+		else {
+			p=new Nuez(x,y,game);
+		}
+		return p;
 	}
 
 	public static String listOfAvaiablePlants() {
@@ -21,7 +35,7 @@ public class PlantFactory {
 
 		String ps = buildPsInfo();
 
-		String pC = buildsPcInfo();
+		String pC = buildPcInfo();
 
 		String nuez = buildNuezInfo();
 
@@ -30,21 +44,21 @@ public class PlantFactory {
 		return sb.toString();
 	}
 
-	private String buildSfInfo(){
+	public static String buildSfInfo(){
 
 		StringBuilder sb = new StringBuilder();
 
 		String sf = "[S]unflower: Cost: ";
 		String harm = "suncoins  Harm: ";
 		int sfCost = SunFlower.getCost();
-		int sfDmg = SunFlower.getDamage();
+		int sfDmg = 0;
 
 		sb.append(sf).append(sfCost).append(harm).append(sfDmg).append("\n");
 
 		return sb.toString();
 	}
 
-	private String buildPsInfo(){
+	public static String buildPsInfo(){
 
 		StringBuilder sb = new StringBuilder();
 
@@ -59,7 +73,7 @@ public class PlantFactory {
 
 	}
 
-	private String buildPcInfo() {
+	public static String buildPcInfo() {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -73,13 +87,13 @@ public class PlantFactory {
 		return sb.toString();
 	}
 
-	private String buildNuezInfo() {
+	public static String buildNuezInfo() {
 		StringBuilder sb = new StringBuilder();
 
 		String nuez = "[N]uez: Cost: ";
 		String harm = "suncoins Harm: ";
 		int nuezCost = Nuez.getCost();
-		int nuezDmg = Nuez.getDamage();
+		int nuezDmg = 0;
 
 		sb.append(nuez).append(harm).append(nuezCost).append(nuezDmg).append("\n");
 

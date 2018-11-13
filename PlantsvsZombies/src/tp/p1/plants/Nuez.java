@@ -10,8 +10,13 @@ public class Nuez extends Plant {
 		super(x,y,10,1,50,game);
 	}
 	
+	public Nuez() {
+		//para avaiablePlants
+		super(0,0,10,1,50,null);
+	}
+	
 	public void update() {
-		
+		//no realiza update pero se ha de implementar
 	}
 	
 	public String toString()

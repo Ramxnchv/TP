@@ -2,6 +2,7 @@ package tp.p1.game;
 
 import java.util.Random;
 
+import tp.p1.command.CommandParser;
 import tp.p1.lists.*;
 import tp.p1.objects.Plant;
 import tp.p1.plants.*;
@@ -66,7 +67,7 @@ public class Game {
 		}
 		return empty;
 	}
-
+	
 	public void eliminarSinVida() {
 		if(zombieList.Delete())
 			zombieManager.setZombiesRestantesVivos(zombieManager.getZombiesRestantesVivos()-1);
@@ -74,7 +75,8 @@ public class Game {
 	}
 
 	public boolean comprobarDentroTablero(int x, int y) {
-		return x >=0 && x<FILAS && y >=0 && y <COLUMNAS;
+		//solo permite poner plantas hasta la penultima columna
+		return x >=0 && x<FILAS && y >=0 && y <COLUMNAS-1;
 	}
 
 	public void attackZombiePS(int x, int damage) {
@@ -166,7 +168,6 @@ public class Game {
 
 	public void addPlantToGame(int x, int y,Plant plant)
 	{
-
 		plantList.Add(x,y,plant,this);
 	}
 
@@ -240,57 +241,53 @@ public class Game {
 	}
 
 	//añadido nuevo p2
-public static void commandHelp() {
-	CommandParser.commandHelp();
-}
+	public static void commandHelp() {
+		CommandParser.commandHelp();
+	}
 
-public String printList() {
-	return PlantFactory.listOfAvaiablePlants();
-}
+	public String printList() {
+		return PlantFactory.listOfAvaiablePlants();
+	}
 
 
-public void add(String plant, int x, int y)
-{
+	public void add(String plant, int x, int y)
+	{
 
-	if(this.comprobarDentroTablero(x, y) && this.checkEmpty(x, y)) {
-		if(plant == "peashooter" && this.enoughMoneyPeaShooter()) {
-			this.decreaseSuncoins(PeaShooter.getCost());
-			//aniadir peashooter en lista
-			this.addPeashooter(x, y);
+		if(this.comprobarDentroTablero(x, y) && this.checkEmpty(x, y)) {
+			if(plant.equals("peashooter") && this.enoughMoneyPeaShooter()) {
+				this.decreaseSuncoins(PeaShooter.getCost());
+				//aniadir peashooter en lista
+				this.addPeashooter(x, y);
+				//computer action
+				this.addZombieAction();
+				//aniadir ciclo
+				this.addCycle();
+			} else {
+				System.out.println("You don't have enough suncoins to buy a peashooter");
+			}
+		}  else if(plant.equals("sunflower") && this.enoughMoneySunFlower()) {
+			this.decreaseSuncoins(SunFlower.getCost());
+			//aniadir sunflower a lista
+			this.addSunflower(x, y);
 			//computer action
 			this.addZombieAction();
 			//aniadir ciclo
 			this.addCycle();
 		} else {
-			System.out.println("You don't have enough suncoins to buy a peashooter");
+			System.out.println("You don't have enough suncoins to buy a sunflower");
 		}
-	}  else if(plant == "sunflower" && this.enoughMoneySunFlower()) {
-		this.decreaseSuncoins(SunFlower.getCost());
-		//aniadir sunflower a lista
-		this.addSunflower(x, y);
+	}
+
+	public boolean setExitTrue(boolean exit)
+	{
+		return exit = true;
+	}
+
+	public void executeNoneCommand()
+	{
 		//computer action
 		this.addZombieAction();
 		//aniadir ciclo
 		this.addCycle();
-	} else {
-		System.out.println("You don't have enough suncoins to buy a sunflower");
 	}
-}
-
-public boolean setExitTrue(boolean exit)
-{
-	return exit = true;
-
-}
-
-public void executeNoneCommand()
-{
-	//computer action
-	this.addZombieAction();
-	//aniadir ciclo
-	this.addCycle();
-}
-
-
-}
 }

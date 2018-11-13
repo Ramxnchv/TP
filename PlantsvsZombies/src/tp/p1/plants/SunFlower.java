@@ -14,6 +14,11 @@ public class SunFlower extends Plant {
 		this.internalCycle=0;
 	}
 	
+	public SunFlower() {
+		//para avaiablePlants
+		super(0,0,1,2,20,null);
+	}
+	
 	public void update() {	
 		if((internalCycle != 0) && (internalCycle%frequency==0))
 			game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()+cantidadRecolectada);
@@ -25,6 +30,5 @@ public class SunFlower extends Plant {
 		String str = "S [" + this.healthPoints + "]";
 		
 		return str;
-	}
-	
+	}	
 }

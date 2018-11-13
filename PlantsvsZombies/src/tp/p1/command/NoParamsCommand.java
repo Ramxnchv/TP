@@ -35,7 +35,7 @@ public class NoParamsCommand extends Command{
 		return c;
 	}
 
-	@Override
+	
 	public void execute(Game game, Controller controller) {
 		// TODO Auto-generated method stub
 

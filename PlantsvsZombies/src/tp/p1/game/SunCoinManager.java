@@ -1,8 +1,6 @@
 package tp.p1.game;
 
-import tp.p1.plants.PeaShooter;
-import tp.p1.plants.SunFlower;
-import tp.p1.lists.SunFlowerList;
+import tp.p1.plants.*;
 
 public class SunCoinManager {
 	private Game game;
@@ -12,14 +10,6 @@ public class SunCoinManager {
 		this.game=game;
 	}
 
-	
-	public int calcularSuncoinsCiclo() {
-		for(int i=0;i<game.getNumSunflowerLista();i++) {
-			
-		}
-		return sunCoins+=50;
-	}
-	
 	public void decreaseSuncoins(int cost)
 	{
 		sunCoins -= cost;

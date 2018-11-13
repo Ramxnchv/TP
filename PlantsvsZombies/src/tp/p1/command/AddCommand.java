@@ -20,8 +20,15 @@ public class AddCommand extends Command {
 			if (commandWords[1].equals("p") || commandWords[1].equals("peashooter"))
 			{
 				this.setPlant("peashooter");
-			} else if(commandWords[1].equals("s") || commandWords[1].equals("sunflower")) {
+			}
+			else if(commandWords[1].equals("s") || commandWords[1].equals("sunflower")) {
 				this.setPlant("sunflower");
+			}
+			else if(commandWords[1].equals("c") || commandWords[1].equals("petacereza")) {
+				this.setPlant("petacereza");
+			}
+			else if(commandWords[1].equals("n") || commandWords[1].equals("nuez")){
+				this.setPlant("nuez");
 			}
 
 			this.setX(Integer.parseInt(commandWords[2]));
