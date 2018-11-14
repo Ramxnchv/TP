@@ -65,13 +65,17 @@ public class Game {
 	
 	//PRINT GAME
 	public String toString() {
+		return gamePrinter.toString();
+	}
+	
+	public String printPrompt() {
 		StringBuilder sb= new StringBuilder();
 		String salida1="Number of cycles: "+numCiclos;
 		String salida2="\nSun coins: "+suncoins.getSunCoins();
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
-		return sb.append(salida1).append(salida2).append(salida3).append(gamePrinter.toString()).toString();
+		return sb.append(salida1).append(salida2).append(salida3).toString();
 	}
-
+	
 	public String getObject(int x, int y)
 	{
 		String str;
@@ -234,7 +238,7 @@ public class Game {
 	
 	private boolean checkEmpty(int x,int y) {
 		boolean empty = false;
-		if(!plantList.checkPeashooter(x, y) && !plantList.checkSunflower(x, y) && !plantList.checkPetacereza(x,y) && !zombieList.checkZombie(x, y)) {
+		if(!plantList.checkPlant(x, y) && !zombieList.checkZombie(x, y)) {
 			empty = true;
 		}
 		return empty;
