@@ -1,28 +1,24 @@
-
 package tp.p1.game;
 
-import java.util.Random;
 import java.util.Scanner;
-
 import tp.p1.command.*;
-import tp.p1.plants.PeaShooter;
-import tp.p1.plants.SunFlower;
-import tp.p1.zombies.Zombie;
+
 
 public class Controller {
-	
+
 	private Game game;
 	private Scanner in;
-	
+
 	public Controller(Game game,Scanner in) {
 		this.game=game;
 		this.in=in;
 	}
-	
+
 	public void run() {
 		boolean exit=false;
+		String prompt=game.printPrompt();
 		String unknownCommandMsg="Comando incorrecto";
-		
+
 		while (!game.isNotFinished() && !exit) {
 			printGame();
 			boolean noPrint = false;
@@ -38,11 +34,11 @@ public class Controller {
 			}
 		}
 	}
-		
+
 		private void setNoPrintGameState() {
-		
+
 		}
-		
+
 		private void printGame() {
 			game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
 			System.out.println(game);
@@ -50,28 +46,28 @@ public class Controller {
 
 		/*
 		//variable para controlar el exit
-		
-		
+
+
 		//variables para controlar update si no hay suncoins o si la accion no requiere update y draw
 		boolean suncoins=true,list=false,help=false;
-		
+
 		while(game.isNotFinished()&&!exit) {
-			
+
 			if(suncoins&&!help&&!list) {
 			//actualizar
 			game.update();
-			
+
 			//draw
 			printGame();
 			}
-			
+
 			//user command
 			System.out.println("Command > ");
 			String[] comando=new String[4];
 			comando=in.nextLine().toLowerCase().trim().split(" ");
 			help=false;
 			list=false;
-			
+
 			if(comando[0].equals("a")||comando[0].equals("add")) {
 				//comprobar espacio vacio y coordenada dentro tablero
 				if(game.checkEmpty(Integer.parseInt(comando[2]), Integer.parseInt(comando[3]))&&game.comprobarDentroTablero(comando[2], comando[3])) {
@@ -148,7 +144,7 @@ public class Controller {
 			}
 		}
 		if(exit) {
-		System.out.println("Game Over");	
+		System.out.println("Game Over");
 		}
 		else if(game.getZombieManager().zombiGanador()) {
 		System.out.println("\nZombies win");
@@ -157,8 +153,7 @@ public class Controller {
 		System.out.println("\nPlayer wins");
 		}
 	}
-	
-	*/
-		
-}
 
+	*/
+
+}
