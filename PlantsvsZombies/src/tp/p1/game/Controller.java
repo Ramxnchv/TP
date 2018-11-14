@@ -1,13 +1,9 @@
 
 package tp.p1.game;
 
-import java.util.Random;
 import java.util.Scanner;
-
 import tp.p1.command.*;
-import tp.p1.plants.PeaShooter;
-import tp.p1.plants.SunFlower;
-import tp.p1.zombies.Zombie;
+
 
 public class Controller {
 	
@@ -21,6 +17,7 @@ public class Controller {
 	
 	public void run() {
 		boolean exit=false;
+		String prompt=game.printPrompt();
 		String unknownCommandMsg="Comando incorrecto";
 		
 		while (!game.isNotFinished() && !exit) {

@@ -65,13 +65,17 @@ public class Game {
 	
 	//PRINT GAME
 	public String toString() {
+		return gamePrinter.toString();
+	}
+	
+	public String printPrompt() {
 		StringBuilder sb= new StringBuilder();
 		String salida1="Number of cycles: "+numCiclos;
 		String salida2="\nSun coins: "+suncoins.getSunCoins();
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
-		return sb.append(salida1).append(salida2).append(salida3).append(gamePrinter.toString()).toString();
+		return sb.append(salida1).append(salida2).append(salida3).toString();
 	}
-
+	
 	public String getObject(int x, int y)
 	{
 		String str;
