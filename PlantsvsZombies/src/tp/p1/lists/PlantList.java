@@ -38,15 +38,13 @@ public class PlantList {
 		}
 	}
 	
-	public boolean checkPlant(int x, int y,Plant plant)
+	public boolean checkPlant(int x, int y)
 	{
 		int i=0;
 		boolean encontrado=false;
 		while(i<contador&&!encontrado) {
-			if(plant.equals(list[i])) {
-				if((list[i].getX()==x)&&(list[i].getY()==y)) {
+			if((list[i].getX()==x)&&(list[i].getY()==y)) {
 				encontrado=true;
-				}
 			}
 			else {
 				i++;

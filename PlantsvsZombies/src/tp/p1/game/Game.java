@@ -238,7 +238,7 @@ public class Game {
 	
 	private boolean checkEmpty(int x,int y) {
 		boolean empty = false;
-		if(!plantList.checkPeashooter(x, y) && !plantList.checkSunflower(x, y) && !plantList.checkPetacereza(x,y) && !zombieList.checkZombie(x, y)) {
+		if(!plantList.checkPlant(x, y) && !zombieList.checkZombie(x, y)) {
 			empty = true;
 		}
 		return empty;
