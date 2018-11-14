@@ -8,14 +8,16 @@ public class Controller {
 
 	private Game game;
 	private Scanner in;
+	private boolean exit = false;
 
-	public Controller(Game game,Scanner in) {
+	public Controller(Game game,Scanner in, boolean exit) {
 		this.game=game;
 		this.in=in;
+		this.exit = exit;
+
 	}
 
 	public void run() {
-		boolean exit=false;
 		String prompt=game.printPrompt();
 		String unknownCommandMsg="Comando incorrecto";
 
@@ -42,6 +44,14 @@ public class Controller {
 		private void printGame() {
 			game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
 			System.out.println(game);
+		}
+
+		public boolean getExit() {
+			return exit;
+		}
+
+		public void setExit(boolean exit) {
+			this.exit = exit;
 		}
 
 		/*
