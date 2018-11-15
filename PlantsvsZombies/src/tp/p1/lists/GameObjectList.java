@@ -4,9 +4,9 @@ import tp.p1.game.Game;
 import tp.p1.objects.*;
 
 public class GameObjectList {
-	public GameObject[] list;
-	public int contador=0;
-	protected static final int BOARD_SIZE=32;
+	private GameObject[] list;
+	private int contador=0;
+	private static final int BOARD_SIZE=32;
 
 	public GameObjectList() {
 		list=new GameObject[BOARD_SIZE];
@@ -62,6 +62,10 @@ public class GameObjectList {
 	public String printPosition(int x, int y)
 	{
 		return list[searchPosition(x,y)].toString();
+	}
+	
+	public boolean checkWinnerZombie(int i) {
+		return list[i].getY() == 0;
 	}
 	
 	//metodo privado para buscar en la lista

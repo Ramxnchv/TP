@@ -16,7 +16,7 @@ public class Controller {
 	public Controller(Game game,Scanner in) {
 		this.game=game;
 		this.in=in;
-		this.exit = exit;
+		exit=false;
 	
 	}
 	
@@ -34,7 +34,7 @@ public class Controller {
 			}
 			else {
 				System.err.println (unknownCommandMsg);
-			setNoPrintGameState();
+				setNoPrintGameState();
 			}
 		}
 		

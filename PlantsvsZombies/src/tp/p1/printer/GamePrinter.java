@@ -1,5 +1,7 @@
 package tp.p1.printer;
 
+import tp.p1.game.Game;
+
 public interface GamePrinter {
-	public void printGame();
+	public String printGame(Game game);
 }

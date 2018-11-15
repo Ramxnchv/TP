@@ -2,12 +2,13 @@ package tp.p1.game;
 
 import java.util.Random;
 
-
 import tp.p1.command.CommandParser;
 import tp.p1.lists.*;
 import tp.p1.objects.Plant;
 import tp.p1.plants.*;
-import tp.p1.printer.Patata;
+import tp.p1.printer.*;
+import tp.p1.printer.GamePrinter;
+import tp.p1.printer.Release;
 import tp.p1.zombies.ZombieManager;
 import tp.p1.objects.Zombie;
 
@@ -19,7 +20,7 @@ public class Game {
 	private Random rand;
 	private int numCiclos;
 	private SunCoinManager suncoins;
-	private Patata gamePrinter;
+	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
 	private final int FILAS=4;
 	private final int COLUMNAS=8;
@@ -59,7 +60,7 @@ public class Game {
 		zombieList =new GameObjectList();
 		plantList=new GameObjectList();
 		numCiclos=0;
-		this.gamePrinter=new Patata(this,FILAS,COLUMNAS);
+		this.gamePrinter=new Release(this,FILAS,COLUMNAS);
 		this.suncoins=new SunCoinManager(this);
 		suncoins.setSunCoins(50);
 		this.zombieManager=new ZombieManager(this);
@@ -80,7 +81,7 @@ public class Game {
 	}
 	
 	public void draw() {
-		
+		gamePrinter.printGame(this);
 	}
 	
 	public String getObject(int x, int y)
@@ -187,20 +188,21 @@ public class Game {
 	{
 		int i = 0;
 		boolean found = false;
-		while (i < zombieList.contador && !found)
+		while (i < zombieList.getContador() && !found)
 		{
-			if(zombieList.getYPosition(i) == 0)
+			if(zombieList.checkWinnerZombie(i))
 			{
 				found = true;
 			}
+			else {
 			i++;
+			}
 		}
 
 		return found;
 	}
 	
 
-	
 	//GENERAR ZOMBIES
 	public void addZombieAction() {
 		int tipoZombie=rand.nextInt(2);
@@ -323,10 +325,6 @@ public class Game {
 	//GETTERS Y SETTERS
 	public LEVEL getLevel() {
 		return level;
-	}
-
-	public void setGamePrinter(Patata gamePrinter) {
-		this.gamePrinter = gamePrinter;
 	}
 
 	public int getFILAS() {
