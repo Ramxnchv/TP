@@ -2,6 +2,10 @@ package tp.p1.command;
 
 import tp.p1.game.Controller;
 import tp.p1.game.Game;
+import tp.p1.game.PlantFactory;
+import tp.p1.objects.*;
+
+
 
 public class AddCommand extends Command {
 	String plant;
@@ -42,7 +46,15 @@ public class AddCommand extends Command {
 	}
 
 	public void execute(Game game, Controller controller) {
-		game.addPlantToGame(this.getPlant(), this.getX(), this.getY());
+		
+		//No se puede comparar nombre de objetos con Strings.. a no ser que lo compares aqui :)
+		if(game.enoughMoney(this.getPlant())){
+			Plant plant = PlantFactory.getPlant(this.getPlant());
+			
+			game.addPlantToGame(plant, this.getX(), this.getY());
+			
+		}
+		
 	}
 
 

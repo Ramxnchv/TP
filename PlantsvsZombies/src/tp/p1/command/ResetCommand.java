@@ -15,10 +15,4 @@ public class ResetCommand extends NoParamsCommand {
 	}
 
 
-	public static Command createResetCommand()
-	{
-		ResetCommand rC = new ResetCommand();
-
-		return rC;
-	}
 }

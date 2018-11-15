@@ -10,6 +10,11 @@ public class Deportista extends Zombie{
 		super(x,y,2,1,1,1,game);
 	}
 	
+	public Deportista() {
+		//para avaiableZombies
+		super(0,0,2,1,1,1,null);
+	}
+	
 	
 	public String toString()
 	{

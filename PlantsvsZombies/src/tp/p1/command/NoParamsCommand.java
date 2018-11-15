@@ -14,22 +14,32 @@ public class NoParamsCommand extends Command{
 
 		if(commandWords[0].equals("h") || commandWords[0].equals("help"))
 		{
-			c = HelpCommand.createHelpCommand();
+			c = new HelpCommand();
 
 		} else if (commandWords[0].equals("r")||commandWords[0].equals("reset")) {
 
-			c = ResetCommand.createResetCommand();
+			c = new ResetCommand();
 
 		} else if (commandWords[0].equals("l")||commandWords [0].equals("list")) {
 
-			c = ListCommand.createListCommand();
+			c = new ListCommand();
+			
 		} else if (commandWords[0].equals("e") || commandWords[0].equals("exit")) {
-			c = ExitCommand.creatExitCommand();
+			
+			c = new ExitCommand();
+			
 		}
 		else if (commandWords[0].equals("") || commandWords[0].equals("none")) {
-			c = NoneCommand.createNoneCommand();
+			
+			c = new NoneCommand();
+			
+		} else if (commandWords[0].equals("p") || commandWords[0].equals("print")) {
+			c = new PrintModeCommand();
+			
 		} else {
+			
 			c = null;
+			
 		}
 
 		return c;

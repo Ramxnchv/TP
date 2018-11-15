@@ -10,6 +10,11 @@ public class Caracubo extends Zombie {
 		super(x,y,8,4,1,1,game);
 	}
 	
+	public Caracubo() {
+		//para avaiableZombies
+		super(0,0,8,4,1,1,null);
+	}
+	
 	public String toString()
 	{
 		String 	str = "W ["  + this.healthPoints + "]";

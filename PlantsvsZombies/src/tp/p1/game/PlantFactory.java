@@ -4,7 +4,7 @@ import tp.p1.objects.Plant;
 import tp.p1.plants.*;
 
 public class PlantFactory {
-
+	
 	private static Plant[] avaiablePlants = {
 		new PeaShooter(),
 		new SunFlower(),
@@ -12,19 +12,19 @@ public class PlantFactory {
 		new Nuez()
 	};
 
-	public static Plant getPlant (String plantName,int x,int y,Game game) {
+	public static Plant getPlant (String plantName) {
 		Plant p;
 		if(plantName.equals("peashooter")||plantName.equals("p")) {
-			p=new PeaShooter(x,y,game);
+			p=new PeaShooter();
 		}
 		else if(plantName.equals("sunflower")||plantName.equals("s")) {
-			p=new SunFlower(x,y,game);
+			p=new SunFlower();
 		}
 		else if(plantName.equals("petacereza")||plantName.equals("c")) {
-			p=new PetaCereza(x,y,game);
+			p=new PetaCereza();
 		}
 		else {
-			p=new Nuez(x,y,game);
+			p=new Nuez();
 		}
 		return p;
 	}
@@ -44,7 +44,7 @@ public class PlantFactory {
 		return sb.toString();
 	}
 
-	public static String buildSfInfo(){
+	private static String buildSfInfo(){
 
 		StringBuilder sb = new StringBuilder();
 
@@ -58,7 +58,7 @@ public class PlantFactory {
 		return sb.toString();
 	}
 
-	public static String buildPsInfo(){
+	private static String buildPsInfo(){
 
 		StringBuilder sb = new StringBuilder();
 
@@ -73,7 +73,7 @@ public class PlantFactory {
 
 	}
 
-	public static String buildPcInfo() {
+	private static String buildPcInfo() {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -87,7 +87,7 @@ public class PlantFactory {
 		return sb.toString();
 	}
 
-	public static String buildNuezInfo() {
+	private static String buildNuezInfo() {
 		StringBuilder sb = new StringBuilder();
 
 		String nuez = "[N]uez: Cost: ";

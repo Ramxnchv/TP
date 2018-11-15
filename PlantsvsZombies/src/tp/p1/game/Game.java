@@ -2,21 +2,24 @@ package tp.p1.game;
 
 import java.util.Random;
 
+
 import tp.p1.command.CommandParser;
 import tp.p1.lists.*;
 import tp.p1.objects.Plant;
 import tp.p1.plants.*;
+import tp.p1.printer.Patata;
 import tp.p1.zombies.ZombieManager;
+import tp.p1.objects.Zombie;
 
 public class Game {
 	//ATRIBUTOS
-	private ZombieList zombieList;
-	private PlantList plantList;
+	private GameObjectList zombieList;
+	private GameObjectList plantList;
 	private LEVEL level;
 	private Random rand;
 	private int numCiclos;
 	private SunCoinManager suncoins;
-	private GamePrinter gamePrinter;
+	private Patata gamePrinter;
 	private ZombieManager zombieManager;
 	private final int FILAS=4;
 	private final int COLUMNAS=8;
@@ -39,35 +42,35 @@ public class Game {
 		//limpiar sin vida
 		this.eliminarSinVida();
 	}
-
+	
 	public void eliminarSinVida() {
 		if(zombieList.Delete())
 			zombieManager.setZombiesRestantesVivos(zombieManager.getZombiesRestantesVivos()-1);
 		plantList.Delete();
 	}
-
+	
 	public void addCycle() {
 		this.numCiclos++;
 	}
-
-
+	
+	
 	//INICIALIZAR Y RESET
 	public void inicializar() {
-		zombieList =new ZombieList();
-		plantList=new PlantList();
+		zombieList =new GameObjectList();
+		plantList=new GameObjectList();
 		numCiclos=0;
-		this.gamePrinter=new GamePrinter(this,FILAS,COLUMNAS);
+		this.gamePrinter=new Patata(this,FILAS,COLUMNAS);
 		this.suncoins=new SunCoinManager(this);
 		suncoins.setSunCoins(50);
 		this.zombieManager=new ZombieManager(this);
 	}
-
-
+	
+	
 	//PRINT GAME
 	public String toString() {
 		return gamePrinter.toString();
 	}
-
+	
 	public String printPrompt() {
 		StringBuilder sb= new StringBuilder();
 		String salida1="Number of cycles: "+numCiclos;
@@ -75,16 +78,20 @@ public class Game {
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
 		return sb.append(salida1).append(salida2).append(salida3).toString();
 	}
-
+	
+	public void draw() {
+		
+	}
+	
 	public String getObject(int x, int y)
 	{
 		String str;
 
-		if(plantList.checkPlantToPrint(x, y))
+		if(plantList.checkObject(x, y))
 		{
 			str = plantList.printPosition(x, y);
 		}
-		else if (zombieList.checkZombie(x, y))
+		else if (zombieList.checkObject(x, y))
 		{
 			str = zombieList.printPosition(x, y);
 		}
@@ -93,10 +100,11 @@ public class Game {
 		}
 		return str;
 	}
-
-
+	
+	
+	
 	//ATTACK ZOMBIES Y PLANTAS
-
+	
 		/*public void attackPlant(int x,int y,int damage) {
 		//si esta vacia la casilla
 		if(game.checkEmpty(x, y-1)&&internalCycle%frequency==0) {
@@ -105,7 +113,7 @@ public class Game {
 		}
 		else if (game.checkEmpty(x, y-1) && internalCycle%frequency!=0 ){
 			this.y = this.y;
-		}
+		} 
 		else {
 			if(!game.checkZombie(x, y-1)) {
 			//atacar
@@ -113,26 +121,26 @@ public class Game {
 			}
 		}
 	}*/
-
+	
 	public void attackZombie(String plantName,int x,int y) {
 		if(plantName.equals("PeaShooter")) {
 			int i = 0;
 			//recorremos las columnas en busca de un zombie
-			while (i < COLUMNAS && !zombieList.checkZombie(x, i))
+			while (i < COLUMNAS && !zombieList.checkObject(x, i))
 			{
 				i++;
 			}
 			//si sale porque encuentra un zombie -> dispara
-			if(zombieList.checkZombie(x,i))
+			if(zombieList.checkObject(x,i))
 			{
 				zombieList.decreaseHealth(x, i, PeaShooter.getDamage());
 			}
 		}
 		else {
-
+			
 			//PetaCereza
 			//comprueba coordenada dentro tablero y comprueba que haya zombie para atacarlo con la explosion
-
+			
 			for(int i=y-1;i<y+2;i++) {
 				if(comprobarDamagePetaCereza(x-1,i)) {
 					if(checkZombie(x-1,i)) {
@@ -156,32 +164,43 @@ public class Game {
 			}
 		}
 	}
-
+	
+	
 	public void attackPlant(int x, int y, int damage)
-{
+	{
 		plantList.decreaseHealth(x, y, damage);
-
-}
-
+		
+	}
+	
 	private boolean comprobarDamagePetaCereza(int x, int y) {
 		return x >=0 && x<FILAS && y >=0 && y <COLUMNAS;
 	}
-
+	
 	//CHECK FINAL PARTIDA
-
+	
 	public boolean isNotFinished() {
-		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
+		return zombieManager.getZombiesRestantesVivos() > 0 && zombieManager.zombiGanador();
 	}
+	
 
 	public boolean checkWinnerZombie()
 	{
+		int i = 0;
 		boolean found = false;
-		if(zombieList.checkWinnerZombie())
-			found = true;
+		while (i < zombieList.contador && !found)
+		{
+			if(zombieList.getYPosition(i) == 0)
+			{
+				found = true;
+			}
+			i++;
+		}
+
 		return found;
 	}
+	
 
-
+	
 	//GENERAR ZOMBIES
 	public void addZombieAction() {
 		int tipoZombie=rand.nextInt(2);
@@ -191,7 +210,7 @@ public class Game {
 			decreaseZombiesLeft();
 		}
 	}
-
+	
 	private String chooseZombie(int numRandom) {
 		String zombie;
 		switch(numRandom) {
@@ -210,47 +229,48 @@ public class Game {
 		}
 		return zombie;
 	}
-
+	
 	public void addZombie(int x, int y,String tipoZombie) {
-		zombieList.Add(x, y, tipoZombie,this);
+		
+		Zombie z = ZombieFactory.getZombie(tipoZombie);
+		zombieList.Add(x, y, z,this);
 	}
-
+	
 	public void decreaseZombiesLeft()
 	{
 		zombieManager.decreaseZombiesLeft();
 	}
-
+	
 	public boolean checkZombie(int x, int y){
 
-		return zombieList.checkZombie(x, y);
+		return zombieList.checkObject(x, y);
 	}
 
-
+	
 	//ANIADIR PLANTAS
-	public boolean addPlantToGame(String plantName, int x, int y)
+	public void addPlantToGame(Plant plant, int x, int y)
 	{
 		if(comprobarDentroTablero(x, y) && checkEmpty(x,y)) {
-			if(enoughMoney(plantName)) {
-				plantList.Add(x,y,plantName,this);
+				//board update()
+				plantList.Add(x,y,plant,this); //IMPORTANTE: SEGUN EL DIAGRAMA HAY QUE PASAR POR BOARD update() primero
 			}
-		}
-		return enoughMoney(plantName);
+		
 	}
-
+	
 	private boolean comprobarDentroTablero(int x, int y) {
 		//solo permite poner plantas hasta la penultima columna
 		return x >=0 && x<FILAS && y >=0 && y <COLUMNAS-1;
 	}
-
-	private boolean checkEmpty(int x,int y) {
+	
+	public boolean checkEmpty(int x,int y) {
 		boolean empty = false;
-		if(!plantList.checkPlant(x, y) && !zombieList.checkZombie(x, y)) {
+		if(!plantList.checkObject(x, y) && !zombieList.checkObject(x, y)) {
 			empty = true;
 		}
 		return empty;
 	}
-
-
+	
+	
 	//SUNCOINS
 	public boolean enoughMoney(String plantName) {
 		boolean enough;
@@ -265,9 +285,9 @@ public class Game {
 		} else {
 			enough = false;
 		}
-
+		
 		return enough;
-
+				
 	}
 
 	public void decreaseSuncoins(int cost)
@@ -276,14 +296,19 @@ public class Game {
 		suncoins.decreaseSuncoins(cost);
 	}
 
-
+	
 	//COMANDOS Y EXECUTES
 	public static void commandHelp() {
 		System.out.println(CommandParser.commandHelp());
 	}
 
 	public void printList() {
-		System.out.println(PlantFactory.listOfAvaiablePlants());
+		System.out.println( PlantFactory.listOfAvaiablePlants());
+	}
+
+	public boolean setExitTrue(boolean exit)
+	{
+		return exit = true;
 	}
 
 	public void executeNoneCommand()
@@ -293,14 +318,14 @@ public class Game {
 		//aniadir ciclo
 		this.addCycle();
 	}
-
-
+	
+	
 	//GETTERS Y SETTERS
 	public LEVEL getLevel() {
 		return level;
 	}
 
-	public void setGamePrinter(GamePrinter gamePrinter) {
+	public void setGamePrinter(Patata gamePrinter) {
 		this.gamePrinter = gamePrinter;
 	}
 
@@ -331,7 +356,7 @@ public class Game {
 	public ZombieManager getZombieManager() {
 		return zombieManager;
 	}
-
+	
 	public int getNumZombiesLista()
 	{
 		return zombieList.getContador();

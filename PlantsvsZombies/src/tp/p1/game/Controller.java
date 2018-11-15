@@ -1,54 +1,58 @@
+
 package tp.p1.game;
 
 import java.util.Scanner;
 import tp.p1.command.*;
+import tp.p1.printer.Patata;
 
 
 public class Controller {
-
+	
 	private Game game;
 	private Scanner in;
-	private boolean exit = false;
-
-	public Controller(Game game,Scanner in, boolean exit) {
+	private boolean exit;
+	
+	
+	public Controller(Game game,Scanner in) {
 		this.game=game;
 		this.in=in;
 		this.exit = exit;
-
+	
 	}
+	
 
 	public void run() {
-		String prompt=game.printPrompt();
-		String unknownCommandMsg="Comando incorrecto";
 
+		String unknownCommandMsg="Comando incorrecto";
 		while (!game.isNotFinished() && !exit) {
-			printGame();
-			boolean noPrint = false;
-			System.out.print(prompt);
+			game.draw();
+			System.out.print(game.printPrompt());
 			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
 			Command command = CommandParser.parseCommand(words, this);
 			if (command != null) {
-			command.execute(game, this);
+				command.execute(game, this);
 			}
 			else {
-			System.err.println (unknownCommandMsg);
+				System.err.println (unknownCommandMsg);
 			setNoPrintGameState();
 			}
 		}
-		if(exit)
-			System.out.println("Thanks for playing Plant vs Zombies");
-	}
-
-		private void setNoPrintGameState() {
-
+		
+		if(exit) {
+			System.out.println("Thanks for playing Plants vs Zombies");
 		}
-
+	}
+		
+		private void setNoPrintGameState() {
+		
+		}
+		
 		private void printGame() {
-			game.setGamePrinter(new GamePrinter(game,game.getFILAS(),game.getCOLUMNAS()));
+			game.setGamePrinter(new Patata(game,game.getFILAS(),game.getCOLUMNAS()));
 			System.out.println(game);
 		}
-
-		public boolean getExit() {
+		
+		public boolean isExit() {
 			return exit;
 		}
 
@@ -58,28 +62,28 @@ public class Controller {
 
 		/*
 		//variable para controlar el exit
-
-
+		
+		
 		//variables para controlar update si no hay suncoins o si la accion no requiere update y draw
 		boolean suncoins=true,list=false,help=false;
-
+		
 		while(game.isNotFinished()&&!exit) {
-
+			
 			if(suncoins&&!help&&!list) {
 			//actualizar
 			game.update();
-
+			
 			//draw
 			printGame();
 			}
-
+			
 			//user command
 			System.out.println("Command > ");
 			String[] comando=new String[4];
 			comando=in.nextLine().toLowerCase().trim().split(" ");
 			help=false;
 			list=false;
-
+			
 			if(comando[0].equals("a")||comando[0].equals("add")) {
 				//comprobar espacio vacio y coordenada dentro tablero
 				if(game.checkEmpty(Integer.parseInt(comando[2]), Integer.parseInt(comando[3]))&&game.comprobarDentroTablero(comando[2], comando[3])) {
@@ -156,7 +160,7 @@ public class Controller {
 			}
 		}
 		if(exit) {
-		System.out.println("Game Over");
+		System.out.println("Game Over");	
 		}
 		else if(game.getZombieManager().zombiGanador()) {
 		System.out.println("\nZombies win");
@@ -165,7 +169,8 @@ public class Controller {
 		System.out.println("\nPlayer wins");
 		}
 	}
-
+	
 	*/
-
+		
 }
+

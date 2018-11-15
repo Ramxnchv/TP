@@ -12,12 +12,5 @@ public class ExitCommand extends NoParamsCommand {
 		controller.setExit(true);
 	}
 
-	public static Command creatExitCommand() {
-
-		ExitCommand eC = new ExitCommand();
-
-		return eC;
-	}
-
 
 }

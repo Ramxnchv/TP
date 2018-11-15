@@ -13,12 +13,6 @@ public class HelpCommand extends NoParamsCommand {
 		Game.commandHelp();
 	}
 
-	public static Command createHelpCommand() {
 
-		HelpCommand hC = new HelpCommand();
-
-		return hC;
-
-	}
 
 }

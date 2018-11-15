@@ -9,6 +9,10 @@ public class ZombieComun extends Zombie {
 		super(x,y,5,2,1,1,game);
 	}
 	
+	public ZombieComun() {
+		//para avaiableZombies
+		super(0,0,5,1,1,1,null);
+	}
 	public String toString()
 	{
 		String 	str = "Z ["  + this.healthPoints + "]";

@@ -1,6 +1,6 @@
 package tp.p1.zombies;
 
-import tp.p1.lists.ZombieList;
+
 import java.util.Random;
 import tp.p1.game.Game;
 import tp.p1.game.LEVEL;

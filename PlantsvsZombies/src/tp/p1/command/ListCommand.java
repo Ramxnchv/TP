@@ -16,10 +16,4 @@ public class ListCommand extends NoParamsCommand {
 
 	}
 
-	public static Command createListCommand()
-	{
-		ListCommand lC = new ListCommand();
-
-		return lC;
-	}
 }

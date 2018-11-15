@@ -14,10 +14,5 @@ public class NoneCommand extends NoParamsCommand{
 	}
 
 
-	public static Command createNoneCommand() {
 
-		NoneCommand nC = new NoneCommand();
-
-		return nC;
-	}
 }
