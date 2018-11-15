@@ -9,7 +9,7 @@ public class ExitCommand extends NoParamsCommand {
 	}
 
 	public void execute(Game game, Controller controller) {
-		game.setExitTrue(controller.getExit());
+		controller.setExit(true);
 	}
 
 	public static Command creatExitCommand() {

@@ -35,6 +35,8 @@ public class Controller {
 			setNoPrintGameState();
 			}
 		}
+		if(exit)
+			System.out.println("Thanks for playing Plant vs Zombies");
 	}
 
 		private void setNoPrintGameState() {

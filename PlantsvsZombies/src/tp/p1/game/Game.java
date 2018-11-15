@@ -279,16 +279,11 @@ public class Game {
 
 	//COMANDOS Y EXECUTES
 	public static void commandHelp() {
-		CommandParser.commandHelp();
+		System.out.println(CommandParser.commandHelp());
 	}
 
-	public String printList() {
-		return PlantFactory.listOfAvaiablePlants();
-	}
-
-	public boolean setExitTrue(boolean exit)
-	{
-		return exit = true;
+	public void printList() {
+		System.out.println(PlantFactory.listOfAvaiablePlants());
 	}
 
 	public void executeNoneCommand()

@@ -4,7 +4,7 @@ import tp.p1.objects.Plant;
 import tp.p1.plants.*;
 
 public class PlantFactory {
-	
+
 	private static Plant[] avaiablePlants = {
 		new PeaShooter(),
 		new SunFlower(),
@@ -49,7 +49,7 @@ public class PlantFactory {
 		StringBuilder sb = new StringBuilder();
 
 		String sf = "[S]unflower: Cost: ";
-		String harm = "suncoins  Harm: ";
+		String harm = " suncoins  Harm: ";
 		int sfCost = SunFlower.getCost();
 		int sfDmg = 0;
 
@@ -63,7 +63,7 @@ public class PlantFactory {
 		StringBuilder sb = new StringBuilder();
 
 		String ps = "[P]eashooter: Cost: ";
-		String harm = "suncoins  Harm: ";
+		String harm = " suncoins  Harm: ";
 		int psCost = PeaShooter.getCost();
 		int psDmg = PeaShooter.getDamage();
 
@@ -78,11 +78,11 @@ public class PlantFactory {
 		StringBuilder sb = new StringBuilder();
 
 		String pc = "Peta[c]ereza: Cost: ";
-		String harm = "suncoins Harm: ";
+		String harm = " suncoins Harm: ";
 		int pcCost = PetaCereza.getCost();
 		int pcDmg = PetaCereza.getDamage();
 
-		sb.append(pc).append(harm).append(pcCost).append(pcDmg).append("\n");
+		sb.append(pc).append(pcCost).append(harm).append(pcDmg).append("\n");
 
 		return sb.toString();
 	}
@@ -91,11 +91,11 @@ public class PlantFactory {
 		StringBuilder sb = new StringBuilder();
 
 		String nuez = "[N]uez: Cost: ";
-		String harm = "suncoins Harm: ";
+		String harm = " suncoins Harm: ";
 		int nuezCost = Nuez.getCost();
 		int nuezDmg = 0;
 
-		sb.append(nuez).append(harm).append(nuezCost).append(nuezDmg).append("\n");
+		sb.append(nuez).append(nuezCost).append(harm).append(nuezDmg).append("\n");
 
 		return sb.toString();
 
