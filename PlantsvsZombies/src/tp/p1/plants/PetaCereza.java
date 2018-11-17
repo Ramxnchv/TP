@@ -6,18 +6,18 @@ import tp.p1.objects.Plant;
 public class PetaCereza extends Plant {
 	private final static int damage=10;
 	private int internalCycle;
-	
+
 	public PetaCereza(int x, int y, Game game) {
 		//x,y,healthPoints,frequency,cost,game
 		super(x,y,2,2,50,game);
 		this.internalCycle=0;
 	}
-	
+
 	public PetaCereza() {
 		//para avaiablePlants
 		super(0,0,2,2,50,null);
 	}
-	
+
 	public void update() {
 		if(internalCycle==frequency) {
 			game.attackZombie("PetaCereza",x,y);
@@ -27,16 +27,21 @@ public class PetaCereza extends Plant {
 			this.internalCycle++;
 		}
 	}
-	
+
 	public String toString()
 	{
 		String str = "C [" + this.healthPoints + "]";
-		
+
 		return str;
 	}
 
 	public static int getDamage() {
 		return damage;
 	}
-	
+	public String printInfo() {
+	String str = "C [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ " ]";
+
+	return str;
+	}
+
 }

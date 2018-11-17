@@ -11,7 +11,7 @@ public class GameObjectList {
 	public GameObjectList() {
 		list=new GameObject[BOARD_SIZE];
 	}
-	
+
 	public boolean Add(int x, int y, GameObject object,Game game) {
 		if(contador<BOARD_SIZE) {
 			list[contador]=object;
@@ -33,7 +33,7 @@ public class GameObjectList {
 		}
 		return encontrado;
 	}
-	
+
 	public boolean Delete() {
 		boolean deleted = false;
 		for(int i=0;i<contador;i++) {
@@ -45,29 +45,34 @@ public class GameObjectList {
 		}
 		return deleted;
 	}
-	
+
 	public void update() {
 		for(int i=0;i<contador;i++) {
 			list[i].update();
 		}
 	}
-	
+
 	public void decreaseHealth(int x, int y, int damage)
 	{
 		int pos = searchPosition(x,y);
 		list[pos].decreaseHealth(damage);
 	}
-	
-	
+
+
 	public String printPosition(int x, int y)
 	{
 		return list[searchPosition(x,y)].toString();
 	}
-	
+
+	public String printInfoDebug(int i){
+
+	return list[i].printInfo();
+	}
+
 	public boolean checkWinnerZombie(int i) {
 		return list[i].getY() == 0;
 	}
-	
+
 	//metodo privado para buscar en la lista
 	private int searchPosition(int x,int y) {
 		int i=0;
@@ -82,11 +87,11 @@ public class GameObjectList {
 		}
 		return i;
 	}
-	
+
 	public int getContador() {
 		return contador;
 	}
-	
+
 	public int getYPosition(int i)
 	{
 		return list[i].getY();
