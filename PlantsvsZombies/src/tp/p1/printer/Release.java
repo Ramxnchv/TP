@@ -1,9 +1,12 @@
 package tp.p1.printer;
 
 import tp.p1.game.Game;
+import tp.p1.util.MyStringUtils;
 
 public class Release extends BoardPrinter {
 
+	private String[][] board;
+	
 	public Release(Game game, int dimX, int dimY) {
 		super(game,dimX,dimY);
 	}
@@ -42,7 +45,7 @@ public class Release extends BoardPrinter {
 				}
 				str.append(lineDelimiter);
 		}
-		return str.toString();
+		return game.printPromptRelease()+"\n"+str.toString();
 	}
 
 }

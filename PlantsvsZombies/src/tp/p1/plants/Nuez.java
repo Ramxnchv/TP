@@ -28,7 +28,7 @@ public class Nuez extends Plant {
 	}
 
 	public String printInfo() {
-	String str = "N [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ " ]";
+	String str = "N [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ "0 ]";
 	
 	return str;
 	}

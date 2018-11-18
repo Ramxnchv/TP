@@ -35,5 +35,9 @@ public abstract class Zombie extends GameObject{
 			}
 		}
 	}
+	
+	protected int timeToNextAction() {
+		return frequency-internalCycle;
+	}
 }
 

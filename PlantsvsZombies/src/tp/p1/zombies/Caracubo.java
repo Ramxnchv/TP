@@ -23,7 +23,7 @@ public class Caracubo extends Zombie {
 	}
 
 	public String printInfo() {
-	String str = "W [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ " ]";
+	String str = "W [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ timeToNextAction() + " ]";
 
 	return str;
 	}

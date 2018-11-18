@@ -1,7 +1,5 @@
 package tp.p1.game;
 
-import tp.p1.plants.*;
-
 public class SunCoinManager {
 	private Game game;
 	private int sunCoins;

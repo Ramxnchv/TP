@@ -21,7 +21,7 @@ public class ZombieComun extends Zombie {
 	}
 
 	public String printInfo() {
-	String str = "Z [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ " ]";
+	String str = "Z [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ timeToNextAction() + " ]";
 
 	return str;
 	}

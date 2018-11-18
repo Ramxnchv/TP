@@ -23,7 +23,7 @@ public class Deportista extends Zombie{
 		return str;
 	}
 	public String printInfo() {
-	String str = "X [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ " ]";
+	String str = "X [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ timeToNextAction() + " ]";
 
 	return str;
 	}

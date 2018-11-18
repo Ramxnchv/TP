@@ -39,9 +39,13 @@ public class PetaCereza extends Plant {
 		return damage;
 	}
 	public String printInfo() {
-	String str = "C [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ " ]";
+	String str = "C [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ timeToNextAction() + " ]";
 
 	return str;
+	}
+	
+	private int timeToNextAction() {
+		return frequency-internalCycle;
 	}
 
 }

@@ -24,7 +24,7 @@ public class PrintModeCommand extends Command {
 		else {
 			gp=new Release(game,x,y);
 		}
-		
+		game.setGamePrinter(gp);
 	}
 	
 	public Command parse(String[] commandWords, Controller controller) {

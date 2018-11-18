@@ -35,7 +35,7 @@ public class PeaShooter extends Plant {
 	}
 
 	public String printInfo() {
-	String str = "P [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ " ]";
+	String str = "P [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ "1 ]";
 
 	return str;
 	}

@@ -33,8 +33,12 @@ public class SunFlower extends Plant {
 	}
 
 	public String printInfo() {
-	String str = "S [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ " ]";
+	String str = "S [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ timeToNextAction() + " ]";
 
 	return str;
+	}
+	
+	public int timeToNextAction() {
+		return frequency-internalCycle;
 	}
 }

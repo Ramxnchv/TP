@@ -41,7 +41,7 @@ public class PlantsVsZombies {
 			}
 			
 			rand= new Random(seed);
-			Game game = new Game(level,rand);
+			Game game = new Game(level,rand,(int)seed);
 			Controller controller = new Controller(game,scanner);
 			System.out.println("Random seed used: "+(int)seed);
 			controller.run();
