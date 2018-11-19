@@ -7,10 +7,12 @@ public abstract class Plant extends GameObject {
 	
 	public Plant(int x, int y,int healthPoints, int frequency,int cost, Game game) {
 		super(x,y,healthPoints,frequency,game);
-		this.cost=cost;
+		Plant.cost=cost;
 	}
 	
 	public abstract void update();
+	
+	public abstract String printInfo();
 		
 	public static int getCost() {
 		return cost;

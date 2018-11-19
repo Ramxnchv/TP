@@ -13,15 +13,15 @@ public class ZombieFactory {
 		};
 	
 	//Por si lo añadimos nosotros
-	public static Zombie getZombie (String zombieName) {
+	public static Zombie getZombie (String zombieName,int x,int y,Game game) {
 		Zombie z;
-		if(zombieName.equals("caracubo")||zombieName.equals("w")) {
-			z=new Caracubo();
+		if(zombieName.equals("Caracubo")||zombieName.equals("w")) {
+			z=new Caracubo(x,y,game);
 		}
-		else if(zombieName.equals("deportista")||zombieName.equals("x")) {
-			z=new Deportista();
+		else if(zombieName.equals("Deportista")||zombieName.equals("x")) {
+			z=new Deportista(x,y,game);
 		} else {
-			z=new ZombieComun();
+			z=new ZombieComun(x,y,game);
 		}
 		return z;
 	}
@@ -39,9 +39,9 @@ public class ZombieFactory {
 		
 		StringBuilder sb = new StringBuilder();
 		
-		String caraCubo = "Name: Caracubo - Health: 8 - Frecuencia: 4 - Daño: 1 - Speed: 1"; 
-		String Deportista = "Name: Deportista - Health: 2 - Frequency: 1 - Damage: 1 - Speed: 1"; 
-		String ZombieComun = "Name: Zombie Comun - Health: 5 - Frecuencia: 1 - Daño: 1 - Velocidad: 1"; 
+		String caraCubo = "Name: Caracubo - Health: "+avaiableZombies[0].getHealthPoints()+" - Frecuencia:"+avaiableZombies[0].getFrequency()+"- Daño:"+avaiableZombies[0].getDamage()+" - Speed:"+avaiableZombies[0].getSpeed(); 
+		String Deportista = "Name: Caracubo - Health: "+avaiableZombies[1].getHealthPoints()+" - Frecuencia:"+avaiableZombies[1].getFrequency()+"- Daño:"+avaiableZombies[1].getDamage()+" - Speed:"+avaiableZombies[1].getSpeed(); 
+		String ZombieComun = "Name: Caracubo - Health: "+avaiableZombies[2].getHealthPoints()+" - Frecuencia:"+avaiableZombies[2].getFrequency()+"- Daño:"+avaiableZombies[2].getDamage()+" - Speed:"+avaiableZombies[2].getSpeed(); 
 		
 		sb.append(caraCubo).append("\n!").append(Deportista).append("\n").append(ZombieComun).append("\n");
 		

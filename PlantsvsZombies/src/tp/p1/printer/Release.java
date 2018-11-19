@@ -9,6 +9,7 @@ public class Release extends BoardPrinter {
 	
 	public Release(Game game, int dimX, int dimY) {
 		super(game,dimX,dimY);
+		encodeGame(game);
 	}
 
 	public void encodeGame(Game game) {

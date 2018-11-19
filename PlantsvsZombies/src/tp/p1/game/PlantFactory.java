@@ -12,19 +12,19 @@ public class PlantFactory {
 		new Nuez()
 	};
 
-	public static Plant getPlant (String plantName) {
+	public static Plant getPlant (String plantName,int x,int y,Game game) {
 		Plant p;
 		if(plantName.equals("peashooter")||plantName.equals("p")) {
-			p=new PeaShooter();
+			p=new PeaShooter(x,y,game);
 		}
 		else if(plantName.equals("sunflower")||plantName.equals("s")) {
-			p=new SunFlower();
+			p=new SunFlower(x,y,game);
 		}
 		else if(plantName.equals("petacereza")||plantName.equals("c")) {
-			p=new PetaCereza();
+			p=new PetaCereza(x,y,game);
 		}
 		else {
-			p=new Nuez();
+			p=new Nuez(x,y,game);
 		}
 		return p;
 	}

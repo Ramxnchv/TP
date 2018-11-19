@@ -6,6 +6,7 @@ import tp.p1.command.CommandParser;
 import tp.p1.lists.*;
 import tp.p1.objects.Plant;
 import tp.p1.plants.*;
+import tp.p1.printer.Debug;
 import tp.p1.printer.GamePrinter;
 import tp.p1.printer.Release;
 import tp.p1.zombies.ZombieManager;
@@ -22,6 +23,7 @@ public class Game {
 	private SunCoinManager suncoins;
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
+	private String printMode;
 	private final int FILAS=4;
 	private final int COLUMNAS=8;
 
@@ -61,6 +63,7 @@ public class Game {
 		zombieList =new GameObjectList();
 		plantList=new GameObjectList();
 		numCiclos=0;
+		this.printMode="Release";
 		this.gamePrinter=new Release(this,FILAS,COLUMNAS);
 		this.suncoins=new SunCoinManager(this);
 		suncoins.setSunCoins(50);
@@ -69,10 +72,17 @@ public class Game {
 
 
 	//PRINT GAME
-	public String toString() {
-		return gamePrinter.toString();
+	
+	public void draw() {
+		if(printMode.equals("Release")) {
+			this.gamePrinter=new Release(this,FILAS,COLUMNAS);
+		}
+		else {
+			this.gamePrinter=new Debug(this,FILAS,COLUMNAS);
+		}
+		System.out.println(gamePrinter.printGame(this));
 	}
-
+	
 	public String printPromptRelease() {
 		StringBuilder sb= new StringBuilder();
 		String salida1="Number of cycles: "+numCiclos;
@@ -88,14 +98,8 @@ public class Game {
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
 		String salida4="\nLevel: "+level;
 		String salida5="\nSeed: "+seed;
-		return sb.append(salida1).append(salida2).append(salida3).toString();
+		return sb.append(salida1).append(salida2).append(salida3).append(salida4).append(salida5).toString();
 	}
-
-	public void draw() {
-
-		System.out.println(gamePrinter.printGame(this));
-	}
-
 
 	public String getObject(int x, int y)
 	{
@@ -113,6 +117,15 @@ public class Game {
 			str = " ";
 		}
 		return str;
+	}
+	
+	public void changePrintMode(String mode) {
+		if(mode.equals("Release")) {
+			printMode="Release";
+		}
+		else {
+			printMode="Debug";
+		}
 	}
 
 	public String getPlantInfo(int i) {
@@ -245,7 +258,7 @@ public String getZombieInfo(int i) {
 
 	public void addZombie(int x, int y,String tipoZombie) {
 
-		Zombie z = ZombieFactory.getZombie(tipoZombie);
+		Zombie z = ZombieFactory.getZombie(tipoZombie,x,y,this);
 		zombieList.Add(x, y, z,this);
 	}
 

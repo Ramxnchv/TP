@@ -17,7 +17,7 @@ public class Controller {
 		this.game=game;
 		this.in=in;
 		exit=false;
-
+		noPrint=false;
 	}
 
 
@@ -25,7 +25,11 @@ public class Controller {
 
 		String unknownCommandMsg="Comando incorrecto";
 		while (game.isNotFinished() && !exit) {
+			if(!noPrint) {
 			game.draw();
+			}
+			noPrint=false;
+			System.out.println("Command >");
 			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
 			Command command = CommandParser.parseCommand(words, this);
 			if (command != null) {
@@ -40,8 +44,19 @@ public class Controller {
 		if(exit) {
 			System.out.println("Thanks for playing Plants vs Zombies");
 		}
+		else if(game.checkWinnerZombie()) {
+			System.out.println("Zombies win");
+		}
+		else {
+			System.out.println("Plants win");
+		}
 	}
+	
+	
+	
 
+		//metodos para controlar print y exit
+	
 		public boolean isExit() {
 			return exit;
 		}
@@ -55,8 +70,8 @@ public class Controller {
 		}
 
 
-		public void setNoPrintGameState(boolean noPrint) {
-			this.noPrint = false;
+		public void setNoPrintGameState() {
+			this.noPrint = true;
 		}
 
 }

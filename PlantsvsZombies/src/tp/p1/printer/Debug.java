@@ -13,7 +13,8 @@ public class Debug extends BoardPrinter{
 		int totalObjects = dimX*dimY;
 		objectsArray = new String [totalObjects] ;
 		cont=0;
-	}
+		encodeGame(game);
+		}
 
 	public void encodeGame(Game game) {
 

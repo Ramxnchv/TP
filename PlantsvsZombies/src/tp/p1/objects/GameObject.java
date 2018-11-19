@@ -48,4 +48,11 @@ public abstract class GameObject {
 	public void setHealthPoints(int healthPoints) {
 		this.healthPoints = healthPoints;
 	}
+
+	public int getFrequency() {
+		return frequency;
+	}
+	
+	
+	
 }

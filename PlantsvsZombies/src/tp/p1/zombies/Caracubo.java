@@ -27,4 +27,5 @@ public class Caracubo extends Zombie {
 
 	return str;
 	}
+	
 }
