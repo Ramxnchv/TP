@@ -6,19 +6,20 @@ import tp.p1.command.*;
 
 
 public class Controller {
-	
+
 	private Game game;
 	private Scanner in;
 	private boolean exit;
-	
-	
+	private boolean noPrint;
+
+
 	public Controller(Game game,Scanner in) {
 		this.game=game;
 		this.in=in;
 		exit=false;
-	
+
 	}
-	
+
 
 	public void run() {
 
@@ -35,16 +36,12 @@ public class Controller {
 				setNoPrintGameState();
 			}
 		}
-		
+
 		if(exit) {
 			System.out.println("Thanks for playing Plants vs Zombies");
 		}
 	}
-		
-		private void setNoPrintGameState() {
-		
-		}
-		
+
 		public boolean isExit() {
 			return exit;
 		}
@@ -52,6 +49,14 @@ public class Controller {
 		public void setExit(boolean exit) {
 			this.exit = exit;
 		}
-		
-}
 
+		public boolean getNoPrintGameState() {
+			return noPrint;
+		}
+
+
+		public void setNoPrintGameState(boolean noPrint) {
+			this.noPrint = false;
+		}
+
+}

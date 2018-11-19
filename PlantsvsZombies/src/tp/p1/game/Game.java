@@ -80,7 +80,7 @@ public class Game {
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
 		return sb.append(salida1).append(salida2).append(salida3).toString();
 	}
-	
+
 	public String printPromptDebug() {
 		StringBuilder sb= new StringBuilder();
 		String salida1="Number of cycles: "+numCiclos;
@@ -92,8 +92,10 @@ public class Game {
 	}
 
 	public void draw() {
-		gamePrinter.printGame(this);
+
+		System.out.println(gamePrinter.printGame(this));
 	}
+
 
 	public String getObject(int x, int y)
 	{
@@ -263,7 +265,10 @@ public String getZombieInfo(int i) {
 	{
 		if(comprobarDentroTablero(x, y) && checkEmpty(x,y)) {
 				//board update()
-				plantList.Add(x,y,plant,this); //IMPORTANTE: SEGUN EL DIAGRAMA HAY QUE PASAR POR BOARD update() primero
+				if(plantList.Add(x,y,plant,this)) {
+					addCycle();
+					decreaseSuncoins(Plant.getCost());
+				}
 			}
 
 	}
@@ -363,7 +368,7 @@ public String getZombieInfo(int i) {
 	public ZombieManager getZombieManager() {
 		return zombieManager;
 	}
-	
+
 	public void setGamePrinter(GamePrinter gamePrinter) {
 		this.gamePrinter = gamePrinter;
 	}
