@@ -37,8 +37,11 @@ public class SunFlower extends Plant {
 
 	return str;
 	}
-	
+
 	public int timeToNextAction() {
+		if(frequency == internalCycle) {
+			internalCycle = 0;
+		}
 		return frequency-internalCycle;
 	}
 }

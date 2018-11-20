@@ -7,16 +7,16 @@ public class Debug extends BoardPrinter{
 
 	private String[] objectsArray;
 	int cont;
-	
+
 	public Debug(Game game, int dimX, int dimY) {
 		super(game,dimX,dimY);
-		int totalObjects = dimX*dimY;
-		objectsArray = new String [totalObjects] ;
-		cont=0;
 		encodeGame(game);
 		}
 
 	public void encodeGame(Game game) {
+		int totalObjects = dimX*dimY;
+		objectsArray = new String [totalObjects] ;
+		cont=0;
 
 		for(int i = 0; i < game.getNumPlantasLista(); i++) {
 			objectsArray[cont] = game.getPlantInfo(i);
@@ -30,23 +30,23 @@ public class Debug extends BoardPrinter{
 
 		}
 
-	public String printGame(Game game) {
-		int cellSize = 7;
-		String vDelimiter = "|";
-		String hDelimiter = "-";
-		String rowDelimiter = MyStringUtils.repeat(hDelimiter, (dimY * (cellSize + 1)) - 1);
-		
-		StringBuilder sb=new StringBuilder();
-		
-		sb.append(rowDelimiter);
-		
-		for(int i=0;i<cont;i++) {
-			
-			sb.append(vDelimiter).append(space).append(objectsArray[i]).append(space);
+		public String printGame(Game game) {
+			int cellSize = 7;
+			String vDelimiter = "|";
+			String hDelimiter = "-";
+			String rowDelimiter = MyStringUtils.repeat(hDelimiter, (dimY * (30 + 1)) - 1);
+
+			StringBuilder sb=new StringBuilder();
+
+			sb.append(rowDelimiter).append("\n");
+
+			for(int i=0;i<cont;i++) {
+
+				sb.append(vDelimiter).append(space).append(objectsArray[i]).append(space);
+			}
+
+			sb.append("\n").append(rowDelimiter);
+
+			return game.printPromptDebug()+"\n"+sb.toString();
 		}
-		
-		sb.append(vDelimiter).append(rowDelimiter);
-		
-		return game.printPromptDebug()+"\n"+sb.toString();
-	}
 }

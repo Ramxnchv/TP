@@ -24,10 +24,7 @@ public class Controller {
 	public void run() {
 
 		String unknownCommandMsg="Comando incorrecto";
-		while (game.isNotFinished() && !exit) {
-			if(!noPrint) {
-			game.draw();
-			}
+		while (game.isNotFinished(noPrint) && !exit) {
 			noPrint=false;
 			System.out.println("Command >");
 			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
@@ -51,12 +48,12 @@ public class Controller {
 			System.out.println("Plants win");
 		}
 	}
-	
-	
-	
+
+
+
 
 		//metodos para controlar print y exit
-	
+
 		public boolean isExit() {
 			return exit;
 		}

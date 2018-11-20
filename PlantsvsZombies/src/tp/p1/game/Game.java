@@ -72,7 +72,7 @@ public class Game {
 
 
 	//PRINT GAME
-	
+
 	public void draw() {
 		if(printMode.equals("Release")) {
 			this.gamePrinter=new Release(this,FILAS,COLUMNAS);
@@ -82,7 +82,7 @@ public class Game {
 		}
 		System.out.println(gamePrinter.printGame(this));
 	}
-	
+
 	public String printPromptRelease() {
 		StringBuilder sb= new StringBuilder();
 		String salida1="Number of cycles: "+numCiclos;
@@ -118,7 +118,7 @@ public class Game {
 		}
 		return str;
 	}
-	
+
 	public void changePrintMode(String mode) {
 		if(mode.equals("Release")) {
 			printMode="Release";
@@ -137,7 +137,7 @@ public class Game {
 
 public String getZombieInfo(int i) {
 
-	String str = plantList.printInfoDebug(i);
+	String str = zombieList.printInfoDebug(i);
 
 	return str;
 }
@@ -147,7 +147,7 @@ public String getZombieInfo(int i) {
 	//ATTACK ZOMBIES Y PLANTAS
 
 	public void attackZombie(String plantName,int x,int y) {
-		if(plantName.equals("PeaShooter")) {
+		if(plantName.equals("Peashooter")) {
 			int i = 0;
 			//recorremos las columnas en busca de un zombie
 			while (i < COLUMNAS && !zombieList.checkObject(x, i))
@@ -202,8 +202,11 @@ public String getZombieInfo(int i) {
 
 	//CHECK FINAL PARTIDA
 
-	public boolean isNotFinished() {
-		update();
+	public boolean isNotFinished(boolean noPrint) {
+		if(!noPrint) {
+			update();
+			draw();
+		}
 		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
 	}
 
