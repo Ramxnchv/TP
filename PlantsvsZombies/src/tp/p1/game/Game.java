@@ -277,15 +277,23 @@ public String getZombieInfo(int i) {
 
 
 	//ANIADIR PLANTAS
-	public void addPlantToGame(Plant plant, int x, int y)
+	public boolean addPlantToGame(Plant plant, int x, int y)
 	{
+		boolean added = false;
 		if(comprobarDentroTablero(x, y) && checkEmpty(x,y)) {
 				//board update()
 				if(plantList.Add(x,y,plant,this)) {
 					addCycle();
+					System.out.println("El coste es: " + Plant.getCost());
 					decreaseSuncoins(Plant.getCost());
+					added = true;
 				}
+			} else {
+				System.out.println("Plant can't be added");
+				added = false;
 			}
+
+		return added;
 
 	}
 
@@ -304,21 +312,9 @@ public String getZombieInfo(int i) {
 
 
 	//SUNCOINS
-	public boolean enoughMoney(String plantName) {
-		boolean enough;
-		if (plantName.equals("peashooter") && (suncoins.getSunCoins() >= PeaShooter.getCost())) {
-			enough = true;
-		} else if (plantName.equals("petacereza") && (suncoins.getSunCoins() >= PetaCereza.getCost())){
-			enough = true;
-		} else if (plantName.equals("sunflower") && (suncoins.getSunCoins() >= SunFlower.getCost())) {
-			enough = true;
-		} else if (plantName.equals("nuez") && (suncoins.getSunCoins() >= Nuez.getCost())) {
-			enough = true;
-		} else {
-			enough = false;
-		}
+	public boolean enoughMoney(int plantCost) {
 
-		return enough;
+		return suncoins.getSunCoins() >= plantCost;
 
 	}
 

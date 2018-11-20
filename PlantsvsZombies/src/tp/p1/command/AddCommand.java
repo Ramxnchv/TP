@@ -46,16 +46,20 @@ public class AddCommand extends Command {
 	}
 
 	public void execute(Game game, Controller controller) {
-		
-		//No se puede comparar nombre de objetos con Strings.. a no ser que lo compares aqui :)
-		if(game.enoughMoney(this.getPlant())){
-			Plant plant = PlantFactory.getPlant(this.getPlant(),x,y,game);
-			
-			game.addPlantToGame(plant, this.getX(), this.getY());
-			
+
+		Plant plant = PlantFactory.getPlant(this.getPlant(),x,y,game);
+		if(game.enoughMoney(Plant.getCost())){
+			if(!game.addPlantToGame(plant, this.getX(), this.getY())){
+				controller.setNoPrintGameState();
+			}
+
+		} else {
+			System.out.println("You don't have enough coins");
+			controller.setNoPrintGameState();
 		}
-		
+
 	}
+
 
 
 	public String getPlant() {
