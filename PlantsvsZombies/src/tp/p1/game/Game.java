@@ -29,6 +29,7 @@ public class Game {
 	private String printMode;
 	private final int FILAS=4;
 	private final int COLUMNAS=8;
+		private boolean sameCycle = false;
 
 	//CONSTRUCTOR
 	public Game(LEVEL level,Random rand,int seed) {
@@ -40,18 +41,23 @@ public class Game {
 
 	//UPDATE Y CICLOS
 	private void update() {
-		
-		//generar soles aleatorios
-		sunManager.update();
-		//actualizar plantas
-		plantList.update();
 
-		//avanzar y atacar zombies
-		zombieList.update();
-		
 
-		//limpiar sin vida
-		this.eliminarSinVida();
+		if(!isSameCycle()) {
+
+			//genera soles aleatorios
+			sunManager.update();
+
+			//actualizar plantas
+			plantList.update();
+
+			//avanzar y atacar zombies
+			zombieList.update();
+
+
+			//limpiar sin vida
+			this.eliminarSinVida();
+		}
 	}
 
 	public void eliminarSinVida() {
@@ -142,11 +148,11 @@ public class Game {
 
 	return str;
 	}
-	
+
 	public String positionToString(int i,int j) {
 		String sunString="";
 		String str;
-		
+
 		if(sunManager.checkSun(i,j)) {
 			sunString = sunManager.positionToString(i, j);
 		}
@@ -161,7 +167,7 @@ public class Game {
 		else {
 			str = " ";
 		}
-	
+
 		return str + sunString;
 	}
 
@@ -321,7 +327,7 @@ public String getZombieInfo(int i) {
 				System.out.println("Plant can't be added");
 				added = false;
 			}
-		
+
 		return added;
 
 	}
@@ -347,11 +353,11 @@ public String getZombieInfo(int i) {
 
 	}
 	public void addSun(int x, int y) {
-		
+
 		sunManager.Add(x, y);
 
 	}
-	
+
 	public boolean catchSun(int x,int y) {
 		return sunManager.catchSun(x, y);
 	}
@@ -433,5 +439,14 @@ public String getZombieInfo(int i) {
 
 		return plantList.getContador();
 	}
-	
+
+	public boolean isSameCycle()
+	{
+		return sameCycle;
+	}
+
+	public void setSameCycle(boolean cycle) {
+		this.sameCycle = cycle;
+	}
+
 }

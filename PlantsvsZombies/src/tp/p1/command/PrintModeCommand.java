@@ -29,6 +29,7 @@ public class PrintModeCommand extends Command {
 		game.setGamePrinter(gp);
 		game.draw();
 		controller.setNoPrintGameState();
+		game.setSameCycle(true);
 	}
 
 	public Command parse(String[] commandWords, Controller controller) {

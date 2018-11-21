@@ -11,6 +11,7 @@ public class HelpCommand extends NoParamsCommand {
 	public void execute(Game game, Controller controller) {
 		Game.commandHelp();
 		controller.setNoPrintGameState();
+		game.setSameCycle(true);
 	}
 
 

@@ -11,6 +11,7 @@ public class NoneCommand extends NoParamsCommand{
 
 	public void execute(Game game, Controller controller) {
 		game.executeNoneCommand();
+		game.setSameCycle(false);
 	}
 
 

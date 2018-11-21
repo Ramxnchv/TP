@@ -4,14 +4,14 @@ import tp.p1.game.Controller;
 import tp.p1.game.Game;
 
 public class CatchCommand extends Command {
-	
+
 	private int x;
 	private int y;
-	
+
 	public CatchCommand() {
 		super("Catch","C","Catch <x> <y>: Catches a sun in position x, y.");
 	}
-	
+
 	public Command parse(String[] commandWords, Controller controller) {
 		Command c = null;
 		//AddCommand add = new AddCommand();
@@ -28,8 +28,14 @@ public class CatchCommand extends Command {
 	}
 
 	public void execute(Game game, Controller controller) {
-		if(!game.catchSun(x, y)) {
-			System.out.println("Can't find a sun in that position,try again");
+		if(!game.isSameCycle()) {
+			game.setSameCycle(true);
+			if(!game.catchSun(x, y)) {
+				System.out.println("Can't find a sun in that position or you're in the same cycle,try again");
+				controller.setNoPrintGameState();
+			}
+		} else {
+			System.out.println("You already caught one sun: you can't get more than 1");
 			controller.setNoPrintGameState();
 		}
 	}
@@ -49,5 +55,5 @@ public class CatchCommand extends Command {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
+
 }
