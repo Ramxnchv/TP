@@ -9,7 +9,7 @@ public class SunManager {
 	private PassiveGameObjectsList suns;
 	private Game game;
 	private int sunCoins;
-
+	
 	public SunManager(Game game) {
 		this.game = game;
 		suns=new PassiveGameObjectsList();
@@ -21,21 +21,22 @@ public class SunManager {
 			int x = game.getRand().nextInt(game.getFILAS());
 			
 			int y = game.getRand().nextInt(game.getCOLUMNAS());
-			while(!suns.isPositionEmpty(x,y)) {
+			while(!suns.isPositionEmpty(x,y)&&suns.isnotFull()) {
 				x = game.getRand().nextInt(game.getCOLUMNAS());
 				y = game.getRand().nextInt(game.getFILAS());
 			}
+			if(!suns.isnotFull()) {
+				Sun sun = new Sun(x, y, game);
+				suns.Add(sun);
+			}
 			
-			Sun sun = new Sun(x, y, game);
-			
-			suns.Add(sun);
 		}
 	}
 	
 	//aniadir sun de un sunflower
 	public void Add(int x, int y) {
-		Sun sun = new Sun(x, y, game);
 		if(suns.isPositionEmpty(x, y)) {
+			Sun sun = new Sun(x, y, game);
 			sun.setPosition(x, y);
 			suns.Add(sun);
 		}

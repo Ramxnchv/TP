@@ -49,7 +49,7 @@ public class PassiveGameObjectsList {
 		
 		int i=0;
 		boolean empty=true;
-		while(i<contador&&empty) {
+		while(i<contador&&empty!=false) {
 			if((list[i].getX()==x)&&(list[i].getY()==y)) {
 				empty=false;
 			}
@@ -94,6 +94,9 @@ public class PassiveGameObjectsList {
 		}
 		return encontrado;
 	}
-	
+
+	public boolean isnotFull() {
+		return contador<BOARD_SIZE-1;
+	}
 	
 }
