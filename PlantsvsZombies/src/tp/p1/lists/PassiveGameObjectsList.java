@@ -39,7 +39,7 @@ public class PassiveGameObjectsList {
 	
 	public PassiveGameObject getPosition(int x,int y) {
 		PassiveGameObject object=null;
-		if(!isPositionEmpty(x,y)) {
+		if(checkObject(x,y)) {
 			object=list[searchPosition(x,y)];
 		}
 		return object;
