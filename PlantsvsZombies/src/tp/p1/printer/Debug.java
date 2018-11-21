@@ -31,10 +31,10 @@ public class Debug extends BoardPrinter{
 		}
 
 		public String printGame(Game game) {
-			int cellSize = 7;
+			int cellSize = 22;
 			String vDelimiter = "|";
 			String hDelimiter = "-";
-			String rowDelimiter = MyStringUtils.repeat(hDelimiter, (dimY * (30 + 1)) - 1);
+			String rowDelimiter = MyStringUtils.repeat(hDelimiter, (cont * (cellSize+1)) );
 
 			StringBuilder sb=new StringBuilder();
 

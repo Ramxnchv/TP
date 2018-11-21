@@ -283,9 +283,11 @@ public String getZombieInfo(int i) {
 		if(comprobarDentroTablero(x, y) && checkEmpty(x,y)) {
 				//board update()
 				if(plantList.Add(x,y,plant,this)) {
-					addCycle();
-					System.out.println("El coste es: " + Plant.getCost());
 					decreaseSuncoins(Plant.getCost());
+					//computer action
+					this.addZombieAction();
+					addCycle();
+					
 					added = true;
 				}
 			} else {

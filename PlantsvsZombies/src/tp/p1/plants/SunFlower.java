@@ -20,9 +20,10 @@ public class SunFlower extends Plant {
 	}
 
 	public void update() {
-		if((internalCycle != 0) && (internalCycle%frequency==0))
+		if((internalCycle != 0) && (internalCycle%frequency==0)) {
 			game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()+cantidadRecolectada);
-		this.internalCycle+=1;
+		}
+		this.internalCycle++;
 	}
 
 	public String toString()
