@@ -46,20 +46,19 @@ public class AddCommand extends Command {
 	}
 
 	public void execute(Game game, Controller controller) {
-
+		
 		Plant plant = PlantFactory.getPlant(this.getPlant(),x,y,game);
 		if(game.enoughMoney(Plant.getCost())){
 			if(!game.addPlantToGame(plant, this.getX(), this.getY())){
 				controller.setNoPrintGameState();
 			}
-
+			
 		} else {
 			System.out.println("You don't have enough coins");
 			controller.setNoPrintGameState();
 		}
-
+		
 	}
-
 
 
 	public String getPlant() {

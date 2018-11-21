@@ -18,7 +18,7 @@ public class Release extends BoardPrinter {
 			for(int j = 0; j < dimY; j++) {
 
 				board[i][j] =  space;
-				board[i][j] = game.getObject(i, j);
+				board[i][j] = game.positionToString(i, j);
 				// TODO Fill the board with simulation objects
 
 			}
@@ -46,6 +46,7 @@ public class Release extends BoardPrinter {
 				}
 				str.append(lineDelimiter);
 		}
+		
 		return game.printPromptRelease()+"\n"+str.toString();
 	}
 

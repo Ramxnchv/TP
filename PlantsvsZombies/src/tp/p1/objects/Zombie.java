@@ -2,7 +2,7 @@ package tp.p1.objects;
 
 import tp.p1.game.Game;
 
-public abstract class Zombie extends GameObject{
+public abstract class Zombie extends ActiveGameObject{
 	protected int damage;
 	protected int internalCycle;
 	protected int speed;
@@ -37,7 +37,7 @@ public abstract class Zombie extends GameObject{
 	}
 
 	protected int timeToNextAction() {
-		if(frequency == internalCycle) {
+		if(frequency-internalCycle==-1) {
 			internalCycle = 0;
 		}
 		return frequency-internalCycle;

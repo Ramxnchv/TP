@@ -5,8 +5,6 @@ import tp.p1.objects.Plant;
 
 public class SunFlower extends Plant {
 	private int internalCycle;
-	private final int cantidadRecolectada = 10;
-
 
 	public SunFlower(int x,int y, Game game) {
 		//x,y,healthPoints,frequency,cost,game
@@ -20,10 +18,10 @@ public class SunFlower extends Plant {
 	}
 
 	public void update() {
-		if((internalCycle != 0) && (internalCycle%frequency==0)) {
-			game.getSuncoins().setSunCoins(game.getSuncoins().getSunCoins()+cantidadRecolectada);
+		internalCycle++;
+		if(timeToNextAction() == 0) {
+			game.addSun(x,y);
 		}
-		this.internalCycle++;
 	}
 
 	public String toString()
@@ -40,9 +38,11 @@ public class SunFlower extends Plant {
 	}
 
 	public int timeToNextAction() {
-		if(frequency == internalCycle) {
+		if(frequency-internalCycle == -1) {
 			internalCycle = 0;
 		}
 		return frequency-internalCycle;
 	}
+	
+	
 }

@@ -5,12 +5,15 @@ import java.util.Random;
 import tp.p1.command.CommandParser;
 import tp.p1.lists.*;
 import tp.p1.objects.Plant;
+import tp.p1.objects.Sun;
 import tp.p1.plants.*;
 import tp.p1.printer.Debug;
 import tp.p1.printer.GamePrinter;
 import tp.p1.printer.Release;
+import tp.p1.suns.SunManager;
 import tp.p1.zombies.ZombieManager;
 import tp.p1.objects.Zombie;
+import tp.p1.suns.SunManager;
 
 public class Game {
 	//ATRIBUTOS
@@ -20,9 +23,9 @@ public class Game {
 	private Random rand;
 	private int seed;
 	private int numCiclos;
-	private SunCoinManager suncoins;
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
+	private SunManager sunManager;
 	private String printMode;
 	private final int FILAS=4;
 	private final int COLUMNAS=8;
@@ -37,11 +40,15 @@ public class Game {
 
 	//UPDATE Y CICLOS
 	private void update() {
+		
+		//generar soles aleatorios
+		sunManager.update();
 		//actualizar plantas
 		plantList.update();
 
 		//avanzar y atacar zombies
 		zombieList.update();
+		
 
 		//limpiar sin vida
 		this.eliminarSinVida();
@@ -62,12 +69,13 @@ public class Game {
 	public void inicializar() {
 		zombieList =new GameObjectList();
 		plantList=new GameObjectList();
+		this.sunManager=new SunManager(this);
 		numCiclos=0;
 		this.printMode="Release";
 		this.gamePrinter=new Release(this,FILAS,COLUMNAS);
-		this.suncoins=new SunCoinManager(this);
-		suncoins.setSunCoins(50);
+		sunManager.setSunCoins(50);
 		this.zombieManager=new ZombieManager(this);
+
 	}
 
 
@@ -86,7 +94,7 @@ public class Game {
 	public String printPromptRelease() {
 		StringBuilder sb= new StringBuilder();
 		String salida1="Number of cycles: "+numCiclos;
-		String salida2="\nSun coins: "+suncoins.getSunCoins();
+		String salida2="\nSun coins: "+sunManager.getSunCoins();
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
 		return sb.append(salida1).append(salida2).append(salida3).toString();
 	}
@@ -94,7 +102,7 @@ public class Game {
 	public String printPromptDebug() {
 		StringBuilder sb= new StringBuilder();
 		String salida1="Number of cycles: "+numCiclos;
-		String salida2="\nSun coins: "+suncoins.getSunCoins();
+		String salida2="\nSun coins: "+sunManager.getSunCoins();
 		String salida3="\nRemaining zombies: "+zombieManager.getZombiesRestantes();
 		String salida4="\nLevel: "+level;
 		String salida5="\nSeed: "+seed;
@@ -133,6 +141,28 @@ public class Game {
 	String str = plantList.printInfoDebug(i);
 
 	return str;
+	}
+	
+	public String positionToString(int i,int j) {
+		String sunString="";
+		String str;
+		
+		if(sunManager.checkSun(i,j)) {
+			sunString = sunManager.positionToString(i, j);
+		}
+		if(plantList.checkObject(i, j))
+		{
+			str = plantList.printPosition(i, j);
+		}
+		else if (zombieList.checkObject(i, j))
+		{
+			str = zombieList.printPosition(i, j);
+		}
+		else {
+			str = " ";
+		}
+	
+		return str + sunString;
 	}
 
 public String getZombieInfo(int i) {
@@ -283,18 +313,16 @@ public String getZombieInfo(int i) {
 		if(comprobarDentroTablero(x, y) && checkEmpty(x,y)) {
 				//board update()
 				if(plantList.Add(x,y,plant,this)) {
-					decreaseSuncoins(Plant.getCost());
-					//computer action
-					this.addZombieAction();
 					addCycle();
-					
+					System.out.println("El coste es: " + Plant.getCost());
+					decreaseSuncoins(Plant.getCost());
 					added = true;
 				}
 			} else {
 				System.out.println("Plant can't be added");
 				added = false;
 			}
-
+		
 		return added;
 
 	}
@@ -316,14 +344,14 @@ public String getZombieInfo(int i) {
 	//SUNCOINS
 	public boolean enoughMoney(int plantCost) {
 
-		return suncoins.getSunCoins() >= plantCost;
+		return sunManager.getSunCoins() >= plantCost;
 
 	}
 
 	public void decreaseSuncoins(int cost)
 	{
 
-		suncoins.decreaseSuncoins(cost);
+		sunManager.decreaseSuncoins(cost);
 	}
 
 
@@ -375,8 +403,8 @@ public String getZombieInfo(int i) {
 		this.numCiclos = numCiclos;
 	}
 
-	public SunCoinManager getSuncoins() {
-		return suncoins;
+	public SunManager getSuncoins() {
+		return sunManager;
 	}
 
 	public ZombieManager getZombieManager() {
@@ -396,5 +424,11 @@ public String getZombieInfo(int i) {
 	{
 
 		return plantList.getContador();
+	}
+	
+	public void addSun(int x, int y) {
+		
+		sunManager.Add(x, y);
+
 	}
 }

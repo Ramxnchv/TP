@@ -22,7 +22,6 @@ public class Controller {
 
 
 	public void run() {
-
 		String unknownCommandMsg="Comando incorrecto";
 		while (game.isNotFinished(noPrint) && !exit) {
 			noPrint=false;

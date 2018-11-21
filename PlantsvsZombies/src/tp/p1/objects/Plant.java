@@ -2,7 +2,7 @@ package tp.p1.objects;
 
 import tp.p1.game.Game;
 
-public abstract class Plant extends GameObject {
+public abstract class Plant extends ActiveGameObject {
 	private static int cost;
 	
 	public Plant(int x, int y,int healthPoints, int frequency,int cost, Game game) {

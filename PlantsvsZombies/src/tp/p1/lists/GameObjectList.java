@@ -4,15 +4,15 @@ import tp.p1.game.Game;
 import tp.p1.objects.*;
 
 public class GameObjectList {
-	private GameObject[] list;
+	private ActiveGameObject[] list;
 	private int contador=0;
 	private static final int BOARD_SIZE=32;
 
 	public GameObjectList() {
-		list=new GameObject[BOARD_SIZE];
+		list=new ActiveGameObject[BOARD_SIZE];
 	}
 
-	public boolean Add(int x, int y, GameObject object,Game game) {
+	public boolean Add(int x, int y, ActiveGameObject object,Game game) {
 		if(contador<BOARD_SIZE) {
 			list[contador]=object;
 			contador++;
