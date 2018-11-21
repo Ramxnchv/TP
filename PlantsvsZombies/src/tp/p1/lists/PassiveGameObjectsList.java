@@ -6,11 +6,12 @@ import tp.p1.objects.PassiveGameObject;
 public class PassiveGameObjectsList {
 	
 	private PassiveGameObject[] list;
-	private int contador=0;
+	private int contador;
 	private static final int BOARD_SIZE=32;
 	
 	public PassiveGameObjectsList() {
 		list=new PassiveGameObject[BOARD_SIZE];
+		contador=0;
 	}
 	
 	public boolean Add(PassiveGameObject object) {
@@ -19,7 +20,30 @@ public class PassiveGameObjectsList {
 			contador++;
 		}
 		return contador<BOARD_SIZE;
-}
+	}
+	
+	public void Delete(int pos) {
+		for(int i=pos;i<contador;i++) {
+				list[i]=list[i+1];
+				contador--;
+		}
+	}
+	
+	public void removeDeadGameObjects() {
+		for(int i=0;i<contador;i++) {
+			if(list[i].isCatched()) {
+				Delete(i);
+			}
+		}
+	}
+	
+	public PassiveGameObject getPosition(int x,int y) {
+		PassiveGameObject object=null;
+		if(!isPositionEmpty(x,y)) {
+			object=list[searchPosition(x,y)];
+		}
+		return object;
+	}
 	
 	public boolean isPositionEmpty(int x, int y) {
 		

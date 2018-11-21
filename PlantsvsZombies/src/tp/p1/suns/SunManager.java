@@ -49,6 +49,19 @@ public class SunManager {
 		return suns.printPosition(i).toString();
 	}
 	
+	public boolean catchSun(int x,int y) {
+		Sun sun= (Sun) suns.getPosition(x,y);
+		if(sun != null) {
+			sun.catchSun();
+			sunCoins+=10;
+			suns.removeDeadGameObjects();
+			return true;
+		}
+		else {
+		return false;
+		}
+	}
+	
 	public boolean checkSun(int x, int y) {
 		return suns.checkObject(x, y);
 	}

@@ -341,11 +341,20 @@ public String getZombieInfo(int i) {
 	}
 
 
-	//SUNCOINS
+	//SUNCOINS y SUNS
 	public boolean enoughMoney(int plantCost) {
 
 		return sunManager.getSunCoins() >= plantCost;
 
+	}
+	public void addSun(int x, int y) {
+		
+		sunManager.Add(x, y);
+
+	}
+	
+	public boolean catchSun(int x,int y) {
+		return sunManager.catchSun(x, y);
 	}
 
 	public void decreaseSuncoins(int cost)
@@ -426,9 +435,4 @@ public String getZombieInfo(int i) {
 		return plantList.getContador();
 	}
 	
-	public void addSun(int x, int y) {
-		
-		sunManager.Add(x, y);
-
-	}
 }

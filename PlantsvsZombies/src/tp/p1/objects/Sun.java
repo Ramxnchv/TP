@@ -4,8 +4,11 @@ import tp.p1.game.Game;
 
 public class Sun extends PassiveGameObject {
 
+	private boolean catched;
+	
 	public Sun(int x, int y, Game game) {
 		super(x, y, game);
+		catched=false;
 	}
 
 	public String printInfo() {
@@ -14,10 +17,17 @@ public class Sun extends PassiveGameObject {
 		
 		return str;
 	}
+	public void catchSun () {
+		catched=true;
+	}
 	
 	public void setPosition(int x, int y) {
 		setX(x);
 		setY(y);
 	}
 
+	public boolean isCatched() {
+		return catched;
+	}
+	
 }

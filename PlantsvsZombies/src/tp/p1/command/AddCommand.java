@@ -85,6 +85,4 @@ public class AddCommand extends Command {
 		this.y = y;
 	}
 
-
-
 }

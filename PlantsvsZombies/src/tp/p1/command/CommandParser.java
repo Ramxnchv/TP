@@ -11,6 +11,7 @@ public class CommandParser {
 		new ExitCommand(),
 		new ListCommand(),
 		new PrintModeCommand(),
+		new CatchCommand(),
 		new NoneCommand()
 
 	};
