@@ -25,7 +25,7 @@ public class SunManager {
 				x = game.getRand().nextInt(game.getCOLUMNAS());
 				y = game.getRand().nextInt(game.getFILAS());
 			}
-			if(!suns.isnotFull()) {
+			if(suns.isnotFull()) {
 				Sun sun = new Sun(x, y, game);
 				suns.Add(sun);
 			}
