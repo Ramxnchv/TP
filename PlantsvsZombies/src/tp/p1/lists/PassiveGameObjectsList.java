@@ -49,7 +49,7 @@ public class PassiveGameObjectsList {
 		
 		int i=0;
 		boolean empty=true;
-		while(i<contador&&!empty) {
+		while(i<contador&&empty) {
 			if((list[i].getX()==x)&&(list[i].getY()==y)) {
 				empty=false;
 			}

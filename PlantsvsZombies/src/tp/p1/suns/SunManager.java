@@ -1,16 +1,13 @@
 package tp.p1.suns;
 
 import tp.p1.game.Game;
-import tp.p1.objects.PassiveGameObject;
 import tp.p1.objects.Sun;
 import tp.p1.lists.PassiveGameObjectsList;
 
 public class SunManager {
 	
 	private PassiveGameObjectsList suns;
-	private int contador=0;
 	private Game game;
-	private static final int BOARD_SIZE=32;
 	private int sunCoins;
 
 	public SunManager(Game game) {
@@ -18,6 +15,7 @@ public class SunManager {
 		suns=new PassiveGameObjectsList();
 	}
 	
+	//crear sun cada 5 ciclos
 	public void update() {
 		if(game.getNumCiclos() != 0 && game.getNumCiclos()%5==0) {
 			int x = game.getRand().nextInt(game.getFILAS());
@@ -34,6 +32,7 @@ public class SunManager {
 		}
 	}
 	
+	//aniadir sun de un sunflower
 	public void Add(int x, int y) {
 		Sun sun = new Sun(x, y, game);
 		if(suns.isPositionEmpty(x, y)) {
@@ -44,7 +43,6 @@ public class SunManager {
 	
 	public String positionToString(int x, int y)
 	{
-		
 		int i = suns.searchPosition(x,  y);
 		return suns.printPosition(i).toString();
 	}

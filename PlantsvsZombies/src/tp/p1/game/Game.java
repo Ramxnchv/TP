@@ -314,7 +314,6 @@ public String getZombieInfo(int i) {
 				//board update()
 				if(plantList.Add(x,y,plant,this)) {
 					addCycle();
-					System.out.println("El coste es: " + Plant.getCost());
 					decreaseSuncoins(Plant.getCost());
 					added = true;
 				}
