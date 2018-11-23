@@ -9,7 +9,6 @@ public class Release extends BoardPrinter {
 	
 	public Release(Game game, int dimX, int dimY) {
 		super(game,dimX,dimY);
-		encodeGame(game);
 	}
 
 	public void encodeGame(Game game) {
@@ -24,8 +23,8 @@ public class Release extends BoardPrinter {
 			}
 		}
 	}
-
-	public String printGame(Game game) {
+	
+	public String toString() {
 		int cellSize = 7;
 		int marginSize = 2;
 		String vDelimiter = "|";
@@ -47,7 +46,12 @@ public class Release extends BoardPrinter {
 				str.append(lineDelimiter);
 		}
 		
-		return game.printPromptRelease()+"\n"+str.toString();
+		return str.toString();
+	}
+
+	public String printGame(Game game) {
+		encodeGame(game);
+		return game.printPromptRelease()+"\n"+this.toString();
 	}
 
 }

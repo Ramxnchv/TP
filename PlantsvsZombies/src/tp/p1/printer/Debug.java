@@ -10,7 +10,6 @@ public class Debug extends BoardPrinter{
 
 	public Debug(Game game, int dimX, int dimY) {
 		super(game,dimX,dimY);
-		encodeGame(game);
 		}
 
 	public void encodeGame(Game game) {
@@ -30,7 +29,8 @@ public class Debug extends BoardPrinter{
 
 		}
 
-		public String printGame(Game game) {
+	
+		public String toString() {
 			int cellSize = 22;
 			String vDelimiter = "|";
 			String hDelimiter = "-";
@@ -47,6 +47,12 @@ public class Debug extends BoardPrinter{
 
 			sb.append("\n").append(rowDelimiter);
 
-			return game.printPromptDebug()+"\n"+sb.toString();
+			return sb.toString();
+		}
+		
+		
+		public String printGame(Game game) {
+			encodeGame(game);
+			return game.printPromptDebug()+"\n"+this.toString();
 		}
 }

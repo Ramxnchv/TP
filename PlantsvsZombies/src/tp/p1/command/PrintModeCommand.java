@@ -20,11 +20,9 @@ public class PrintModeCommand extends Command {
 		GamePrinter gp;
 		if(mode.equals("debug")) {
 			gp=new Debug(game,x,y);
-			game.changePrintMode("Debug");
 		}
 		else {
 			gp=new Release(game,x,y);
-			game.changePrintMode("Release");
 		}
 		game.setGamePrinter(gp);
 		game.draw();

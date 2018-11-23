@@ -13,7 +13,6 @@ import tp.p1.printer.Release;
 import tp.p1.suns.SunManager;
 import tp.p1.zombies.ZombieManager;
 import tp.p1.objects.Zombie;
-import tp.p1.suns.SunManager;
 
 public class Game {
 	//ATRIBUTOS
@@ -26,7 +25,6 @@ public class Game {
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
 	private SunManager sunManager;
-	private String printMode;
 	private final int FILAS=4;
 	private final int COLUMNAS=8;
 		private boolean sameCycle = false;
@@ -77,7 +75,6 @@ public class Game {
 		plantList=new GameObjectList();
 		this.sunManager=new SunManager(this);
 		numCiclos=0;
-		this.printMode="Release";
 		this.gamePrinter=new Release(this,FILAS,COLUMNAS);
 		sunManager.setSunCoins(50);
 		this.zombieManager=new ZombieManager(this);
@@ -88,12 +85,6 @@ public class Game {
 	//PRINT GAME
 
 	public void draw() {
-		if(printMode.equals("Release")) {
-			this.gamePrinter=new Release(this,FILAS,COLUMNAS);
-		}
-		else {
-			this.gamePrinter=new Debug(this,FILAS,COLUMNAS);
-		}
 		System.out.println(gamePrinter.printGame(this));
 	}
 
@@ -131,15 +122,6 @@ public class Game {
 			str = " ";
 		}
 		return str;
-	}
-
-	public void changePrintMode(String mode) {
-		if(mode.equals("Release")) {
-			printMode="Release";
-		}
-		else {
-			printMode="Debug";
-		}
 	}
 
 	public String getPlantInfo(int i) {
