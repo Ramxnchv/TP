@@ -9,7 +9,7 @@ public class CatchCommand extends Command {
 	private int y;
 
 	public CatchCommand() {
-		super("Catch","C","Catch <x> <y>: Catches a sun in position x, y.");
+		super("catch","C","Catch <x> <y>: Catches a sun in position x, y.");
 	}
 
 	public Command parse(String[] commandWords, Controller controller) {

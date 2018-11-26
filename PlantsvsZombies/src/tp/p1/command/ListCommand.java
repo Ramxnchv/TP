@@ -7,7 +7,7 @@ public class ListCommand extends NoParamsCommand {
 
 
 	public ListCommand() {
-		super("List", "L", "List: Prints the list of available plants.");
+		super("list", "L", "List: Prints the list of available plants.");
 	}
 
 	public void execute(Game game, Controller controller) {

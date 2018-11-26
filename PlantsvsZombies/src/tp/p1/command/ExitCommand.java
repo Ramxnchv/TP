@@ -5,11 +5,12 @@ import tp.p1.game.Game;
 
 public class ExitCommand extends NoParamsCommand {
 	public ExitCommand() {
-		super("Exit", "E", "Exit: finish the program");
+		super("exit", "E", "Exit: finish the program");
 	}
 
 	public void execute(Game game, Controller controller) {
 		controller.setExit(true);
+		controller.setNoPrintGameState();
 	}
 
 

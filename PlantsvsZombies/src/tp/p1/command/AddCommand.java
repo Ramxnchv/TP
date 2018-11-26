@@ -13,28 +13,18 @@ public class AddCommand extends Command {
 	int y;
 
 	public AddCommand() {
-		super("Add","A","Add <plant> <x> <y>: Adds a plant in position x, y.");
+		super("add","A","Add <plant> <x> <y>: Adds a plant in position x, y.");
 	}
 
 	public Command parse(String[] commandWords, Controller controller) {
 		Command c = null;
 		//AddCommand add = new AddCommand();
-		if(commandWords[0].equals("a")||commandWords[0].equals("add")) {
+		if(commandWords[0].equals(commandName)) {
 			c = this; // = add;
-			if (commandWords[1].equals("p") || commandWords[1].equals("peashooter"))
-			{
-				this.setPlant("peashooter");
-			}
-			else if(commandWords[1].equals("s") || commandWords[1].equals("sunflower")) {
-				this.setPlant("sunflower");
-			}
-			else if(commandWords[1].equals("c") || commandWords[1].equals("petacereza")) {
-				this.setPlant("petacereza");
-			}
-			else if(commandWords[1].equals("n") || commandWords[1].equals("nuez")){
-				this.setPlant("nuez");
-			}
 
+			this.setPlant	(commandWords[1]); //almacenamos plantas
+
+			//almacenamos coordenadas
 			this.setX(Integer.parseInt(commandWords[2]));
 			this.setY(Integer.parseInt(commandWords[3]));
 

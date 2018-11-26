@@ -5,7 +5,7 @@ import tp.p1.game.Game;
 
 public class HelpCommand extends NoParamsCommand {
 	public HelpCommand() {
-		super("Help", "H", "Help: Prints this help message");
+		super("help", "H", "Help: Prints this help message");
 	}
 
 	public void execute(Game game, Controller controller) {

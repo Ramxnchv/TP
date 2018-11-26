@@ -5,7 +5,7 @@ import tp.p1.game.Game;
 
 public class ResetCommand extends NoParamsCommand {
 	public ResetCommand() {
-		super("Reset", "R", "Reset: Starts a new game.");
+		super("reset", "R", "Reset: Starts a new game.");
 		// TODO Auto-generated constructor stub
 	}
 

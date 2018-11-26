@@ -4,7 +4,7 @@ import tp.p1.objects.Plant;
 import tp.p1.plants.*;
 
 public class PlantFactory {
-	
+
 	private static Plant[] avaiablePlants = {
 		new PeaShooter(),
 		new SunFlower(),
