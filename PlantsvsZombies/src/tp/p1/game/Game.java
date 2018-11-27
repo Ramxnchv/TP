@@ -27,7 +27,7 @@ public class Game {
 	private SunManager sunManager;
 	private final int FILAS=4;
 	private final int COLUMNAS=8;
-		private boolean sameCycle = false;
+	private boolean sameCycle = false;
 
 	//CONSTRUCTOR
 	public Game(LEVEL level,Random rand,int seed) {
@@ -164,49 +164,9 @@ public String getZombieInfo(int i) {
 
 	//ATTACK ZOMBIES Y PLANTAS
 
-	public void attackZombie(String plantName,int x,int y) {
-		if(plantName.equals("Peashooter")) {
-			int i = 0;
-			//recorremos las columnas en busca de un zombie
-			while (i < COLUMNAS && !zombieList.checkObject(x, i))
-			{
-				i++;
-			}
-			//si sale porque encuentra un zombie -> dispara
-			if(zombieList.checkObject(x,i))
-			{
-				zombieList.decreaseHealth(x, i, PeaShooter.getDamage());
-			}
-		}
-		else {
-
-			//PetaCereza
-			//comprueba coordenada dentro tablero y comprueba que haya zombie para atacarlo con la explosion
-
-			for(int i=y-1;i<y+2;i++) {
-				if(comprobarDamagePetaCereza(x-1,i)) {
-					if(checkZombie(x-1,i)) {
-						zombieList.decreaseHealth(x-1, i, PetaCereza.getDamage());
-					}
-				}
-			}
-			for(int i=y-1;i<y+2;i++) {
-				if(comprobarDamagePetaCereza(x,i)) {
-					if(checkZombie(x,i)) {
-						zombieList.decreaseHealth(x, i, PetaCereza.getDamage());
-					}
-				}
-			}
-			for(int i=y-1;i<y+2;i++) {
-				if(comprobarDamagePetaCereza(x+1,i)) {
-					if(checkZombie(x+1,i)) {
-						zombieList.decreaseHealth(x+1, i, PetaCereza.getDamage());
-					}
-				}
-			}
-		}
+	public void decreaseHealthZombie(int x,int y,int damage) {
+		zombieList.decreaseHealth(x, y, damage);
 	}
-
 
 	public void attackPlant(int x, int y, int damage)
 	{
@@ -214,7 +174,7 @@ public String getZombieInfo(int i) {
 
 	}
 
-	private boolean comprobarDamagePetaCereza(int x, int y) {
+	public boolean comprobarDamagePetaCereza(int x, int y) {
 		return x >=0 && x<FILAS && y >=0 && y <COLUMNAS;
 	}
 

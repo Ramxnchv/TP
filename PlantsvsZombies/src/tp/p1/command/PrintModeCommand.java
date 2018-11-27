@@ -33,7 +33,7 @@ public class PrintModeCommand extends Command {
 	public Command parse(String[] commandWords, Controller controller) {
 		Command c = null;
 
-		if(commandWords[0].equals(commandName) {
+		if(commandWords[0].equals(commandName)) {
 			c = this;
 
 			mode = commandWords[1];

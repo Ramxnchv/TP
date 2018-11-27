@@ -18,7 +18,17 @@ public class PeaShooter extends Plant {
 	}
 
 	public void update() {
-		game.attackZombie("Peashooter",x,y);
+		int i = 0;
+		//recorremos las columnas en busca de un zombie
+		while (i < game.getCOLUMNAS() && !game.checkZombie(x, i))
+		{
+			i++;
+		}
+		//si sale porque encuentra un zombie -> dispara
+		if(game.checkZombie(x,i))
+		{
+			game.decreaseHealthZombie(x,i,PeaShooter.getDamage());
+		}
 	}
 
 

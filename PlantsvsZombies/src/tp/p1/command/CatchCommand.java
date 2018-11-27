@@ -15,7 +15,7 @@ public class CatchCommand extends Command {
 	public Command parse(String[] commandWords, Controller controller) {
 		Command c = null;
 		//AddCommand add = new AddCommand();
-		if(commandWords[0].equals("c")||commandWords[0].equals("catch")) {
+		if(commandWords[0].equals(commandName)) {
 			c = this; // = add;
 			this.setX(Integer.parseInt(commandWords[1]));
 			this.setY(Integer.parseInt(commandWords[2]));

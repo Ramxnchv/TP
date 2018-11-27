@@ -20,8 +20,32 @@ public class PetaCereza extends Plant {
 
 	public void update() {
 		if(internalCycle==frequency) {
-			game.attackZombie("PetaCereza",x,y);
+			//comprueba coordenada dentro tablero y comprueba que haya zombie para atacarlo con la explosion
+
+			for(int i=y-1;i<y+2;i++) {
+				if(game.comprobarDamagePetaCereza(x-1,i)) {
+					if(game.checkZombie(x-1,i)) {
+						game.decreaseHealthZombie(x-1, i, PetaCereza.getDamage());
+					}
+				}
+			}
+			for(int i=y-1;i<y+2;i++) {
+				if(game.comprobarDamagePetaCereza(x,i)) {
+					if(game.checkZombie(x,i)) {
+						game.decreaseHealthZombie(x, i, PetaCereza.getDamage());
+					}
+				}
+			}
+			for(int i=y-1;i<y+2;i++) {
+				if(game.comprobarDamagePetaCereza(x+1,i)) {
+					if(game.checkZombie(x+1,i)) {
+						game.decreaseHealthZombie(x+1, i, PetaCereza.getDamage());
+					}
+				}
+			}
+			
 			healthPoints=0;
+			
 		}
 		else {
 			this.internalCycle++;
