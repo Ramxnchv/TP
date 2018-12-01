@@ -16,7 +16,8 @@ public class AddCommand extends Command {
 		super("add","A","Add <plant> <x> <y>: Adds a plant in position x, y.");
 	}
 
-	public Command parse(String[] commandWords, Controller controller) {
+	public Command parse (String[] commandWords, Controller controller) throws CommandParseException {
+		try {
 		Command c = null;
 		//AddCommand add = new AddCommand();
 		if(commandWords[0].equals(commandName)) {
@@ -27,17 +28,28 @@ public class AddCommand extends Command {
 			//almacenamos coordenadas
 			this.setX(Integer.parseInt(commandWords[2]));
 			this.setY(Integer.parseInt(commandWords[3]));
-
-		}else {
-			c = null;
 		}
-
 		return c;
+		}catch() {
+			throw new CommandParseException();
+		}
+		
 	}
 
-	public void execute(Game game, Controller controller) {
-
-		Plant plant = PlantFactory.getPlant(this.getPlant(),x,y,game);
+	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
+		try {
+			Plant plant = PlantFactory.getPlant(this.getPlant(),x,y,game);
+			if(plant==null) {
+				throw new CommandExecuteException();
+			}
+		}
+		catch(NoSuncoinsException e) {
+			System.out.println(e.getMessage());
+		}
+		catch(NotEmptyException em) {
+			System.out.println(em.getMessage());
+		}
+		//H
 		if(game.enoughMoney(Plant.getCost())){
 			game.setSameCycle(false);
 			if(!game.addPlantToGame(plant, this.getX(), this.getY())){

@@ -255,7 +255,7 @@ public String getZombieInfo(int i) {
 
 
 	//ANIADIR PLANTAS
-	public boolean addPlantToGame(Plant plant, int x, int y)
+	public boolean addPlantToGame(Plant plant, int x, int y) throws NotEmptyException
 	{
 		boolean added = false;
 		if(comprobarDentroTablero(x, y) && checkEmpty(x,y)) {

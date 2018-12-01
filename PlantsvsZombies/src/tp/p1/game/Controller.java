@@ -22,21 +22,28 @@ public class Controller {
 
 
 	public void run() {
-		String unknownCommandMsg="Comando incorrecto";
-		while (game.isNotFinished(noPrint) && !exit) {
-			noPrint=false;
-			System.out.println("Command >");
-			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
-			Command command = CommandParser.parseCommand(words, this);
-			if (command != null) {
-				command.execute(game, this);
-			}
-			else {
-				System.err.println (unknownCommandMsg);
-				setNoPrintGameState();
+		try {
+			String unknownCommandMsg="Comando incorrecto";
+			while (game.isNotFinished(noPrint) && !exit) {
+				noPrint=false;
+				System.out.println("Command >");
+				String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
+				Command command = CommandParser.parseCommand(words, this);
+				if (command != null) {
+					command.execute(game, this);
+				}
+				else {
+					System.err.println (unknownCommandMsg);
+					setNoPrintGameState();
+				}
 			}
 		}
-
+		catch(CommandParseException p) {
+			System.out.println(p.getMessage());
+		}
+		catch(CommandExecuteException e) {
+			System.out.println(e.getMessage());
+		}
 		if(exit) {
 			System.out.println("Thanks for playing Plants vs Zombies");
 		}
