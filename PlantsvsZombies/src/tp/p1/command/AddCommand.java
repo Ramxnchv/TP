@@ -42,27 +42,26 @@ public class AddCommand extends Command {
 			if(plant==null) {
 				throw new CommandExecuteException();
 			}
-		}
-		catch(NoSuncoinsException e) {
-			System.out.println(e.getMessage());
-		}
-		catch(NotEmptyException em) {
-			System.out.println(em.getMessage());
-		}
-		//H
-		if(game.enoughMoney(Plant.getCost())){
-			game.setSameCycle(false);
-			if(!game.addPlantToGame(plant, this.getX(), this.getY())){
+		
+			if(game.enoughMoney(Plant.getCost())){
+				game.setSameCycle(false);
+				if(!game.addPlantToGame(plant, this.getX(), this.getY())){
+				controller.setNoPrintGameState();
+				game.setSameCycle(true);
+				}
+
+			} else {
+				System.out.println("You don't have enough coins");
 				controller.setNoPrintGameState();
 				game.setSameCycle(true);
 			}
-
-		} else {
-			System.out.println("You don't have enough coins");
-			controller.setNoPrintGameState();
-			game.setSameCycle(true);
 		}
-
+		catch(NoSuncoinsException e) {
+		System.out.println(e.getMessage());
+		}
+		catch(NotEmptyPositionException em) {
+		System.out.println(em.getMessage());
+		}
 	}
 
 
