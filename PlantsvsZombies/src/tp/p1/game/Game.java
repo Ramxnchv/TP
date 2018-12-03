@@ -326,6 +326,9 @@ public String getZombieInfo(int i) {
 		System.out.println( PlantFactory.listOfAvaiablePlants());
 	}
 
+	public void store() {
+		
+	}
 
 	public void executeNoneCommand()
 	{

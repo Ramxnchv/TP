@@ -1,17 +1,15 @@
 package tp.p1.command;
 
-import tp.p1.game.Controller;
 import tp.p1.game.Game;
 import tp.p1.game.PlantFactory;
 import tp.p1.objects.*;
 
 
-
 public class AddCommand extends Command {
-	String plant;
-	int x;
-	int y;
-	String plantFullName;
+	private String plant;
+	private int x;
+	private int y;
+	private String plantFullName;
 
 	public AddCommand() {
 		super("add","A","Add <plant> <x> <y>: Adds a plant in position x, y.");
