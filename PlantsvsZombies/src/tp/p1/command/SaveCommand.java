@@ -31,12 +31,12 @@ public class SaveCommand extends Command {
 		return c;
 	}
 	public boolean execute(Game game) throws CommandExecuteException{
-		final String header="plantVSZombies 3.0";
+		final String header="“Plants Vs Zombies v3.0";
 		try(BufferedWriter bw=new BufferedWriter(new FileWriter(file))){
 			bw.write(header);
 			bw.newLine();
 			bw.newLine();
-			game.store();
+			game.store(bw);
 			System.out.println("Game successfully saved in file "+ this.file +".dat. Use the load command to reload it");
 			return false;
 		}catch(IOException e) {

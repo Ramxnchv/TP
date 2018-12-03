@@ -1,5 +1,8 @@
 package tp.p1.suns;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import tp.p1.game.Game;
 import tp.p1.objects.Sun;
 import tp.p1.lists.PassiveGameObjectsList;
@@ -31,6 +34,10 @@ public class SunManager {
 			}
 			
 		}
+	}
+	
+	public void store(BufferedWriter bw) throws IOException {
+		
 	}
 	
 	//aniadir sun de un sunflower

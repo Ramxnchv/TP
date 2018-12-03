@@ -24,7 +24,7 @@ public enum LEVEL {
 
 	public static LEVEL parse(String inputString) {
 		for (LEVEL level : LEVEL.values() )
-		if (level . name().equalsIgnoreCase(inputString)) return level;
+		if (level.name().equalsIgnoreCase(inputString)) return level;
 		return null;
 	}
 	

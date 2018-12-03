@@ -1,5 +1,7 @@
 package tp.p1.game;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.Random;
 
 import tp.p1.command.CommandParser;
@@ -326,8 +328,18 @@ public String getZombieInfo(int i) {
 		System.out.println( PlantFactory.listOfAvaiablePlants());
 	}
 
-	public void store() {
-		
+	public void store(BufferedWriter bw) throws IOException {
+		bw.write("cycle: "+this.numCiclos);
+		bw.newLine();
+		bw.write("sunCoins: "+this.sunManager.getSunCoins());
+		bw.newLine();
+		bw.write("level: "+this.level.name());
+		bw.newLine();
+		bw.write("remZombies"+this.zombieManager.getZombiesRestantes());
+		bw.newLine();
+		this.plantList.store(bw);
+		this.zombieList.store(bw);
+		this.sunManager.store(bw);
 	}
 
 	public void executeNoneCommand()

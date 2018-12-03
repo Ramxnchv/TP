@@ -1,6 +1,9 @@
 package tp.p1.lists;
 
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import tp.p1.objects.PassiveGameObject;
 
 public class PassiveGameObjectsList {
@@ -27,6 +30,10 @@ public class PassiveGameObjectsList {
 				list[i]=list[i+1];
 				contador--;
 		}
+	}
+	
+	public void store(BufferedWriter bw) throws IOException{
+		
 	}
 	
 	public void removeDeadGameObjects() {

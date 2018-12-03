@@ -1,5 +1,8 @@
 package tp.p1.lists;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import tp.p1.game.Game;
 import tp.p1.objects.*;
 
@@ -50,6 +53,10 @@ public class GameObjectList {
 		for(int i=0;i<contador;i++) {
 			list[i].update();
 		}
+	}
+	
+	public void store(BufferedWriter bw) throws IOException {
+		
 	}
 
 	public void decreaseHealth(int x, int y, int damage)
