@@ -13,6 +13,7 @@ public class ListCommand extends NoParamsCommand {
 	public boolean execute(Game game) {
 		game.printList();
 		game.setSameCycle(true);
+		return false;
 	}
 
 }

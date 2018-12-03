@@ -13,6 +13,7 @@ public class Nuez extends Plant {
 	public Nuez() {
 		//para avaiablePlants
 		super(0,0,10,1,50,null);
+		name="Nuez";
 	}
 
 	public void update() {

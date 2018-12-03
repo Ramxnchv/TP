@@ -9,7 +9,8 @@ public class ExitCommand extends NoParamsCommand {
 	}
 
 	public boolean execute(Game game) {
-		controller.setExit(true);
+		game.setExit();
+		return false;
 	}
 
 

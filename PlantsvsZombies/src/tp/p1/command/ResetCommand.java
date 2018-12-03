@@ -12,6 +12,7 @@ public class ResetCommand extends NoParamsCommand {
 
 	public boolean execute(Game game) {
 		game.inicializar();
+		return true;
 	}
 
 

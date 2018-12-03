@@ -183,11 +183,9 @@ public String getZombieInfo(int i) {
 
 	//CHECK FINAL PARTIDA
 
-	public boolean isNotFinished(boolean noPrint) {
-		if(!noPrint) {
-			update();
-			draw();
-		}
+	public boolean isNotFinished() {
+		this.update();
+		this.draw();
 		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
 	}
 
@@ -328,10 +326,6 @@ public String getZombieInfo(int i) {
 		System.out.println( PlantFactory.listOfAvaiablePlants());
 	}
 
-	public boolean setExitTrue(boolean exit)
-	{
-		return exit = true;
-	}
 
 	public void executeNoneCommand()
 	{

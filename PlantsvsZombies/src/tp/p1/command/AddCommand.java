@@ -11,6 +11,7 @@ public class AddCommand extends Command {
 	String plant;
 	int x;
 	int y;
+	String plantFullName;
 
 	public AddCommand() {
 		super("add","A","Add <plant> <x> <y>: Adds a plant in position x, y.");
@@ -18,25 +19,28 @@ public class AddCommand extends Command {
 
 	public Command parse (String[] commandWords) throws CommandParseException {
 		try {
+			
 		Command c = null;
-		//AddCommand add = new AddCommand();
+		
 		if(commandWords.length!=4) {
-			throw new CommandParseException("Incorrect number of arguments for add command");
+			throw new CommandParseException("Incorrect number of arguments for add command: Add <plant> <x> <y>");
 		}
 		if(commandWords[0].equals(commandName)) {
-			c = this; // = add;
+			c = this;
 
 			this.setPlant	(commandWords[1]); //almacenamos plantas
 
 			//almacenamos coordenadas
 			this.setX(Integer.parseInt(commandWords[2]));
 			this.setY(Integer.parseInt(commandWords[3]));
+		}else {
+			throw new CommandParseException("Unknown command. Use ’help’ to see the available commands");
 		}
 		
 		return c;
 		
 		}catch(NumberFormatException e) {
-			throw new CommandParseException("Invalid argument for add command, number expected");
+			throw new CommandParseException("Invalid argument for add command, number expected: Add <plant> <x> <y>");
 		}
 		
 	}
@@ -48,24 +52,24 @@ public class AddCommand extends Command {
 			if(plant==null) {
 				throw new CommandExecuteException("Unknown Plant Name");
 			}
-		
+			
+			//se guarda el nombre entero de la planta para darlo en los mensajes de error
+			this.plantFullName=plant.getName();
+			
 			added=game.addPlantToGame(plant, x, y);
 			
 		}
 		catch(NoSuncoinsException e) {
-			System.out.println(e.getMessage());
 			game.setSameCycle(true);
-			added= false;
+			throw new CommandExecuteException("Failed to add "+plantFullName+":"+e.getMessage());
 		}
 		catch(NotEmptyPositionException em) {
-			System.out.println(em.getMessage());
 			game.setSameCycle(true);
-			added= false;
+			throw new CommandExecuteException("Failed to add "+plantFullName+": position "+em.getMessage()+" is already occupied");
 		}
 		catch(OutOfBoardException ob) {
-			System.out.println(ob.getMessage()+ "is an invalid position");
 			game.setSameCycle(true);
-			added= false;
+			throw new CommandExecuteException("Failed to add "+plantFullName+": "+ob.getMessage()+" is an invalid position");
 		}
 		return added;
 	}

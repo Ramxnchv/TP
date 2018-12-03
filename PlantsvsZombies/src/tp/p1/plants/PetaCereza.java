@@ -16,6 +16,7 @@ public class PetaCereza extends Plant {
 	public PetaCereza() {
 		//para avaiablePlants
 		super(0,0,2,2,50,null);
+		name="PetaCereza";
 	}
 
 	public void update() {

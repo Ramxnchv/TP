@@ -11,6 +11,7 @@ public class HelpCommand extends NoParamsCommand {
 	public boolean execute(Game game) {
 		Game.commandHelp();
 		game.setSameCycle(true);
+		return false;
 	}
 
 

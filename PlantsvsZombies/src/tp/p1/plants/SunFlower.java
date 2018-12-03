@@ -15,6 +15,7 @@ public class SunFlower extends Plant {
 	public SunFlower() {
 		//para avaiablePlants
 		super(0,0,1,2,20,null);
+		name="SunFlower";
 	}
 
 	public void update() {

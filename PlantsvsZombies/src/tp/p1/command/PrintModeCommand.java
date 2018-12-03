@@ -16,7 +16,7 @@ public class PrintModeCommand extends Command {
 		super("printMode", "P", "[P]rintMode: change print mode [Release|Debug].");
 	}
 
-	public boolean execute(Game game) {
+	public boolean execute(Game game) throws CommandExecuteException {
 		GamePrinter gp;
 		if(mode.equals("debug")) {
 			gp=new Debug(game,x,y);
@@ -26,21 +26,25 @@ public class PrintModeCommand extends Command {
 		}
 		game.setGamePrinter(gp);
 		game.draw();
-		controller.setNoPrintGameState();
 		game.setSameCycle(true);
+		return true;
 	}
 
-	public Command parse(String[] commandWords) {
+	public Command parse(String[] commandWords) throws CommandParseException {
 		Command c = null;
 
+		if(commandWords.length!=2) {
+			throw new CommandParseException("Unknown print mode: "+commandWords[1]);
+		}
+		
 		if(commandWords[0].equals(commandName)) {
 			c = this;
 
 			mode = commandWords[1];
+		}else {
+			throw new CommandParseException("Unknown command. Use ’help’ to see the available commands");
 		}
-		else {
-			c=null;
-		}
+		
 		return c;
 	}
 }
