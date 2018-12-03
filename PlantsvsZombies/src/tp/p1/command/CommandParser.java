@@ -16,12 +16,12 @@ public class CommandParser {
 
 	};
 	
-	public static Command parseCommand(String[] commandWords, Controller controller) {
+	public static Command parseCommand(String[] commandWords) throws CommandParseException {
 		boolean found=false;
 		int i=0;
 		Command c=null;
 		while(i<avaiableCommand.length&&!found) {
-			c=avaiableCommand[i].parse(commandWords, controller);
+			c=avaiableCommand[i].parse(commandWords);
 			if(c!=null) {
 				found=true;
 			}

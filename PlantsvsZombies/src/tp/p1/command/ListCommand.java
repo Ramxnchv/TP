@@ -10,9 +10,8 @@ public class ListCommand extends NoParamsCommand {
 		super("list", "L", "List: Prints the list of available plants.");
 	}
 
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game) {
 		game.printList();
-		controller.setNoPrintGameState();
 		game.setSameCycle(true);
 	}
 

@@ -9,16 +9,12 @@ public class NoParamsCommand extends Command{
 		super(commandText, commandTextMsg, helpTextMsg);
 	}
 
-	public Command parse(String[] commandWords, Controller controller) {
-		Command c;
+	public Command parse(String[] commandWords) {
+		Command c=null;
 
 		if(commandWords[0].equals(commandName))
 		{
 			c = this;
-
-		} else {
-
-			c = null;
 
 		}
 
@@ -26,9 +22,8 @@ public class NoParamsCommand extends Command{
 	}
 
 
-	public void execute(Game game, Controller controller) {
-		// TODO Auto-generated method stub
-
+	public boolean execute(Game game) {
+		return true;
 	}
 
 }

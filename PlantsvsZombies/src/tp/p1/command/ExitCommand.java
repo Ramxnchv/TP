@@ -8,9 +8,8 @@ public class ExitCommand extends NoParamsCommand {
 		super("exit", "E", "Exit: finish the program");
 	}
 
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game) {
 		controller.setExit(true);
-		controller.setNoPrintGameState();
 	}
 
 

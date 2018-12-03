@@ -3,6 +3,9 @@ package tp.p1.game;
 import java.util.Random;
 
 import tp.p1.command.CommandParser;
+import tp.p1.command.NoSuncoinsException;
+import tp.p1.command.NotEmptyPositionException;
+import tp.p1.command.OutOfBoardException;
 import tp.p1.lists.*;
 import tp.p1.objects.Plant;
 import tp.p1.objects.Sun;
@@ -255,23 +258,28 @@ public String getZombieInfo(int i) {
 
 
 	//ANIADIR PLANTAS
-	public boolean addPlantToGame(Plant plant, int x, int y) throws NotEmptyException
-	{
+	public boolean addPlantToGame(Plant plant, int x, int y) throws NotEmptyPositionException,NoSuncoinsException,OutOfBoardException
+	{	
 		boolean added = false;
-		if(comprobarDentroTablero(x, y) && checkEmpty(x,y)) {
-				//board update()
-				if(plantList.Add(x,y,plant,this)) {
-					addCycle();
-					decreaseSuncoins(Plant.getCost());
-					added = true;
-				}
-			} else {
-				System.out.println("Plant can't be added");
-				added = false;
-			}
-
+		
+		if(!this.enoughMoney(Plant.getCost())) {
+			throw new NoSuncoinsException("not enough suncoins to buy it");
+		}
+		this.setSameCycle(false);
+		if(!checkEmpty(x,y)) {
+			throw new NotEmptyPositionException("("+x+","+y+")");
+		}
+		if(!comprobarDentroTablero(x,y)) {
+			throw new OutOfBoardException("("+x+","+y+")");
+		}
+			//board update()
+		if(plantList.Add(x,y,plant,this)) {
+			addCycle();
+			decreaseSuncoins(Plant.getCost());
+			added = true;
+		}
+		
 		return added;
-
 	}
 
 	private boolean comprobarDentroTablero(int x, int y) {

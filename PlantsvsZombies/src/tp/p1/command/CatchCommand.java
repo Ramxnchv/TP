@@ -27,7 +27,7 @@ public class CatchCommand extends Command {
 		return c;
 	}
 
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game) {
 		if(!game.isSameCycle()) {
 			game.setSameCycle(true);
 			if(!game.catchSun(x, y)) {

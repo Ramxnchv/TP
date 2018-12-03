@@ -16,7 +16,7 @@ public class PrintModeCommand extends Command {
 		super("printMode", "P", "[P]rintMode: change print mode [Release|Debug].");
 	}
 
-	public void execute(Game game, Controller controller) {
+	public boolean execute(Game game) {
 		GamePrinter gp;
 		if(mode.equals("debug")) {
 			gp=new Debug(game,x,y);
@@ -30,7 +30,7 @@ public class PrintModeCommand extends Command {
 		game.setSameCycle(true);
 	}
 
-	public Command parse(String[] commandWords, Controller controller) {
+	public Command parse(String[] commandWords) {
 		Command c = null;
 
 		if(commandWords[0].equals(commandName)) {

@@ -17,18 +17,24 @@ public enum LEVEL {
 		return numeroZombies;
 	}
 
-	public void setNumeroZombies(int numeroZombies) {
-		this.numeroZombies = numeroZombies;
-	}
 
 	public double getFrecuencia() {
 		return frecuencia;
 	}
 
-	public void setFrecuencia(double frecuencia) {
-		this.frecuencia = frecuencia;
+	public static LEVEL parse(String inputString) {
+		for (LEVEL level : LEVEL.values() )
+		if (level . name().equalsIgnoreCase(inputString)) return level;
+		return null;
 	}
 	
-	
+	public static String all (String separator) {
+		StringBuilder sb = new StringBuilder();
+		for (LEVEL level : LEVEL.values() )
+		sb.append(level.name() + separator);
+		String allLevels = sb.toString();
+		int p=allLevels.length()-separator.length();
+		return allLevels.substring(0, p);
+	}
 	
 }

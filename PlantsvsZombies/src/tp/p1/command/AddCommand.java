@@ -16,10 +16,13 @@ public class AddCommand extends Command {
 		super("add","A","Add <plant> <x> <y>: Adds a plant in position x, y.");
 	}
 
-	public Command parse (String[] commandWords, Controller controller) throws CommandParseException {
+	public Command parse (String[] commandWords) throws CommandParseException {
 		try {
 		Command c = null;
 		//AddCommand add = new AddCommand();
+		if(commandWords.length!=4) {
+			throw new CommandParseException("Incorrect number of arguments for add command");
+		}
 		if(commandWords[0].equals(commandName)) {
 			c = this; // = add;
 
@@ -29,39 +32,42 @@ public class AddCommand extends Command {
 			this.setX(Integer.parseInt(commandWords[2]));
 			this.setY(Integer.parseInt(commandWords[3]));
 		}
+		
 		return c;
-		}catch() {
-			throw new CommandParseException();
+		
+		}catch(NumberFormatException e) {
+			throw new CommandParseException("Invalid argument for add command, number expected");
 		}
 		
 	}
 
-	public boolean execute(Game game, Controller controller) throws CommandExecuteException {
+	public boolean execute(Game game) throws CommandExecuteException {
+		boolean added=false;
 		try {
-			Plant plant = PlantFactory.getPlant(this.getPlant(),x,y,game);
+			Plant plant = PlantFactory.getPlant(this.plant,x,y,game);
 			if(plant==null) {
-				throw new CommandExecuteException();
+				throw new CommandExecuteException("Unknown Plant Name");
 			}
 		
-			if(game.enoughMoney(Plant.getCost())){
-				game.setSameCycle(false);
-				if(!game.addPlantToGame(plant, this.getX(), this.getY())){
-				controller.setNoPrintGameState();
-				game.setSameCycle(true);
-				}
-
-			} else {
-				System.out.println("You don't have enough coins");
-				controller.setNoPrintGameState();
-				game.setSameCycle(true);
-			}
+			added=game.addPlantToGame(plant, x, y);
+			
 		}
 		catch(NoSuncoinsException e) {
-		System.out.println(e.getMessage());
+			System.out.println(e.getMessage());
+			game.setSameCycle(true);
+			added= false;
 		}
 		catch(NotEmptyPositionException em) {
-		System.out.println(em.getMessage());
+			System.out.println(em.getMessage());
+			game.setSameCycle(true);
+			added= false;
 		}
+		catch(OutOfBoardException ob) {
+			System.out.println(ob.getMessage()+ "is an invalid position");
+			game.setSameCycle(true);
+			added= false;
+		}
+		return added;
 	}
 
 
