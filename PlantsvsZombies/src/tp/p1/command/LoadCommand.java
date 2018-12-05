@@ -3,13 +3,45 @@ package tp.p1.command;
 import tp.p1.game.Game;
 
 public class LoadCommand extends Command {
-	
+
 	String fileName;
-	
+
+	public LoadCommand() {
+		super("load","l","Save <filename>: Save the state of the game to a file.");
+	}
+
 	public Command parse(String[] commandWords) throws CommandParseException{
-		
+		Command c;
+
+		if(commandWords.length!=2) {
+			throw new CommandParseException("Incorrect number of arguments for load command: Load <filename>");
+		}
+		if(!MyStringUtils.isValidFilename(fileName)) {
+			throw new CommandParseException("Invalid filename: the filename contains invalid characters");
+		}
+
+		if(commandWords[0].equals(commandName)) {
+			c=this;
+		}else {
+			throw new CommandParseException("Unknown command. Use ’help’ to see the available commands");
+		}
+
+		return c;
+
 	}
 	public boolean execute(Game game) throws CommandExecuteException{
-		
+		try {
+			BufferedReader is = new BufferedReader (new FileReader(fileName));
+			game.load(is);
+
+			System.out.println("Game successfully loaded from file "+ this.fileName +".dat. Use the load command to reload it");
+			//Pintado en modo release?
+
+		}catch(IOException e) {
+			throw new CommandExecuteException();
+		}
+
+		return false;
+
 	}
 }

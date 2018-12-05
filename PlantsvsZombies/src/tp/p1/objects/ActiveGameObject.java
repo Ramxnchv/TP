@@ -3,12 +3,13 @@ package tp.p1.objects;
 import tp.p1.game.Game;
 
 public abstract class ActiveGameObject extends GameObject {
-	
+
 	protected int healthPoints;
 	protected int frequency;
-	
-	public ActiveGameObject(int x, int y,  int healthPoints, int frequency, Game game) {
+
+	public ActiveGameObject(String symbol, int x, int y,  int healthPoints, int frequency, Game game) {
 		super(x, y, game);
+		this.symbol = symbol;
 		this.healthPoints = healthPoints;
 		this.frequency = frequency;
 	}
@@ -16,12 +17,12 @@ public abstract class ActiveGameObject extends GameObject {
 	public abstract void update();
 
 	public abstract String printInfo();
-	
+
 	public void decreaseHealth(int damage)
 	{
 		healthPoints -= damage;
 	}
-	
+
 	public int getHealthPoints() {
 		return healthPoints;
 	}
@@ -33,5 +34,7 @@ public abstract class ActiveGameObject extends GameObject {
 	public int getFrequency() {
 		return frequency;
 	}
+
+	public abstract void store (BufferedWriter bw) throws IOException;
 
 }

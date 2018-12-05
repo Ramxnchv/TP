@@ -9,13 +9,13 @@ public class PeaShooter extends Plant {
 
 	public PeaShooter(int x, int y,Game game) {
 		//x,y,healthPoints,frequency,cost,game
-		super(x,y,3,1,50,game);
+		super("P",x,y,3,1,50,game);
 		name="PeaShooter";
 	}
 
 	public PeaShooter() {
 		//para avaiablePlants
-		super(0,0,3,1,50,null);
+		super("P",0,0,3,1,50,null);
 	}
 
 	public void update() {
@@ -49,5 +49,11 @@ public class PeaShooter extends Plant {
 	String str = "P [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ "1 ]";
 
 	return str;
+	}
+
+	public void store(BufferedWriter bw) throws IOException {
+
+	bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + 1);
+
 	}
 }

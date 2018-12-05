@@ -5,16 +5,16 @@ import tp.p1.game.Game;
 public abstract class Plant extends ActiveGameObject {
 	private static int cost;
 	protected String name;
-	
-	public Plant(int x, int y,int healthPoints, int frequency,int cost, Game game) {
-		super(x,y,healthPoints,frequency,game);
+
+	public Plant(String symbol, int x, int y,int healthPoints, int frequency,int cost, Game game) {
+		super(symbol,x,y,healthPoints,frequency,game);
 		Plant.cost=cost;
 	}
-	
+
 	public abstract void update();
-	
+
 	public abstract String printInfo();
-		
+
 	public static int getCost() {
 		return cost;
 	}
@@ -22,5 +22,5 @@ public abstract class Plant extends ActiveGameObject {
 	public String getName() {
 		return name;
 	}
-	
+
 }

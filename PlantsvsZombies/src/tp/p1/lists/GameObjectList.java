@@ -54,9 +54,13 @@ public class GameObjectList {
 			list[i].update();
 		}
 	}
-	
+
 	public void store(BufferedWriter bw) throws IOException {
-		
+
+		for (int i = 0; i < contador; i++) {
+			list[i].store(bw);
+		}
+
 	}
 
 	public void decreaseHealth(int x, int y, int damage)

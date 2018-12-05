@@ -7,12 +7,12 @@ public class Caracubo extends Zombie {
 
 	public Caracubo(int x, int y, Game game) {
 		//x,y,healthPoints,frequency,damage,speed,game
-		super(x,y,8,4,1,1,game);
+		super("W",x,y,8,4,1,1,game);
 	}
 
 	public Caracubo() {
 		//para avaiableZombies
-		super(0,0,8,4,1,1,null);
+		super("W",0,0,8,4,1,1,null);
 	}
 
 	public String toString()
@@ -27,5 +27,9 @@ public class Caracubo extends Zombie {
 
 	return str;
 	}
-	
+
+	public void store(BufferedWriter bw) throws IOException {
+		bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + timeToNextAction());
+	}
+
 }

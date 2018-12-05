@@ -23,10 +23,17 @@ public class Game {
 	//ATRIBUTOS
 	private GameObjectList zombieList;
 	private GameObjectList plantList;
+	private GameObjectList zombieListCopy;
+	private GameObjectList plantListCopy;
 	private LEVEL level;
 	private Random rand;
 	private int seed;
 	private int numCiclos;
+	private int cyclesCopy;
+	private int suncoinsCopy;
+	private int remainingZombiesCopy;
+	private int seedCopy;
+	private LEVEL levelCopy;
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
 	private SunManager sunManager;
@@ -259,9 +266,9 @@ public String getZombieInfo(int i) {
 
 	//ANIADIR PLANTAS
 	public boolean addPlantToGame(Plant plant, int x, int y) throws NotEmptyPositionException,NoSuncoinsException,OutOfBoardException
-	{	
+	{
 		boolean added = false;
-		
+
 		if(!this.enoughMoney(Plant.getCost())) {
 			throw new NoSuncoinsException("not enough suncoins to buy it");
 		}
@@ -278,7 +285,7 @@ public String getZombieInfo(int i) {
 			decreaseSuncoins(Plant.getCost());
 			added = true;
 		}
-		
+
 		return added;
 	}
 
@@ -318,6 +325,28 @@ public String getZombieInfo(int i) {
 		sunManager.decreaseSuncoins(cost);
 	}
 
+	//backup del juego
+	private void gameBackUp() {
+
+		zombieListCopy =new GameObjectList();
+		plantListCopy =new GameObjectList();
+
+		cyclesCopy = this.numCiclos;
+
+		suncoinsCopy = this.sunManager.getSunCoins();
+
+		remainingZombiesCopy = this.zombieManager.getZombiesRestantes();
+
+		levelCopy = this.level;
+
+		seedCopy = this.seed;
+
+		plantList = plantListCopy;
+		zombieList = zombieListCopy;
+
+	}
+
+
 
 	//COMANDOS Y EXECUTES
 	public static void commandHelp() {
@@ -337,10 +366,21 @@ public String getZombieInfo(int i) {
 		bw.newLine();
 		bw.write("remZombies"+this.zombieManager.getZombiesRestantes());
 		bw.newLine();
+		bw.write("plantList: ");
 		this.plantList.store(bw);
+		bw.newLine();
+		bw.write("zombieList");
 		this.zombieList.store(bw);
+		bw.newLine();
 		this.sunManager.store(bw);
 	}
+
+	public void load (BufferedReader is) throws IOException {
+
+		//copiar estado actual
+		gameBackUp();
+	}
+
 
 	public void executeNoneCommand()
 	{

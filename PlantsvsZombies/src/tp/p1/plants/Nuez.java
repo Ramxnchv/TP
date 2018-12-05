@@ -7,12 +7,12 @@ public class Nuez extends Plant {
 
 	public Nuez(int x, int y,Game game) {
 		//x,y,healthPoints,frequency,cost,game
-		super(x,y,10,1,50,game);
+		super("N",x,y,10,1,50,game);
 	}
 
 	public Nuez() {
 		//para avaiablePlants
-		super(0,0,10,1,50,null);
+		super("N",0,0,10,1,50,null);
 		name="Nuez";
 	}
 
@@ -30,7 +30,13 @@ public class Nuez extends Plant {
 
 	public String printInfo() {
 	String str = "N [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ "0 ]";
-	
+
 	return str;
+	}
+
+	public void store(BufferedWriter bw) throws IOException {
+
+	bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + 0);
+
 	}
 }

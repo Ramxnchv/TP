@@ -9,13 +9,13 @@ public class PetaCereza extends Plant {
 
 	public PetaCereza(int x, int y, Game game) {
 		//x,y,healthPoints,frequency,cost,game
-		super(x,y,2,2,50,game);
+		super("C",x,y,2,2,50,game);
 		this.internalCycle=0;
 	}
 
 	public PetaCereza() {
 		//para avaiablePlants
-		super(0,0,2,2,50,null);
+		super("C",0,0,2,2,50,null);
 		name="PetaCereza";
 	}
 
@@ -44,9 +44,9 @@ public class PetaCereza extends Plant {
 					}
 				}
 			}
-			
+
 			healthPoints=0;
-			
+
 		}
 		else {
 			this.internalCycle++;
@@ -68,9 +68,15 @@ public class PetaCereza extends Plant {
 
 	return str;
 	}
-	
+
 	private int timeToNextAction() {
 		return frequency-internalCycle;
+	}
+
+	public void store(BufferedWriter bw) throws IOException {
+
+	bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + timeToNextAction());
+
 	}
 
 }
