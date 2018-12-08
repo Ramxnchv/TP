@@ -1,5 +1,6 @@
 package tp.p1.suns;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
@@ -8,53 +9,53 @@ import tp.p1.objects.Sun;
 import tp.p1.lists.PassiveGameObjectsList;
 
 public class SunManager {
-	
+
 	private PassiveGameObjectsList suns;
 	private Game game;
 	private int sunCoins;
-	
+
 	public SunManager(Game game) {
 		this.game = game;
 		suns=new PassiveGameObjectsList();
 	}
-	
+
 	//crear sun cada 5 ciclos
 	public void update() {
 		if(game.getNumCiclos() != 0 && game.getNumCiclos()%5==0) {
 			int x = game.getRand().nextInt(game.getFILAS());
-			
+
 			int y = game.getRand().nextInt(game.getCOLUMNAS());
 			while(!suns.isPositionEmpty(x,y)&&suns.isnotFull()) {
 				x = game.getRand().nextInt(game.getCOLUMNAS());
 				y = game.getRand().nextInt(game.getFILAS());
 			}
 			if(suns.isnotFull()) {
-				Sun sun = new Sun(x, y, game);
+				Sun sun = new Sun("*",x, y, game);
 				suns.Add(sun);
 			}
-			
+
 		}
 	}
-	
+
 	public void store(BufferedWriter bw) throws IOException {
-		
+
 	}
-	
+
 	//aniadir sun de un sunflower
 	public void Add(int x, int y) {
 		if(suns.isPositionEmpty(x, y)) {
-			Sun sun = new Sun(x, y, game);
+			Sun sun = new Sun("*",x, y, game);
 			sun.setPosition(x, y);
 			suns.Add(sun);
 		}
 	}
-	
+
 	public String positionToString(int x, int y)
 	{
 		int i = suns.searchPosition(x,  y);
 		return suns.printPosition(i).toString();
 	}
-	
+
 	public boolean catchSun(int x,int y) {
 		Sun sun= (Sun) suns.getPosition(x,y);
 		if(sun != null) {
@@ -67,16 +68,31 @@ public class SunManager {
 		return false;
 		}
 	}
-	
+
+	public void loadFromFile(BufferedReader br, String [] line) {
+		int x, y;
+
+		String [] elemento = line[0].split(":");
+
+		for(int i = 0; i < line.length;i++) {
+			x = Integer.parseInt(elemento[2]);
+			y = Integer.parseInt(elemento[3]);
+
+			Add(x,y);
+
+
+		}
+	}
+
 	public boolean checkSun(int x, int y) {
 		return suns.checkObject(x, y);
 	}
-	
+
 	public void decreaseSuncoins(int cost)
 	{
 		sunCoins -= cost;
 	}
-	
+
 	public int getSunCoins() {
 		return sunCoins;
 	}
@@ -85,4 +101,3 @@ public class SunManager {
 		this.sunCoins = sunCoins;
 	}
 }
-

@@ -1,15 +1,18 @@
 package tp.p1.lists;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
 import tp.p1.game.Game;
+import tp.p1.game.PlantFactory;
+import tp.p1.game.ZombieFactory;
 import tp.p1.objects.*;
-
 public class GameObjectList {
 	private ActiveGameObject[] list;
 	private int contador=0;
 	private static final int BOARD_SIZE=32;
+	private Game game;
 
 	public GameObjectList() {
 		list=new ActiveGameObject[BOARD_SIZE];
@@ -77,7 +80,7 @@ public class GameObjectList {
 
 	public String printInfoDebug(int i){
 
-	return list[i].printInfo();
+		return list[i].printInfo();
 	}
 
 	public boolean checkWinnerZombie(int i) {
@@ -106,5 +109,45 @@ public class GameObjectList {
 	public int getYPosition(int i)
 	{
 		return list[i].getY();
+	}
+
+	public void modifyObject(int health, int timeToNextAction, int i) {
+		list[i].setHealthPoints(health);
+		list[i].setTimeToNextAction(timeToNextAction);
+
+	}
+
+	public void loadFromFile(BufferedReader br, String [] line, String listType) {
+		String symbol;
+		int x, y, life, timeAction;
+		String [] elemento = line[0].split(":");
+
+		for(int i =  0; i < line.length; i++) {
+			symbol = elemento[0].toLowerCase();
+			x = Integer.parseInt(elemento[2]);
+			y = Integer.parseInt(elemento[3]);
+			life = Integer.parseInt(elemento[1]);
+			timeAction = Integer.parseInt(elemento[4]);
+
+			if(listType.equals("plantList")) {
+
+				Plant plant = PlantFactory.getPlant(symbol, x, y, game);
+				list[i].setHealthPoints(life);
+				list[i].setTimeToNextAction(timeAction);
+				list[i] = plant;
+
+			} else if (listType.equals("zombieList")) {
+
+				Zombie zombie = ZombieFactory.getZombie(symbol, x, y, game);
+				list[i].setHealthPoints(life);
+				list[i].setTimeToNextAction(timeAction);
+				list[i] = zombie;
+
+			} else {
+				//
+
+			}
+		}
+
 	}
 }

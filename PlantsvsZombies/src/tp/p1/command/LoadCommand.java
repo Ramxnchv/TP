@@ -30,11 +30,16 @@ public class LoadCommand extends Command {
 
 	}
 	public boolean execute(Game game) throws CommandExecuteException{
-		try {
-			BufferedReader is = new BufferedReader (new FileReader(fileName));
-			game.load(is);
+		try (BufferedReader br = new BufferedReader (new FileReader(fileName))) {
 
-			System.out.println("Game successfully loaded from file "+ this.fileName +".dat. Use the load command to reload it");
+			final String header="“Plants Vs Zombies v3.0";
+			String s;
+
+			s = br.readLine();
+			if(s.equals(header))
+				if (game.load(br))
+					System.out.println("Game successfully loaded from file "+ this.fileName +".dat. Use the load command to reload it");
+
 			//Pintado en modo release?
 
 		}catch(IOException e) {

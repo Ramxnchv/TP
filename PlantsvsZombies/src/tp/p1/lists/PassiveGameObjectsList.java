@@ -7,16 +7,16 @@ import java.io.IOException;
 import tp.p1.objects.PassiveGameObject;
 
 public class PassiveGameObjectsList {
-	
+
 	private PassiveGameObject[] list;
 	private int contador;
 	private static final int BOARD_SIZE=32;
-	
+
 	public PassiveGameObjectsList() {
 		list=new PassiveGameObject[BOARD_SIZE];
 		contador=0;
 	}
-	
+
 	public boolean Add(PassiveGameObject object) {
 		if(contador<BOARD_SIZE) {
 			list[contador]=object;
@@ -24,18 +24,22 @@ public class PassiveGameObjectsList {
 		}
 		return contador<BOARD_SIZE;
 	}
-	
+
 	public void Delete(int pos) {
 		for(int i=pos;i<contador;i++) {
 				list[i]=list[i+1];
 				contador--;
 		}
 	}
-	
-	public void store(BufferedWriter bw) throws IOException{
-		
+
+	public void store(BufferedWriter bw) throws IOException {
+
+		for (int i = 0; i < contador; i++) {
+			list[i].store(bw);
+		}
+
 	}
-	
+
 	public void removeDeadGameObjects() {
 		for(int i=0;i<contador;i++) {
 			if(list[i].isCatched()) {
@@ -43,7 +47,7 @@ public class PassiveGameObjectsList {
 			}
 		}
 	}
-	
+
 	public PassiveGameObject getPosition(int x,int y) {
 		PassiveGameObject object=null;
 		if(checkObject(x,y)) {
@@ -51,9 +55,9 @@ public class PassiveGameObjectsList {
 		}
 		return object;
 	}
-	
+
 	public boolean isPositionEmpty(int x, int y) {
-		
+
 		int i=0;
 		boolean empty=true;
 		while(i<contador&&empty!=false) {
@@ -66,8 +70,8 @@ public class PassiveGameObjectsList {
 		}
 		return empty;
 	}
-	
-	
+
+
 	public int searchPosition(int x,int y) {
 		int i=0;
 		boolean encontrado=false;
@@ -81,12 +85,12 @@ public class PassiveGameObjectsList {
 		}
 		return i;
 	}
-	
+
 	public String printPosition(int i) {
-		
+
 		return list[i].printInfo().toString();
 	}
-	
+
 	public boolean checkObject(int x, int y)
 	{
 		int i=0;
@@ -105,5 +109,5 @@ public class PassiveGameObjectsList {
 	public boolean isnotFull() {
 		return contador<BOARD_SIZE-1;
 	}
-	
+
 }

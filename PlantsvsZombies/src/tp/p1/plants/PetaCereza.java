@@ -1,5 +1,8 @@
 package tp.p1.plants;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import tp.p1.game.Game;
 import tp.p1.objects.Plant;
 
@@ -8,14 +11,14 @@ public class PetaCereza extends Plant {
 	private int internalCycle;
 
 	public PetaCereza(int x, int y, Game game) {
-		//x,y,healthPoints,frequency,cost,game
-		super("C",x,y,2,2,50,game);
+		//x,y,healthPoints,frequency,timeAction,cost,game
+		super("C",x,y,2,2,2,50,game);
 		this.internalCycle=0;
 	}
 
 	public PetaCereza() {
 		//para avaiablePlants
-		super("C",0,0,2,2,50,null);
+		super("C",0,0,2,2,2,50,null);
 		name="PetaCereza";
 	}
 
@@ -73,9 +76,10 @@ public class PetaCereza extends Plant {
 		return frequency-internalCycle;
 	}
 
+	@Override
 	public void store(BufferedWriter bw) throws IOException {
 
-	bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + timeToNextAction());
+		bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + ":" + timeToNextAction() + ", ");
 
 	}
 

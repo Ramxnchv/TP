@@ -1,5 +1,8 @@
 package tp.p1.plants;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 import tp.p1.game.Game;
 import tp.p1.objects.Plant;
 
@@ -8,14 +11,14 @@ public class PeaShooter extends Plant {
 	private final static int damage=1;
 
 	public PeaShooter(int x, int y,Game game) {
-		//x,y,healthPoints,frequency,cost,game
-		super("P",x,y,3,1,50,game);
+		//x,y,healthPoints,frequency,timeToAction,cost,game
+		super("P",x,y,3,1,1,50,game);
 		name="PeaShooter";
 	}
 
 	public PeaShooter() {
 		//para avaiablePlants
-		super("P",0,0,3,1,50,null);
+		super("P",0,0,3,1,1,50,null);
 	}
 
 	public void update() {
@@ -51,9 +54,10 @@ public class PeaShooter extends Plant {
 	return str;
 	}
 
+	@Override
 	public void store(BufferedWriter bw) throws IOException {
 
-	bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + 1);
+		bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + ":" + 1 + ", ");
 
 	}
 }

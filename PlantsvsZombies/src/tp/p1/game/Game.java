@@ -1,5 +1,6 @@
 package tp.p1.game;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.Random;
@@ -40,6 +41,9 @@ public class Game {
 	private final int FILAS=4;
 	private final int COLUMNAS=8;
 	private boolean sameCycle = false;
+	public static final String wrongPrefixMsg = "unknown game attribute";
+	public static final String lineTooLongMsg = "too many words on line commencing";
+	public static final String lineTooShortMsg = "missing data on line commencing";
 
 	//CONSTRUCTOR
 	public Game(LEVEL level,Random rand,int seed) {
@@ -325,9 +329,8 @@ public String getZombieInfo(int i) {
 		sunManager.decreaseSuncoins(cost);
 	}
 
-	//backup del juego
 	private void gameBackUp() {
-
+		//Hacemos una copia del estado actual del juego
 		zombieListCopy =new GameObjectList();
 		plantListCopy =new GameObjectList();
 
@@ -345,7 +348,6 @@ public String getZombieInfo(int i) {
 		zombieList = zombieListCopy;
 
 	}
-
 
 
 	//COMANDOS Y EXECUTES
@@ -369,18 +371,84 @@ public String getZombieInfo(int i) {
 		bw.write("plantList: ");
 		this.plantList.store(bw);
 		bw.newLine();
-		bw.write("zombieList");
+		bw.write("zombieList: ");
 		this.zombieList.store(bw);
 		bw.newLine();
+		bw.write("sunList: ");
 		this.sunManager.store(bw);
 	}
 
-	public void load (BufferedReader is) throws IOException {
+	public boolean load (BufferedReader br) throws IOException {
+
+		String[] line;
+
 
 		//copiar estado actual
 		gameBackUp();
+
+		//Cargamos ciclos
+		line = loadLine(br, "cycle", false);
+		numCiclos = Integer.parseInt(line[0]);
+
+		//cargamos suncoins
+		line = loadLine(br, "sunCoins", false);
+		sunManager.setSunCoins(Integer.parseInt(line[0]));
+
+		//zomies restantes
+		line = loadLine(br, "remZombies", false);
+		zombieManager.setZombiesRestantes(Integer.parseInt(line[0]));
+
+		//cargamos listaPlantas
+		line = loadLine(br, "plantList", true);
+		plantList = new GameObjectList();
+		plantList.loadFromFile(br, line, "plantList");
+
+
+
+		//cargamos listaZombies
+		line = loadLine(br, "zombieList", true);
+		zombieList = new GameObjectList();
+		zombieList.loadFromFile(br, line, "zombieList");
+
+		//cargamos los soles
+		line = loadLine(br, "sunList", true);
+		sunManager = new SunManager(this);
+		sunManager.loadFromFile(br, line);
+
+		return false;
+
 	}
 
+
+	public String[] loadLine(BufferedReader inStream, String prefix, boolean isList) throws IOException {
+		String line = inStream.readLine().trim();
+		if(!line.startsWith(prefix+ ":"))
+			System.out.println(wrongPrefixMsg + prefix);
+		String contentString = line. substring(prefix.length()+1).trim();
+		String[]  words;
+
+		if(!contentString.equals("")) {
+			if(!isList) {
+				words = contentString.split("\\s+");
+
+				if(words.length != 1)
+					System.out.println(lineTooLongMsg + prefix);
+
+			} else {
+				words = contentString.split(",\\s*");
+				System.out.println(words[1]);
+			}
+		} else {
+			if(!isList)
+				System.out.println(lineTooShortMsg + prefix);
+
+			words = new String[0];
+
+		}
+
+
+		return words;
+	}
 
 	public void executeNoneCommand()
 	{
