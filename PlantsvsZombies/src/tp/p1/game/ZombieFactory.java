@@ -26,7 +26,6 @@ public class ZombieFactory {
 		return z;
 	}
 	
-	//Por si se añade de forma aleatoria (creo)
 	public static Zombie getZombie() {
 		
 		Zombie z = null;
@@ -40,8 +39,8 @@ public class ZombieFactory {
 		StringBuilder sb = new StringBuilder();
 		
 		String caraCubo = "Name: Caracubo - Health: "+avaiableZombies[0].getHealthPoints()+" - Frecuencia:"+avaiableZombies[0].getFrequency()+"- Daño:"+avaiableZombies[0].getDamage()+" - Speed:"+avaiableZombies[0].getSpeed(); 
-		String Deportista = "Name: Caracubo - Health: "+avaiableZombies[1].getHealthPoints()+" - Frecuencia:"+avaiableZombies[1].getFrequency()+"- Daño:"+avaiableZombies[1].getDamage()+" - Speed:"+avaiableZombies[1].getSpeed(); 
-		String ZombieComun = "Name: Caracubo - Health: "+avaiableZombies[2].getHealthPoints()+" - Frecuencia:"+avaiableZombies[2].getFrequency()+"- Daño:"+avaiableZombies[2].getDamage()+" - Speed:"+avaiableZombies[2].getSpeed(); 
+		String Deportista = "Name: Deportista - Health: "+avaiableZombies[1].getHealthPoints()+" - Frecuencia:"+avaiableZombies[1].getFrequency()+"- Daño:"+avaiableZombies[1].getDamage()+" - Speed:"+avaiableZombies[1].getSpeed(); 
+		String ZombieComun = "Name: ZombieComun - Health: "+avaiableZombies[2].getHealthPoints()+" - Frecuencia:"+avaiableZombies[2].getFrequency()+"- Daño:"+avaiableZombies[2].getDamage()+" - Speed:"+avaiableZombies[2].getSpeed(); 
 		
 		sb.append(caraCubo).append("\n!").append(Deportista).append("\n").append(ZombieComun).append("\n");
 		

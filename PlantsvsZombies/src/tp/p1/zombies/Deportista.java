@@ -21,7 +21,7 @@ public class Deportista extends Zombie{
 
 	public String toString()
 	{
-		String 	str = symbol + " ["  + this.healthPoints + "]";
+		String 	str = "X" + " ["  + this.healthPoints + "]";
 
 		return str;
 	}

@@ -42,21 +42,21 @@ public class AddCommand extends Command {
 		}catch(NumberFormatException e) {
 			throw new CommandParseException("Invalid argument for add command, number expected: Add <plant> <x> <y>");
 		}
-		
+	}	
 
 	public boolean execute(Game game) throws CommandExecuteException {
-		boolean added=false;
+		boolean added;
 		try {
 			Plant plant = PlantFactory.getPlant(this.plant,x,y,game);
 			if(plant==null) {
+				added=false;
 				throw new CommandExecuteException("Unknown Plant Name");
 			}
-
 			//se guarda el nombre entero de la planta para darlo en los mensajes de error
 			this.plantFullName=plant.getName();
 
 			added=game.addPlantToGame(plant, x, y);
-
+			
 		}
 		catch(NoSuncoinsException e) {
 			game.setSameCycle(true);

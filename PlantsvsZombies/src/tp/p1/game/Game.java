@@ -205,7 +205,6 @@ public String getZombieInfo(int i) {
 
 	public boolean isNotFinished() {
 		this.update();
-		this.draw();
 		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
 	}
 	

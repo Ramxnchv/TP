@@ -20,7 +20,7 @@ public class Caracubo extends Zombie {
 
 	public String toString()
 	{
-		String 	str = symbol + " ["  + this.healthPoints + "]";
+		String 	str = "W" + " ["  + this.healthPoints + "]";
 
 		return str;
 	}

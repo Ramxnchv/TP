@@ -33,7 +33,7 @@ public class LoadCommand extends Command {
 		if(commandWords[0].equals(commandName)) {
 			c=this;
 		}else {
-			throw new CommandParseException("Unknown command. Use ’help’ to see the available commands");
+			throw new CommandParseException("Unknown command. Use help to see the available commands");
 		}
 
 		return c;

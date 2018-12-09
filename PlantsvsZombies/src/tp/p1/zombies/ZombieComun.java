@@ -18,7 +18,7 @@ public class ZombieComun extends Zombie {
 	}
 	public String toString()
 	{
-		String 	str = symbol + " ["  + this.healthPoints + "]";
+		String 	str = "Z" + " ["  + this.healthPoints + "]";
 
 		return str;
 	}

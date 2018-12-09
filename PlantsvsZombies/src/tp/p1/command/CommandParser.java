@@ -11,9 +11,10 @@ public class CommandParser {
 		new ExitCommand(),
 		new ListCommand(),
 		new PrintModeCommand(),
-		new NoneCommand();
-		new CatchCommand();
-
+		new NoneCommand(),
+		new SaveCommand(),
+		new LoadCommand(),
+		new CatchCommand()
 	};
 
 	public static Command parseCommand(String[] commandWords) throws CommandParseException {

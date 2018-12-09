@@ -19,6 +19,7 @@ public class Controller {
 
 	public void run() {
 		String unknownCommandMsg="Comando incorrecto";
+		game.draw();
 		while (game.isNotFinished()&&!game.commandExit()) {
 			System.out.println("Command >");
 			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
@@ -36,8 +37,9 @@ public class Controller {
 			} catch (CommandParseException | CommandExecuteException ex) {
 			System.out.format(ex.getMessage() + "%n%n");
 			}
-
 		}
+		
+		
 		if(game.commandExit()) {
 			System.out.println("Thanks for playing Plants vs Zombies");
 		}
