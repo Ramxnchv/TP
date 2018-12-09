@@ -8,7 +8,11 @@ import tp.p1.game.Game;
 public abstract class ActiveGameObject extends GameObject {
 	protected int healthPoints;
 	protected int frequency;
+<<<<<<< Updated upstream
 	protected int timeToNextAction;
+=======
+	protected String symbol;
+>>>>>>> Stashed changes
 
 	public ActiveGameObject(String symbol, int x, int y,  int healthPoints, int frequency, int timeToNextAction, Game game) {
 		super(symbol,x, y, game);

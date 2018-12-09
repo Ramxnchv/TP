@@ -1,6 +1,11 @@
 package tp.p1.command;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import tp.p1.game.Game;
+import tp.p1.util.MyStringUtils;
 
 public class LoadCommand extends Command {
 
@@ -19,7 +24,12 @@ public class LoadCommand extends Command {
 		if(!MyStringUtils.isValidFilename(fileName)) {
 			throw new CommandParseException("Invalid filename: the filename contains invalid characters");
 		}
-
+		if(!MyStringUtils.fileExists(fileName)) {
+			throw new CommandParseException("File not found");
+		}
+		if(!MyStringUtils.isReadable(fileName)) {
+			throw new CommandParseException("The file is not readable");
+		}
 		if(commandWords[0].equals(commandName)) {
 			c=this;
 		}else {

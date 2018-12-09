@@ -378,6 +378,7 @@ public String getZombieInfo(int i) {
 		this.sunManager.store(bw);
 	}
 
+<<<<<<< Updated upstream
 	public boolean load (BufferedReader br) throws IOException {
 
 		String[] line;
@@ -417,6 +418,11 @@ public String getZombieInfo(int i) {
 
 		return false;
 
+=======
+	public void load (BufferedReader is) throws IOException {
+		//copiar estado actual
+			gameBackUp();
+>>>>>>> Stashed changes
 	}
 
 
