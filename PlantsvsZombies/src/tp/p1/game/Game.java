@@ -25,12 +25,12 @@ public class Game {
 	//ATRIBUTOS
 	private GameObjectList zombieList;
 	private GameObjectList plantList;
-	
+
 	private LEVEL level;
 	private Random rand;
 	private int seed;
 	private int numCiclos;
-	
+
 	private boolean exit;
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
@@ -41,7 +41,7 @@ public class Game {
 	public static final String wrongPrefixMsg = "unknown game attribute";
 	public static final String lineTooLongMsg = "too many words on line commencing";
 	public static final String lineTooShortMsg = "missing data on line commencing";
-	
+
 	//backup
 	private int cyclesCopy;
 	private int suncoinsCopy;
@@ -207,7 +207,7 @@ public String getZombieInfo(int i) {
 		this.update();
 		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
 	}
-	
+
 	public void setExit() {
 		this.exit=true;
 	}
@@ -379,7 +379,7 @@ public String getZombieInfo(int i) {
 		bw.newLine();
 		bw.write("level: "+this.level.name());
 		bw.newLine();
-		bw.write("remZombies"+this.zombieManager.getZombiesRestantes());
+		bw.write("remZombies: "+this.zombieManager.getZombiesRestantes());
 		bw.newLine();
 		bw.write("plantList: ");
 		this.plantList.store(bw);
@@ -398,7 +398,9 @@ public String getZombieInfo(int i) {
 
 		//copiar estado actual
 		gameBackUp();
-		
+
+		br.readLine(); //para leer el espacio en blanco despues del header
+
 		//Cargamos ciclos
 		line = loadLine(br, "cycle", false);
 		numCiclos = Integer.parseInt(line[0]);
@@ -407,28 +409,38 @@ public String getZombieInfo(int i) {
 		line = loadLine(br, "sunCoins", false);
 		sunManager.setSunCoins(Integer.parseInt(line[0]));
 
+		line = loadLine(br, "level", false);
+		level = LEVEL.parse(line[0]);
+
 		//zomies restantes
 		line = loadLine(br, "remZombies", false);
 		zombieManager.setZombiesRestantes(Integer.parseInt(line[0]));
 
 		//cargamos listaPlantas
 		line = loadLine(br, "plantList", true);
-		plantList = new GameObjectList();
-		plantList.loadFromFile(br, line, "plantList");
+		if(line.length!=0) {
+			plantList = new GameObjectList();
+			plantList.loadFromFile(br, line, "plantList");
+		}
 
 
 
 		//cargamos listaZombies
 		line = loadLine(br, "zombieList", true);
-		zombieList = new GameObjectList();
-		zombieList.loadFromFile(br, line, "zombieList");
+		if(line.length!=0) {
+			zombieList = new GameObjectList();
+			zombieList.loadFromFile(br, line, "zombieList");
+		}
+
 
 		//cargamos los soles
 		line = loadLine(br, "sunList", true);
-		sunManager = new SunManager(this);
-		sunManager.loadFromFile(br, line);
+		if(line.length!=0) {
+			sunManager = new SunManager(this);
+			sunManager.loadFromFile(br, line);
+		}
 
-		return false;
+		return true;
 
 	}
 
@@ -460,7 +472,7 @@ public String getZombieInfo(int i) {
 		}
 		return words;
 	}
-	
+
 	public void executeBackUp() {
 		this.numCiclos=this.cyclesCopy;
 		this.sunManager.setSunCoins(this.suncoinsCopy);
