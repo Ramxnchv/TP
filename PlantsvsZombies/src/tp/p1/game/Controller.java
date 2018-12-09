@@ -31,21 +31,21 @@ public class Controller {
 				}
 				else {
 					System.err.println (unknownCommandMsg);
-					
+
 				}
 			} catch (CommandParseException | CommandExecuteException ex) {
 			System.out.format(ex.getMessage() + "%n%n");
 			}
-			
-			if(game.commandExit()) {
-				System.out.println("Thanks for playing Plants vs Zombies");
-			}
-			else if(game.checkWinnerZombie()) {
-				System.out.println("Zombies win");
-			}
-			else {
-				System.out.println("Plants win");
-			}
+
+		}
+		if(game.commandExit()) {
+			System.out.println("Thanks for playing Plants vs Zombies");
+		}
+		else if(game.checkWinnerZombie()) {
+			System.out.println("Zombies win");
+		}
+		else {
+			System.out.println("Plants win");
 		}
 	}
 }

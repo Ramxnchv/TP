@@ -3,7 +3,7 @@ package tp.p1.command;
 import tp.p1.game.Controller;
 
 public class CommandParser {
-	
+
 	private static Command[] avaiableCommand = {
 		new AddCommand(),
 		new HelpCommand(),
@@ -11,11 +11,11 @@ public class CommandParser {
 		new ExitCommand(),
 		new ListCommand(),
 		new PrintModeCommand(),
-		new CatchCommand(),
-		new NoneCommand()
+		new NoneCommand();
+		new CatchCommand();
 
 	};
-	
+
 	public static Command parseCommand(String[] commandWords) throws CommandParseException {
 		boolean found=false;
 		int i=0;
@@ -31,15 +31,15 @@ public class CommandParser {
 		}
 		return c;
 	}
-	
+
 	public static String commandHelp() {
 		StringBuilder sb=new StringBuilder();
-		
+
 		for(int i=0;i<avaiableCommand.length;i++) {
 			sb.append(avaiableCommand[i].helpText()).append("\n");
 		}
-		
+
 		return sb.toString();
 	}
-	
+
 }

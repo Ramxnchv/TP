@@ -13,18 +13,21 @@ public class CatchCommand extends Command {
 
 	public Command parse(String[] commandWords) throws CommandParseException {
 		Command c = null;
-		
-		if(commandWords.length!=3) {
-			throw new CommandParseException("Incorrect number of arguments for catch command: Catch <x> <y>");
-		}
-		
+
+
 		if(commandWords[0].equals(commandName)) {
-			c = this;
-			this.setX(Integer.parseInt(commandWords[1]));
-			this.setY(Integer.parseInt(commandWords[2]));
+			if(commandWords.length!=3) {
+				throw new CommandParseException("Incorrect number of arguments for catch command: Catch <x> <y>");
+			} else {
+
+				c = this;
+				this.setX(Integer.parseInt(commandWords[1]));
+				this.setY(Integer.parseInt(commandWords[2]));
+			}
+
 
 		}else {
-			throw new CommandParseException("Unknown command. Use ’help’ to see the available commands");
+			throw new CommandParseException("Unknown command. Use â€™helpâ€™ to see the available commands");
 		}
 
 		return c;

@@ -33,18 +33,19 @@ public class PrintModeCommand extends Command {
 	public Command parse(String[] commandWords) throws CommandParseException {
 		Command c = null;
 
-		if(commandWords.length!=2) {
-			throw new CommandParseException("Unknown print mode: "+commandWords[1]);
-		}
-		
 		if(commandWords[0].equals(commandName)) {
-			c = this;
+			if(commandWords.length!=2) {
+				throw new CommandParseException("Unknown print mode: "+commandWords[1]);
+			} else {
+				c = this;
 
-			mode = commandWords[1];
+				mode = commandWords[1];
+			}
+
 		}else {
-			throw new CommandParseException("Unknown command. Use ’help’ to see the available commands");
+			c = null;
 		}
-		
+
 		return c;
 	}
 }

@@ -17,31 +17,32 @@ public class AddCommand extends Command {
 
 	public Command parse (String[] commandWords) throws CommandParseException {
 		try {
-			
+
 		Command c = null;
-		
-		if(commandWords.length!=4) {
-			throw new CommandParseException("Incorrect number of arguments for add command: Add <plant> <x> <y>");
-		}
+
 		if(commandWords[0].equals(commandName)) {
 			c = this;
+			if(commandWords.length!=4) {
+				throw new CommandParseException("Incorrect number of arguments for add command: Add <plant> <x> <y>");
+			} else {
+				this.setPlant	(commandWords[1]); //almacenamos plantas
 
-			this.setPlant	(commandWords[1]); //almacenamos plantas
 
-			//almacenamos coordenadas
-			this.setX(Integer.parseInt(commandWords[2]));
-			this.setY(Integer.parseInt(commandWords[3]));
+				//almacenamos coordenadas
+				this.setX(Integer.parseInt(commandWords[2]));
+				this.setY(Integer.parseInt(commandWords[3]));
+			}
+
 		}else {
-			throw new CommandParseException("Unknown command. Use ’help’ to see the available commands");
+			c = null;
 		}
-		
+
 		return c;
-		
+
 		}catch(NumberFormatException e) {
 			throw new CommandParseException("Invalid argument for add command, number expected: Add <plant> <x> <y>");
 		}
 		
-	}
 
 	public boolean execute(Game game) throws CommandExecuteException {
 		boolean added=false;
@@ -50,12 +51,12 @@ public class AddCommand extends Command {
 			if(plant==null) {
 				throw new CommandExecuteException("Unknown Plant Name");
 			}
-			
+
 			//se guarda el nombre entero de la planta para darlo en los mensajes de error
 			this.plantFullName=plant.getName();
-			
+
 			added=game.addPlantToGame(plant, x, y);
-			
+
 		}
 		catch(NoSuncoinsException e) {
 			game.setSameCycle(true);
