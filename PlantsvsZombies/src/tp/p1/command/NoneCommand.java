@@ -5,7 +5,7 @@ import tp.p1.game.Game;
 
 public class NoneCommand extends NoParamsCommand{
 	public NoneCommand() {
-		super("", "", "[none]: Skips cycle.\n");
+		super("", "", "[none]: Skips cycle.");
 	}
 
 

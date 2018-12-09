@@ -17,22 +17,23 @@ public class SaveCommand extends Command {
 	
 	public Command parse(String[] commandWords) throws CommandParseException{
 		Command c=null;
+		
 		if(commandWords.length!=2) {
 			throw new CommandParseException("Incorrect number of arguments for save command: Save <filename>");
 		}
+		
+		file=commandWords[1];
+		
 		if(!MyStringUtils.isValidFilename(file)) {
 			throw new CommandParseException("Invalid filename: the filename contains invalid characters");
 		}
 		if(commandWords[0].equals(commandName)) {
 			c=this;
 		}
-		else {
-			throw new CommandParseException("Unknown command. Use help to see the available commands");
-		}
 		return c;
 	}
 	public boolean execute(Game game) throws CommandExecuteException{
-		final String header="“Plants Vs Zombies v3.0";
+		final String header="“Plants Vs Zombies v3.0”";
 		try(BufferedWriter bw=new BufferedWriter(new FileWriter(file))){
 			bw.write(header);
 			bw.newLine();

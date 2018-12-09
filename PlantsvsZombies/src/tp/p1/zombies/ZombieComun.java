@@ -9,12 +9,12 @@ public class ZombieComun extends Zombie {
 
 	public ZombieComun(int x,int y,Game game) {
 		//x,y,healthPoints,frequency,damage,timeAction,speed,game
-		super("Z",x,y,5,2,1,2,1,game);
+		super(x,y,5,2,1,2,1,game);
 	}
 
 	public ZombieComun() {
 		//para avaiableZombies
-		super("Z",0,0,5,1,1,2,1,null);
+		super(0,0,5,1,1,2,1,null);
 	}
 	public String toString()
 	{
@@ -24,7 +24,7 @@ public class ZombieComun extends Zombie {
 	}
 
 	public String printInfo() {
-	String str = symbol + " [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ timeToNextAction() + " ]";
+	String str = "Z" + " [l:" + this.healthPoints + ",x:" + this.getX() + ",y:" + this.getY() + ",t:"+ timeToNextAction() + " ]";
 
 	return str;
 	}
@@ -34,7 +34,7 @@ public class ZombieComun extends Zombie {
 
 	@Override
 	public void store(BufferedWriter bw) throws IOException {
-		bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + ":" + timeToNextAction() + ", ");
+		bw.write("Z" + ":" + healthPoints + ":" + x + ":" + y + ":" + timeToNextAction() + ", ");
 
 	}
 }

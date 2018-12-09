@@ -10,7 +10,7 @@ public class Sun extends PassiveGameObject {
 	private boolean catched;
 
 	public Sun(String symbol, int x, int y, Game game) {
-		super("*",x, y, game);
+		super(x, y, game);
 		catched=false;
 	}
 
@@ -34,7 +34,7 @@ public class Sun extends PassiveGameObject {
 	}
 
 	public void store(BufferedWriter bw) throws IOException {
-		bw.write(symbol + ":" + x + ":" + y + ", ");
+		bw.write("*" + ":" + x + ":" + y + ", ");
 	}
 
 }

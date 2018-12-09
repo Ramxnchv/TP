@@ -12,8 +12,8 @@ public abstract class ActiveGameObject extends GameObject {
 	protected String symbol;
 
 
-	public ActiveGameObject(String symbol, int x, int y,  int healthPoints, int frequency, int timeToNextAction, Game game) {
-		super(symbol,x, y, game);
+	public ActiveGameObject(int x, int y,  int healthPoints, int frequency, int timeToNextAction, Game game) {
+		super(x, y, game);
 		this.healthPoints = healthPoints;
 		this.frequency = frequency;
 		this.timeToNextAction = timeToNextAction;

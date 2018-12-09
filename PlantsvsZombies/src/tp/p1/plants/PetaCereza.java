@@ -12,13 +12,13 @@ public class PetaCereza extends Plant {
 
 	public PetaCereza(int x, int y, Game game) {
 		//x,y,healthPoints,frequency,timeAction,cost,game
-		super("C",x,y,2,2,2,50,game);
+		super(x,y,2,2,2,50,game);
 		this.internalCycle=0;
 	}
 
 	public PetaCereza() {
 		//para avaiablePlants
-		super("C",0,0,2,2,2,50,null);
+		super(0,0,2,2,2,50,null);
 		name="PetaCereza";
 	}
 
@@ -79,7 +79,7 @@ public class PetaCereza extends Plant {
 	@Override
 	public void store(BufferedWriter bw) throws IOException {
 
-		bw.write(symbol + ":" + healthPoints + ":" + x + ":" + y + ":" + timeToNextAction() + ", ");
+		bw.write("C" + ":" + healthPoints + ":" + x + ":" + y + ":" + timeToNextAction() + ", ");
 
 	}
 

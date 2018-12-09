@@ -24,12 +24,7 @@ public class CatchCommand extends Command {
 				this.setX(Integer.parseInt(commandWords[1]));
 				this.setY(Integer.parseInt(commandWords[2]));
 			}
-
-
-		}else {
-			throw new CommandParseException("Unknown command. Use ’help’ to see the available commands");
 		}
-
 		return c;
 	}
 

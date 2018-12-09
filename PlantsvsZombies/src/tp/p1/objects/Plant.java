@@ -6,8 +6,8 @@ public abstract class Plant extends ActiveGameObject {
 	private static int cost;
 	protected String name;
 
-	public Plant(String symbol, int x, int y,int healthPoints, int frequency, int timeToNextAction, int cost, Game game) {
-		super(symbol,x,y,healthPoints,frequency, timeToNextAction, game);
+	public Plant(int x, int y,int healthPoints, int frequency, int timeToNextAction, int cost, Game game) {
+		super(x,y,healthPoints,frequency, timeToNextAction, game);
 		Plant.cost=cost;
 	}
 

@@ -12,15 +12,18 @@ public class LoadCommand extends Command {
 	String fileName;
 
 	public LoadCommand() {
-		super("load","l","Save <filename>: Save the state of the game to a file.");
+		super("load","Lo","Load <filename>: Load the state of the game to a file.");
 	}
 
 	public Command parse(String[] commandWords) throws CommandParseException{
-		Command c;
-
+		Command c=null;
+		
 		if(commandWords.length!=2) {
 			throw new CommandParseException("Incorrect number of arguments for load command: Load <filename>");
 		}
+		
+		fileName=commandWords[1];
+		
 		if(!MyStringUtils.isValidFilename(fileName)) {
 			throw new CommandParseException("Invalid filename: the filename contains invalid characters");
 		}
@@ -30,8 +33,10 @@ public class LoadCommand extends Command {
 		if(!MyStringUtils.isReadable(fileName)) {
 			throw new CommandParseException("The file is not readable");
 		}
+		
 		if(commandWords[0].equals(commandName)) {
 			c=this;
+			
 		}else {
 			throw new CommandParseException("Unknown command. Use help to see the available commands");
 		}
@@ -42,7 +47,7 @@ public class LoadCommand extends Command {
 	public boolean execute(Game game) throws CommandExecuteException{
 		try (BufferedReader br = new BufferedReader (new FileReader(fileName))) {
 
-			final String header="Plants Vs Zombies v3.0";
+			final String header="“Plants Vs Zombies v3.0”";
 			
 			if(br.readLine().equals(header)) {
 				if (game.load(br)) {

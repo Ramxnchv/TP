@@ -12,9 +12,9 @@ public class CommandParser {
 		new ListCommand(),
 		new PrintModeCommand(),
 		new NoneCommand(),
+		new CatchCommand(),
 		new SaveCommand(),
-		new LoadCommand(),
-		new CatchCommand()
+		new LoadCommand()
 	};
 
 	public static Command parseCommand(String[] commandWords) throws CommandParseException {
@@ -26,9 +26,7 @@ public class CommandParser {
 			if(c!=null) {
 				found=true;
 			}
-			else {
-				i++;
-			}
+			i++;
 		}
 		return c;
 	}
