@@ -56,17 +56,3 @@ public abstract class Zombie extends ActiveGameObject{
 	}
 
 }
-
-	public int getDamage() {
-		return damage;
-	}
-
-	public int getInternalCycle() {
-		return internalCycle;
-	}
-
-	public int getSpeed() {
-		return speed;
-	}
-
-}

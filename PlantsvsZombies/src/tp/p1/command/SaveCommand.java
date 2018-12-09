@@ -39,6 +39,7 @@ public class SaveCommand extends Command {
 			game.store(bw);
 			System.out.println("Game successfully saved in file "+ this.file +".dat. Use the load command to reload it");
 			return false;
+			
 		}catch(IOException e) {
 			throw new CommandExecuteException();
 		}

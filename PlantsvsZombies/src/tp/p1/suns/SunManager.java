@@ -38,7 +38,7 @@ public class SunManager {
 	}
 
 	public void store(BufferedWriter bw) throws IOException {
-
+		suns.store(bw);
 	}
 
 	//aniadir sun de un sunflower

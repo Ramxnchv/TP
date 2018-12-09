@@ -42,21 +42,23 @@ public class LoadCommand extends Command {
 	public boolean execute(Game game) throws CommandExecuteException{
 		try (BufferedReader br = new BufferedReader (new FileReader(fileName))) {
 
-			final String header="“Plants Vs Zombies v3.0";
-			String s;
-
-			s = br.readLine();
-			if(s.equals(header))
-				if (game.load(br))
+			final String header="Plants Vs Zombies v3.0";
+			
+			if(br.readLine().equals(header)) {
+				if (game.load(br)) {
 					System.out.println("Game successfully loaded from file "+ this.fileName +".dat. Use the load command to reload it");
-
-			//Pintado en modo release?
-
+				}
+			}	
+			
+		}catch(FileContentsException e) {
+			game.executeBackUp();
+			throw new CommandExecuteException("Load failed: invalid file contents");
+			
 		}catch(IOException e) {
-			throw new CommandExecuteException();
+			throw new CommandExecuteException(e.getMessage());
 		}
-
-		return false;
+		
+		return true;
 
 	}
 }

@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class PlantsVsZombies {
 
 	public static void main(String[] args) {
+	try {
 		if((args.length>0)||(args.length<3)) {
 			LEVEL level;
 			long seed;
@@ -18,18 +19,21 @@ public class PlantsVsZombies {
 			Scanner scanner=new Scanner(System.in);
 			
 			args[0].toUpperCase();
-			
-			if(args[0].equals("EASY")) {
-				level=LEVEL.EASY;
-			}
-			else if(args[0].equals("HARD")) {
-				level=LEVEL.HARD;
-			}
-			else if(args[0].equals("INSANE")) {
-				level=LEVEL.INSANE;
-			}
-			else {
-				System.out.println("El nivel introducido es incorrecto, por defecto se asigna EASY");
+			try {
+				if(args[0].equals("EASY")) {
+					level=LEVEL.EASY;
+				}
+				else if(args[0].equals("HARD")) {
+					level=LEVEL.HARD;
+				}
+				else if(args[0].equals("INSANE")) {
+					level=LEVEL.INSANE;
+				}
+				else {
+					throw new LevelException("Nivel incorrecto, por defecto se asignara EASY");
+				}
+			}catch (LevelException e) {
+				System.out.println(e.getMessage());	
 				level=LEVEL.EASY;
 			}
 			
@@ -45,6 +49,12 @@ public class PlantsVsZombies {
 			Controller controller = new Controller(game,scanner);
 			System.out.println("Random seed used: "+(int)seed);
 			controller.run();
-		}	
+			}
+	else {
+		throw new NumParamsException("Has introducido un numero de parametros incorrecto");	
+	}
+		}catch(NumParamsException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

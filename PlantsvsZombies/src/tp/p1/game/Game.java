@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import tp.p1.command.CommandParser;
+import tp.p1.command.FileContentsException;
 import tp.p1.command.NoSuncoinsException;
 import tp.p1.command.NotEmptyPositionException;
 import tp.p1.command.OutOfBoardException;
@@ -24,17 +25,13 @@ public class Game {
 	//ATRIBUTOS
 	private GameObjectList zombieList;
 	private GameObjectList plantList;
-	private GameObjectList zombieListCopy;
-	private GameObjectList plantListCopy;
+	
 	private LEVEL level;
 	private Random rand;
 	private int seed;
 	private int numCiclos;
-	private int cyclesCopy;
-	private int suncoinsCopy;
-	private int remainingZombiesCopy;
-	private int seedCopy;
-	private LEVEL levelCopy;
+	
+	private boolean exit;
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
 	private SunManager sunManager;
@@ -44,6 +41,15 @@ public class Game {
 	public static final String wrongPrefixMsg = "unknown game attribute";
 	public static final String lineTooLongMsg = "too many words on line commencing";
 	public static final String lineTooShortMsg = "missing data on line commencing";
+	
+	//backup
+	private int cyclesCopy;
+	private int suncoinsCopy;
+	private int remainingZombiesCopy;
+	private int seedCopy;
+	private LEVEL levelCopy;
+	private GameObjectList zombieListCopy;
+	private GameObjectList plantListCopy;
 
 	//CONSTRUCTOR
 	public Game(LEVEL level,Random rand,int seed) {
@@ -90,6 +96,7 @@ public class Game {
 		zombieList =new GameObjectList();
 		plantList=new GameObjectList();
 		this.sunManager=new SunManager(this);
+		this.exit=false;
 		numCiclos=0;
 		this.gamePrinter=new Release(this,FILAS,COLUMNAS);
 		sunManager.setSunCoins(50);
@@ -200,6 +207,10 @@ public String getZombieInfo(int i) {
 		this.update();
 		this.draw();
 		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
+	}
+	
+	public void setExit() {
+		this.exit=true;
 	}
 
 
@@ -359,6 +370,9 @@ public String getZombieInfo(int i) {
 		System.out.println( PlantFactory.listOfAvaiablePlants());
 	}
 
+	public boolean commandExit() {
+		return this.exit;
+	}
 	public void store(BufferedWriter bw) throws IOException {
 		bw.write("cycle: "+this.numCiclos);
 		bw.newLine();
@@ -378,15 +392,14 @@ public String getZombieInfo(int i) {
 		this.sunManager.store(bw);
 	}
 
-<<<<<<< Updated upstream
-	public boolean load (BufferedReader br) throws IOException {
+
+	public boolean load (BufferedReader br) throws IOException,FileContentsException {
 
 		String[] line;
 
-
 		//copiar estado actual
 		gameBackUp();
-
+		
 		//Cargamos ciclos
 		line = loadLine(br, "cycle", false);
 		numCiclos = Integer.parseInt(line[0]);
@@ -418,18 +431,13 @@ public String getZombieInfo(int i) {
 
 		return false;
 
-=======
-	public void load (BufferedReader is) throws IOException {
-		//copiar estado actual
-			gameBackUp();
->>>>>>> Stashed changes
 	}
 
 
-	public String[] loadLine(BufferedReader inStream, String prefix, boolean isList) throws IOException {
+	public String[] loadLine(BufferedReader inStream, String prefix, boolean isList) throws IOException,FileContentsException {
 		String line = inStream.readLine().trim();
 		if(!line.startsWith(prefix+ ":"))
-			System.out.println(wrongPrefixMsg + prefix);
+			throw new FileContentsException(wrongPrefixMsg + prefix);
 		String contentString = line. substring(prefix.length()+1).trim();
 		String[]  words;
 
@@ -438,7 +446,7 @@ public String getZombieInfo(int i) {
 				words = contentString.split("\\s+");
 
 				if(words.length != 1)
-					System.out.println(lineTooLongMsg + prefix);
+					throw new FileContentsException(lineTooLongMsg + prefix);
 
 			} else {
 				words = contentString.split(",\\s*");
@@ -446,14 +454,22 @@ public String getZombieInfo(int i) {
 			}
 		} else {
 			if(!isList)
-				System.out.println(lineTooShortMsg + prefix);
+				throw new FileContentsException(lineTooShortMsg + prefix);
 
 			words = new String[0];
 
 		}
-
-
 		return words;
+	}
+	
+	public void executeBackUp() {
+		this.numCiclos=this.cyclesCopy;
+		this.sunManager.setSunCoins(this.suncoinsCopy);
+		this.zombieManager.setZombiesRestantes(this.remainingZombiesCopy);
+		this.seed=this.seedCopy;
+		this.level=this.levelCopy;
+		this.zombieList=this.zombieListCopy;
+		this.plantListCopy=this.plantList;
 	}
 
 	public void executeNoneCommand()

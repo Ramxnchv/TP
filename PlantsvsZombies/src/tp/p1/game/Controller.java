@@ -9,19 +9,17 @@ public class Controller {
 
 	private Game game;
 	private Scanner in;
-	private boolean exit;
 
 
 	public Controller(Game game,Scanner in) {
 		this.game=game;
 		this.in=in;
-		exit=false;
 	}
 
 
 	public void run() {
 		String unknownCommandMsg="Comando incorrecto";
-		while (game.isNotFinished()) {
+		while (game.isNotFinished()&&!game.commandExit()) {
 			System.out.println("Command >");
 			String[] words = in.nextLine().toLowerCase().trim().split("\\s+");
 			try {
@@ -39,7 +37,7 @@ public class Controller {
 			System.out.format(ex.getMessage() + "%n%n");
 			}
 			
-			if(exit) {
+			if(game.commandExit()) {
 				System.out.println("Thanks for playing Plants vs Zombies");
 			}
 			else if(game.checkWinnerZombie()) {
@@ -50,15 +48,4 @@ public class Controller {
 			}
 		}
 	}
-
-
-		//metodos para controlar exit
-
-		public boolean isExit() {
-			return exit;
-		}
-
-		public void setExit(boolean exit) {
-			this.exit = exit;
-		}
 }
