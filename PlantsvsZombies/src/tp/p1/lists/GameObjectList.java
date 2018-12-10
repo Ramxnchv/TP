@@ -111,18 +111,12 @@ public class GameObjectList {
 		return list[i].getY();
 	}
 
-	public void modifyObject(int health, int timeToNextAction, int i) {
-		list[i].setHealthPoints(health);
-		list[i].setTimeToNextAction(timeToNextAction);
-
-	}
-
 	public void loadFromFile(BufferedReader br, String [] line, String listType) {
 		String symbol;
 		int x, y, life, timeAction;
-		String [] elemento = line[0].split(":");
 
 		for(int i =  0; i < line.length; i++) {
+			String [] elemento = line[0].split(":");
 			symbol = elemento[0].toLowerCase();
 			x = Integer.parseInt(elemento[2]);
 			y = Integer.parseInt(elemento[3]);
@@ -132,19 +126,19 @@ public class GameObjectList {
 			if(listType.equals("plantList")) {
 
 				Plant plant = PlantFactory.getPlant(symbol, x, y, game);
-				list[i].setHealthPoints(life);
-				list[i].setTimeToNextAction(timeAction);
 				list[i] = plant;
-
-			} else if (listType.equals("zombieList")) {
-
-				Zombie zombie = ZombieFactory.getZombie(symbol, x, y, game);
+				contador++;
 				list[i].setHealthPoints(life);
 				list[i].setTimeToNextAction(timeAction);
-				list[i] = zombie;
+
 
 			} else {
-				//
+
+				Zombie zombie = ZombieFactory.getZombie(symbol, x, y, game);
+				list[i] = zombie;
+				coontador++;
+				list[i].setHealthPoints(life);
+				list[i].setTimeToNextAction(timeAction);
 
 			}
 		}

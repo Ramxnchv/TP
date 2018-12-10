@@ -394,55 +394,55 @@ public String getZombieInfo(int i) {
 
 	public boolean load (BufferedReader br) throws IOException,FileContentsException {
 
-		String[] line;
+	String[] line;
 
-		//copiar estado actual
-		gameBackUp();
+	//copiar estado actual
+	gameBackUp();
 
-		br.readLine(); //para leer el espacio en blanco despues del header
+	br.readLine(); //para leer el espacio en blanco despues del header
 
-		//Cargamos ciclos
-		line = loadLine(br, "cycle", false);
-		numCiclos = Integer.parseInt(line[0]);
+	//Cargamos ciclos
+	line = loadLine(br, "cycle", false);
+	numCiclos = Integer.parseInt(line[0]);
 
-		//cargamos suncoins
-		line = loadLine(br, "sunCoins", false);
-		sunManager.setSunCoins(Integer.parseInt(line[0]));
+	//cargamos suncoins
+	line = loadLine(br, "sunCoins", false);
+	int numero = Integer.parseInt(line[0]);
+	sunManager.setSunCoins(numero);
 
-		line = loadLine(br, "level", false);
-		level = LEVEL.parse(line[0]);
+	line = loadLine(br, "level", false);
+	level = LEVEL.parse(line[0]);
 
-		//zomies restantes
-		line = loadLine(br, "remZombies", false);
-		zombieManager.setZombiesRestantes(Integer.parseInt(line[0]));
+	//zomies restantes
+	line = loadLine(br, "remZombies", false);
+	zombieManager.setZombiesRestantes(Integer.parseInt(line[0]));
 
-		//cargamos listaPlantas
-		line = loadLine(br, "plantList", true);
-		if(line.length!=0) {
-			plantList = new GameObjectList();
-			plantList.loadFromFile(br, line, "plantList");
-		}
-
-
-
-		//cargamos listaZombies
-		line = loadLine(br, "zombieList", true);
-		if(line.length!=0) {
-			zombieList = new GameObjectList();
-			zombieList.loadFromFile(br, line, "zombieList");
-		}
-
-
-		//cargamos los soles
-		line = loadLine(br, "sunList", true);
-		if(line.length!=0) {
-			sunManager = new SunManager(this);
-			sunManager.loadFromFile(br, line);
-		}
-
-		return true;
-
+	//cargamos listaPlantas
+	line = loadLine(br, "plantList", true);
+	if(line.length!=0) {
+		plantList = new GameObjectList();
+		plantList.loadFromFile(br, line, "plantList");
 	}
+
+
+	//cargamos listaZombies
+	line = loadLine(br, "zombieList", true);
+	if(line.length!=0) {
+		zombieList = new GameObjectList();
+		zombieList.loadFromFile(br, line, "zombieList");
+	}
+
+
+
+	//cargamos los soles
+	line = loadLine(br, "sunList", true);
+	if(line.length!=0) {
+		sunManager.loadFromFile(br, line);
+	}
+
+	return true;
+
+}
 
 
 	public String[] loadLine(BufferedReader inStream, String prefix, boolean isList) throws IOException,FileContentsException {

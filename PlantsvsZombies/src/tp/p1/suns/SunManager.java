@@ -72,9 +72,8 @@ public class SunManager {
 	public void loadFromFile(BufferedReader br, String [] line) {
 		int x, y;
 
-		String [] elemento = line[0].split(":");
-
 		for(int i = 0; i < line.length;i++) {
+			String [] elemento = line[0].split(":");
 			x = Integer.parseInt(elemento[2]);
 			y = Integer.parseInt(elemento[3]);
 

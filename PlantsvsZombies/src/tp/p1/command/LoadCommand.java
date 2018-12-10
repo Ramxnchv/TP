@@ -50,9 +50,10 @@ public class LoadCommand extends Command {
 			final String header="Plants Vs Zombies v3.0";
 
 			if(br.readLine().equals(header)) {
-				if (game.load(br))
+				if (game.load(br)) {
+					game.setSameCycle(true);
 					System.out.println("Game successfully loaded from file "+ this.fileName +".dat. Use the load command to reload it");
-
+				}
 			}
 
 		}catch(FileContentsException e) {
