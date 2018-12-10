@@ -11,13 +11,13 @@ public class SunFlower extends Plant {
 
 	public SunFlower(int x,int y, Game game) {
 		//x,y,healthPoints,frequency,cost,game
-		super(x,y,1,2,2,20,game);
+		super("S",x,y,1,2,2,20,game);
 		this.internalCycle=0;
 	}
 
 	public SunFlower() {
 		//para avaiablePlants
-		super(0,0,1,2,2,20,null);
+		super("S",0,0,1,2,2,20,null);
 		name="SunFlower";
 	}
 

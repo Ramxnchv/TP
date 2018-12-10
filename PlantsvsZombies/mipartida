@@ -1,0 +1,9 @@
+“Plants Vs Zombies v3.0”
+
+cycle: 7
+sunCoins: 10
+level: HARD
+remZombies: 4
+plantList: S:1:0:0:1, N:10:1:4:0, 
+zombieList: W:8:1:6:-2, 
+sunList: 

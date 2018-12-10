@@ -25,12 +25,12 @@ public class Game {
 	//ATRIBUTOS
 	private GameObjectList zombieList;
 	private GameObjectList plantList;
-
+	
 	private LEVEL level;
 	private Random rand;
 	private int seed;
 	private int numCiclos;
-
+	
 	private boolean exit;
 	private GamePrinter gamePrinter;
 	private ZombieManager zombieManager;
@@ -41,7 +41,7 @@ public class Game {
 	public static final String wrongPrefixMsg = "unknown game attribute";
 	public static final String lineTooLongMsg = "too many words on line commencing";
 	public static final String lineTooShortMsg = "missing data on line commencing";
-
+	
 	//backup
 	private int cyclesCopy;
 	private int suncoinsCopy;
@@ -204,10 +204,12 @@ public String getZombieInfo(int i) {
 	//CHECK FINAL PARTIDA
 
 	public boolean isNotFinished() {
-		this.update();
+		if(!sameCycle) {
+			this.update();
+		}
 		return zombieManager.getZombiesRestantesVivos() > 0 && !zombieManager.zombiGanador();
 	}
-
+	
 	public void setExit() {
 		this.exit=true;
 	}
@@ -394,65 +396,69 @@ public String getZombieInfo(int i) {
 
 	public boolean load (BufferedReader br) throws IOException,FileContentsException {
 
-	String[] line;
+		String[] line;
 
-	//copiar estado actual
-	gameBackUp();
+		//copiar estado actual
+		gameBackUp();
+		
+		br.readLine(); //para leer el espacio en blanco despues del header
 
-	br.readLine(); //para leer el espacio en blanco despues del header
+		//Cargamos ciclos
+		line = loadLine(br, "cycle", false);
+		numCiclos = Integer.parseInt(line[0]);
 
-	//Cargamos ciclos
-	line = loadLine(br, "cycle", false);
-	numCiclos = Integer.parseInt(line[0]);
+		//cargamos suncoins
+		line = loadLine(br, "sunCoins", false);
+		int numero = Integer.parseInt(line[0]);
+		sunManager.setSunCoins(numero);
 
-	//cargamos suncoins
-	line = loadLine(br, "sunCoins", false);
-	int numero = Integer.parseInt(line[0]);
-	sunManager.setSunCoins(numero);
+		line = loadLine(br, "level", false);
+		level = LEVEL.parse(line[0]);
 
-	line = loadLine(br, "level", false);
-	level = LEVEL.parse(line[0]);
+		//zomies restantes
+		line = loadLine(br, "remZombies", false);
+		zombieManager.setZombiesRestantes(Integer.parseInt(line[0]));
 
-	//zomies restantes
-	line = loadLine(br, "remZombies", false);
-	zombieManager.setZombiesRestantes(Integer.parseInt(line[0]));
+		//cargamos listaPlantas
+		line = loadLine(br, "plantList", true);
+		if(line.length!=0) {
+			plantList = new GameObjectList();
+			plantList.loadFromFile(br, line, "plantList");
+		}
 
-	//cargamos listaPlantas
-	line = loadLine(br, "plantList", true);
-	if(line.length!=0) {
-		plantList = new GameObjectList();
-		plantList.loadFromFile(br, line, "plantList");
+
+		//cargamos listaZombies
+		line = loadLine(br, "zombieList", true);
+		if(line.length!=0) {
+			zombieList = new GameObjectList();
+			zombieList.loadFromFile(br, line, "zombieList");
+		}
+
+
+
+		//cargamos los soles
+		line = loadLine(br, "sunList", true);
+		if(line.length!=0) {
+			sunManager.loadFromFile(br, line);
+		}
+
+		return true;
+
 	}
-
-
-	//cargamos listaZombies
-	line = loadLine(br, "zombieList", true);
-	if(line.length!=0) {
-		zombieList = new GameObjectList();
-		zombieList.loadFromFile(br, line, "zombieList");
-	}
-
-
-
-	//cargamos los soles
-	line = loadLine(br, "sunList", true);
-	if(line.length!=0) {
-		sunManager.loadFromFile(br, line);
-	}
-
-	return true;
-
-}
 
 
 	public String[] loadLine(BufferedReader inStream, String prefix, boolean isList) throws IOException,FileContentsException {
 		String line = inStream.readLine().trim();
-		if(!line.startsWith(prefix+ ":"))
+		
+		if(!line.startsWith(prefix+ ":")) 
 			throw new FileContentsException(wrongPrefixMsg + prefix);
-		String contentString = line. substring(prefix.length()+1).trim();
+		
+
+		String contentString = line.substring(prefix.length()+1).trim();
 		String[]  words;
 
 		if(!contentString.equals("")) {
+			
 			if(!isList) {
 				words = contentString.split("\\s+");
 
@@ -461,18 +467,18 @@ public String getZombieInfo(int i) {
 
 			} else {
 				words = contentString.split(",\\s*");
-				System.out.println(words[1]);
 			}
 		} else {
 			if(!isList)
 				throw new FileContentsException(lineTooShortMsg + prefix);
-
+			
 			words = new String[0];
 
 		}
+
 		return words;
 	}
-
+	
 	public void executeBackUp() {
 		this.numCiclos=this.cyclesCopy;
 		this.sunManager.setSunCoins(this.suncoinsCopy);
@@ -481,6 +487,7 @@ public String getZombieInfo(int i) {
 		this.level=this.levelCopy;
 		this.zombieList=this.zombieListCopy;
 		this.plantListCopy=this.plantList;
+
 	}
 
 	public void executeNoneCommand()

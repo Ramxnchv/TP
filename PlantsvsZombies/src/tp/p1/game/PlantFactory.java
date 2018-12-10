@@ -23,11 +23,8 @@ public class PlantFactory {
 		else if(plantName.equals("petacereza")||plantName.equals("c")) {
 			p=new PetaCereza(x,y,game);
 		}
-		else if(plantName.equals("nuez")||plantName.equals("n")){
-			p=new Nuez(x,y,game);
-		}
 		else {
-			p=null;
+			p=new Nuez(x,y,game);
 		}
 		return p;
 	}

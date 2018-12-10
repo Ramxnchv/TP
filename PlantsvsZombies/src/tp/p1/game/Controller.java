@@ -32,14 +32,13 @@ public class Controller {
 				}
 				else {
 					System.err.println (unknownCommandMsg);
-
+					
 				}
 			} catch (CommandParseException | CommandExecuteException ex) {
 			System.out.format(ex.getMessage() + "%n%n");
 			}
+			
 		}
-		
-		
 		if(game.commandExit()) {
 			System.out.println("Thanks for playing Plants vs Zombies");
 		}

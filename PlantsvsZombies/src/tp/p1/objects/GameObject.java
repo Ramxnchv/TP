@@ -6,12 +6,14 @@ import java.io.IOException;
 import tp.p1.game.Game;
 
 public abstract class GameObject {
+	protected String symbol;
 	protected int x;
 	protected int y;
 	protected Game game;
 
 
-	public GameObject(int x, int y, Game game) {
+	public GameObject(String symbol ,int x, int y, Game game) {
+		this.symbol = symbol;
 		this.x=x;
 		this.y=y;
 		this.game=game;

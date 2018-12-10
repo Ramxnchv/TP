@@ -12,13 +12,13 @@ public class PetaCereza extends Plant {
 
 	public PetaCereza(int x, int y, Game game) {
 		//x,y,healthPoints,frequency,timeAction,cost,game
-		super(x,y,2,2,2,50,game);
+		super("C",x,y,2,2,2,50,game);
 		this.internalCycle=0;
 	}
 
 	public PetaCereza() {
 		//para avaiablePlants
-		super(0,0,2,2,2,50,null);
+		super("C",0,0,2,2,2,50,null);
 		name="PetaCereza";
 	}
 

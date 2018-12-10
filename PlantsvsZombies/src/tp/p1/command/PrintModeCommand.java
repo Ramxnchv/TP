@@ -13,7 +13,7 @@ public class PrintModeCommand extends Command {
 	private int y=8;
 
 	public PrintModeCommand() {
-		super("printMode", "P", "[P]rintMode: change print mode [Release|Debug].");
+		super("printmode", "P", "[P]rintMode: change print mode [Release|Debug].");
 	}
 
 	public boolean execute(Game game) throws CommandExecuteException {
@@ -37,6 +37,7 @@ public class PrintModeCommand extends Command {
 			if(commandWords.length!=2) {
 				throw new CommandParseException("Unknown print mode: "+commandWords[1]);
 			} else {
+				
 				c = this;
 
 				mode = commandWords[1];
@@ -45,7 +46,7 @@ public class PrintModeCommand extends Command {
 		}else {
 			c = null;
 		}
-
+		
 		return c;
 	}
 }

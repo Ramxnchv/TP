@@ -10,14 +10,14 @@ public class NoParamsCommand extends Command{
 
 	public Command parse(String[] commandWords) throws CommandParseException{
 		Command c=null;
-
+		
 		if(commandWords[0].equals(commandName))
 		{
 			c = this;
 			if(commandWords.length!=1) {
 				throw new CommandParseException(commandName+" command has no arguments");
-			}
-
+			} 
+			
 
 		}else {
 			c = null;

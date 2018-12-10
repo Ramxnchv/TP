@@ -17,44 +17,45 @@ public class AddCommand extends Command {
 
 	public Command parse (String[] commandWords) throws CommandParseException {
 		try {
-
+			
 		Command c = null;
-
+		
 		if(commandWords[0].equals(commandName)) {
 			c = this;
 			if(commandWords.length!=4) {
 				throw new CommandParseException("Incorrect number of arguments for add command: Add <plant> <x> <y>");
 			} else {
 				this.setPlant	(commandWords[1]); //almacenamos plantas
-
+			
 
 				//almacenamos coordenadas
 				this.setX(Integer.parseInt(commandWords[2]));
 				this.setY(Integer.parseInt(commandWords[3]));
 			}
-
+				
 		}else {
 			c = null;
 		}
-
+		
 		return c;
-
+		
 		}catch(NumberFormatException e) {
 			throw new CommandParseException("Invalid argument for add command, number expected: Add <plant> <x> <y>");
 		}
-	}	
+		
+	}
 
 	public boolean execute(Game game) throws CommandExecuteException {
-		boolean added;
+		boolean added=false;
 		try {
 			Plant plant = PlantFactory.getPlant(this.plant,x,y,game);
 			if(plant==null) {
-				added=false;
 				throw new CommandExecuteException("Unknown Plant Name");
 			}
+			
 			//se guarda el nombre entero de la planta para darlo en los mensajes de error
 			this.plantFullName=plant.getName();
-
+			
 			added=game.addPlantToGame(plant, x, y);
 			
 		}

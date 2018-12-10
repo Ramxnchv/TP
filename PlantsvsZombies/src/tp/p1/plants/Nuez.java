@@ -10,12 +10,12 @@ public class Nuez extends Plant {
 
 	public Nuez(int x, int y,Game game) {
 		//x,y,healthPoints,frequency,timeToNextAction, cost,game
-		super(x,y,10,1,0,50,game);
+		super("N",x,y,10,1,0,50,game);
 	}
 
 	public Nuez() {
 		//para avaiablePlants
-		super(0,0,10,1,0,50,null);
+		super("N",0,0,10,1,0,50,null);
 		name="Nuez";
 	}
 

@@ -73,9 +73,9 @@ public class SunManager {
 		int x, y;
 
 		for(int i = 0; i < line.length;i++) {
-			String [] elemento = line[0].split(":");
-			x = Integer.parseInt(elemento[2]);
-			y = Integer.parseInt(elemento[3]);
+			String [] elemento = line[i].split(":");
+			x = Integer.parseInt(elemento[1]);
+			y = Integer.parseInt(elemento[2]);
 
 			Add(x,y);
 

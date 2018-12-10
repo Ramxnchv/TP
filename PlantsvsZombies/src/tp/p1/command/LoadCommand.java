@@ -12,7 +12,7 @@ public class LoadCommand extends Command {
 	String fileName;
 
 	public LoadCommand() {
-		super("load","Lo","Load <filename>: Load the state of the game to a file.");
+		super("load","l","Load <filename>: Save the state of the game to a file.");
 	}
 
 	public Command parse(String[] commandWords) throws CommandParseException{
@@ -48,22 +48,22 @@ public class LoadCommand extends Command {
 		try (BufferedReader br = new BufferedReader (new FileReader(fileName))) {
 
 			final String header="Plants Vs Zombies v3.0";
-
+			
 			if(br.readLine().equals(header)) {
 				if (game.load(br)) {
 					game.setSameCycle(true);
 					System.out.println("Game successfully loaded from file "+ this.fileName +".dat. Use the load command to reload it");
 				}
-			}
-
+			}	
+			
 		}catch(FileContentsException e) {
 			game.executeBackUp();
 			throw new CommandExecuteException("Load failed: invalid file contents");
-
+			
 		}catch(IOException e) {
 			throw new CommandExecuteException(e.getMessage());
 		}
-
+		
 		return true;
 
 	}

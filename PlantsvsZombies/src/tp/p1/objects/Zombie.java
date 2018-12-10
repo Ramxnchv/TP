@@ -7,8 +7,8 @@ public abstract class Zombie extends ActiveGameObject{
 	protected int internalCycle;
 	protected int speed;
 
-	public Zombie(int x,int y,int healthPoints,int frequency,int damage, int timeAction, int speed,Game game) {
-		super(x,y,healthPoints,frequency, timeAction, game);
+	public Zombie(String symbol, int x,int y,int healthPoints,int frequency,int damage, int timeAction, int speed,Game game) {
+		super(symbol,x,y,healthPoints,frequency, timeAction, game);
 		this.damage=damage;
 		this.internalCycle=0;
 		this.speed=speed;

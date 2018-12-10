@@ -12,13 +12,13 @@ public class PeaShooter extends Plant {
 
 	public PeaShooter(int x, int y,Game game) {
 		//x,y,healthPoints,frequency,timeToAction,cost,game
-		super(x,y,3,1,1,50,game);
+		super("P",x,y,3,1,1,50,game);
 		name="PeaShooter";
 	}
 
 	public PeaShooter() {
 		//para avaiablePlants
-		super(0,0,3,1,1,50,null);
+		super("P",0,0,3,1,1,50,null);
 	}
 
 	public void update() {
