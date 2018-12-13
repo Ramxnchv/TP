@@ -7,7 +7,6 @@ public class CommandParser {
 	private static Command[] avaiableCommand = {
 		new AddCommand(),
 		new SaveCommand(),
-		new LoadCommand(),
 		new PrintModeCommand(),
 		new CatchCommand(),
 		new HelpCommand(),
@@ -15,8 +14,7 @@ public class CommandParser {
 		new ExitCommand(),
 		new ListCommand(),
 		new NoneCommand(),
-
-
+		new LoadCommand()
 
 	};
 	

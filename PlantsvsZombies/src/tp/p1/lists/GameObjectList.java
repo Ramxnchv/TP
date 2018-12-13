@@ -12,7 +12,6 @@ public class GameObjectList {
 	private ActiveGameObject[] list;
 	private int contador=0;
 	private static final int BOARD_SIZE=32;
-	private Game game;
 
 	public GameObjectList() {
 		list=new ActiveGameObject[BOARD_SIZE];
@@ -117,36 +116,35 @@ public class GameObjectList {
 
 	}
 
-	public void loadFromFile(BufferedReader br, String [] line, String listType) {
+	public void loadFromFile(String [] line, Game game) {
 		String symbol;
 		int x, y, life, timeAction;
 		
 
 		for(int i =  0; i < line.length; i++) {
+			
 			String [] elemento = line[i].split(":");
 			symbol = elemento[0].toLowerCase();
 			x = Integer.parseInt(elemento[2]);
 			y = Integer.parseInt(elemento[3]);
 			life = Integer.parseInt(elemento[1]);
 			timeAction = Integer.parseInt(elemento[4]);
-
-			if(listType.equals("plantList")) {
-
-				Plant plant = PlantFactory.getPlant(symbol, x, y, game);
-				list[i] = plant;
-				contador++;
-				list[i].setHealthPoints(life);
-				list[i].setTimeToNextAction(timeAction);
-
-
-
-			} else {
+			
+			Plant plant = PlantFactory.getPlant(symbol, x, y, game);
+			if(plant == null) {
+				
 				Zombie zombie = ZombieFactory.getZombie(symbol, x, y, game);
 				list[i] = zombie;
 				contador++;
 				list[i].setHealthPoints(life);
 				list[i].setTimeToNextAction(timeAction);
-
+				
+			} else {
+				
+				list[i] = plant;
+				contador++;
+				list[i].setHealthPoints(life);
+				list[i].setTimeToNextAction(timeAction);
 
 			}
 		}

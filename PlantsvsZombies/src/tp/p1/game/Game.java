@@ -42,14 +42,6 @@ public class Game {
 	public static final String lineTooLongMsg = "too many words on line commencing";
 	public static final String lineTooShortMsg = "missing data on line commencing";
 	
-	//backup
-	private int cyclesCopy;
-	private int suncoinsCopy;
-	private int remainingZombiesCopy;
-	private int seedCopy;
-	private LEVEL levelCopy;
-	private GameObjectList zombieListCopy;
-	private GameObjectList plantListCopy;
 
 	//CONSTRUCTOR
 	public Game(LEVEL level,Random rand,int seed) {
@@ -341,26 +333,6 @@ public String getZombieInfo(int i) {
 		sunManager.decreaseSuncoins(cost);
 	}
 
-	private void gameBackUp() {
-		//Hacemos una copia del estado actual del juego
-		zombieListCopy =new GameObjectList();
-		plantListCopy =new GameObjectList();
-
-		cyclesCopy = this.numCiclos;
-
-		suncoinsCopy = this.sunManager.getSunCoins();
-
-		remainingZombiesCopy = this.zombieManager.getZombiesRestantes();
-
-		levelCopy = this.level;
-
-		seedCopy = this.seed;
-
-		plantList = plantListCopy;
-		zombieList = zombieListCopy;
-
-	}
-
 
 	//COMANDOS Y EXECUTES
 	public static void commandHelp() {
@@ -397,50 +369,63 @@ public String getZombieInfo(int i) {
 	public boolean load (BufferedReader br) throws IOException,FileContentsException {
 
 		String[] line;
-
-		//copiar estado actual
-		gameBackUp();
+		
+		//backup
+		int cyclesCopy;
+		int suncoinsCopy;
+		int remainingZombiesCopy;
+		LEVEL levelCopy;
+		GameObjectList zombieListCopy = new GameObjectList();
+		GameObjectList plantListCopy = new GameObjectList();
+		SunManager sunManagerCopy = sunManager;
+		
 		
 		br.readLine(); //para leer el espacio en blanco despues del header
 
 		//Cargamos ciclos
 		line = loadLine(br, "cycle", false);
-		numCiclos = Integer.parseInt(line[0]);
+		cyclesCopy = Integer.parseInt(line[0]);
 
 		//cargamos suncoins
 		line = loadLine(br, "sunCoins", false);
-		int numero = Integer.parseInt(line[0]);
-		sunManager.setSunCoins(numero);
+		suncoinsCopy = Integer.parseInt(line[0]);
+		
 
 		line = loadLine(br, "level", false);
-		level = LEVEL.parse(line[0]);
+		levelCopy = LEVEL.parse(line[0]);
 
 		//zomies restantes
 		line = loadLine(br, "remZombies", false);
-		zombieManager.setZombiesRestantes(Integer.parseInt(line[0]));
+		remainingZombiesCopy = Integer.parseInt(line[0]);
+	
 
 		//cargamos listaPlantas
 		line = loadLine(br, "plantList", true);
 		if(line.length!=0) {
-			plantList = new GameObjectList();
-			plantList.loadFromFile(br, line, "plantList");
+			plantListCopy.loadFromFile(line,this);
 		}
-
 
 		//cargamos listaZombies
 		line = loadLine(br, "zombieList", true);
 		if(line.length!=0) {
-			zombieList = new GameObjectList();
-			zombieList.loadFromFile(br, line, "zombieList");
+			zombieListCopy.loadFromFile(line, this);
 		}
-
-
 
 		//cargamos los soles
 		line = loadLine(br, "sunList", true);
 		if(line.length!=0) {
-			sunManager.loadFromFile(br, line);
+			sunManagerCopy.loadFromFile(line);
 		}
+		
+		//Si todo funciona, la copia es el original
+		this.numCiclos = cyclesCopy;
+		this.level = levelCopy;
+		this.zombieManager.setZombiesRestantes(remainingZombiesCopy);
+		this.sunManager.setSunCoins(suncoinsCopy);
+		this.plantList = plantListCopy;
+		this.zombieList = zombieListCopy;
+		this.sunManager = sunManagerCopy;
+		
 
 		return true;
 
@@ -479,16 +464,6 @@ public String getZombieInfo(int i) {
 		return words;
 	}
 	
-	public void executeBackUp() {
-		this.numCiclos=this.cyclesCopy;
-		this.sunManager.setSunCoins(this.suncoinsCopy);
-		this.zombieManager.setZombiesRestantes(this.remainingZombiesCopy);
-		this.seed=this.seedCopy;
-		this.level=this.levelCopy;
-		this.zombieList=this.zombieListCopy;
-		this.plantListCopy=this.plantList;
-
-	}
 
 	public void executeNoneCommand()
 	{

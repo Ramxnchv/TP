@@ -69,7 +69,7 @@ public class SunManager {
 		}
 	}
 
-	public void loadFromFile(BufferedReader br, String [] line) {
+	public void loadFromFile(String [] line) {
 		int x, y;
 
 		for(int i = 0; i < line.length;i++) {

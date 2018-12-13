@@ -10,6 +10,7 @@ import tp.p1.util.MyStringUtils;
 public class SaveCommand extends Command {
 
 	private String file;
+	final String header="“Plants Vs Zombies v3.0”";
 	
 	public SaveCommand() {
 		super("save","S","Save <filename>: Save the state of the game to a file.");
@@ -20,10 +21,12 @@ public class SaveCommand extends Command {
 		
 		if(commandWords[0].equals(commandName)) {
 			c=this;
-			file = commandWords[1];
 			if(commandWords.length!=2) {
 				throw new CommandParseException("Incorrect number of arguments for save command: Save <filename>");
 			}
+			
+			file = commandWords[1];
+			
 			if(!MyStringUtils.isValidFilename(file)) {
 				throw new CommandParseException("Invalid filename: the filename contains invalid characters");
 			}
@@ -33,7 +36,7 @@ public class SaveCommand extends Command {
 		return c;
 	}
 	public boolean execute(Game game) throws CommandExecuteException{
-		final String header="Plants Vs Zombies v3.0";
+		
 		try(BufferedWriter bw=new BufferedWriter(new FileWriter(file))){
 			bw.write(header);
 			bw.newLine();
