@@ -58,7 +58,8 @@ public class LoadCommand extends Command {
 			
 		}catch(FileContentsException e) {
 			throw new CommandExecuteException("Load failed: invalid file contents");
-			
+		}catch(NumberFormatException e) {
+			throw new CommandExecuteException("The format of any values of the file are invalid");
 		}catch(IOException e) {
 			throw new CommandExecuteException(e.getMessage());
 		}

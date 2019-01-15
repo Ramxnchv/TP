@@ -366,7 +366,7 @@ public String getZombieInfo(int i) {
 	}
 
 
-	public boolean load (BufferedReader br) throws IOException,FileContentsException {
+	public boolean load (BufferedReader br) throws IOException,FileContentsException,NumberFormatException {
 
 		String[] line;
 		
